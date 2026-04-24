@@ -1,0 +1,1 @@
+export default function Home(){return <div style={{padding:'60px',fontFamily:'Arial'}}><h1>Integration Intelligence Engine</h1><p>Execution intelligence for investors and acquirers.</p><p>Upload this project to GitHub then deploy on Vercel.</p></div>}
