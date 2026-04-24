@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
@@ -9,6 +9,14 @@ const supabase = createClient(
 export default function Home() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const vote = async (choice) => {
     if (submitted || loading) return;
@@ -32,9 +40,10 @@ export default function Home() {
     border: "1px solid rgba(255,255,255,0.18)",
     background: "rgba(255,255,255,0.08)",
     color: "white",
-    fontSize: "18px",
+    fontSize: mobile ? "16px" : "18px",
     fontWeight: "600",
-    cursor: "pointer"
+    cursor: "pointer",
+    width: "100%"
   };
 
   return (
@@ -53,7 +62,7 @@ export default function Home() {
         style={{
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "95px 24px 85px"
+          padding: mobile ? "60px 20px" : "95px 24px 85px"
         }}
       >
         <div
@@ -71,8 +80,8 @@ export default function Home() {
 
         <h1
           style={{
-            fontSize: "72px",
-            lineHeight: 1.03,
+            fontSize: mobile ? "44px" : "72px",
+            lineHeight: 1.05,
             marginTop: "24px",
             marginBottom: "24px",
             maxWidth: "920px"
@@ -83,7 +92,7 @@ export default function Home() {
 
         <p
           style={{
-            fontSize: "26px",
+            fontSize: mobile ? "20px" : "26px",
             color: "#E2E8F0",
             maxWidth: "860px"
           }}
@@ -97,8 +106,8 @@ export default function Home() {
           style={{
             marginTop: "36px",
             display: "flex",
-            gap: "16px",
-            flexWrap: "wrap"
+            flexDirection: mobile ? "column" : "row",
+            gap: "16px"
           }}
         >
           <a
@@ -109,7 +118,8 @@ export default function Home() {
               textDecoration: "none",
               padding: "14px 22px",
               borderRadius: "14px",
-              fontWeight: "600"
+              fontWeight: "600",
+              textAlign: "center"
             }}
           >
             View Example Output
@@ -122,7 +132,8 @@ export default function Home() {
               color: "white",
               textDecoration: "none",
               padding: "14px 22px",
-              borderRadius: "14px"
+              borderRadius: "14px",
+              textAlign: "center"
             }}
           >
             Share Perspective
@@ -130,166 +141,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TRUST BAR */}
-      <section
-        style={{
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-          padding: "22px 24px",
-          color: "#C7D2FE"
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
-            gap: "18px",
-            fontSize: "14px"
-          }}
-        >
-          <div>Built from lived integration experience</div>
-          <div>Designed for investors & acquirers</div>
-          <div>Board-grade outputs in hours, not weeks</div>
-          <div>Early validation phase underway</div>
-        </div>
-      </section>
-
-      {/* WHY THIS MATTERS */}
+      {/* PROCESS OVERVIEW */}
       <section
         style={{
           background: "white",
           color: "#111827",
-          padding: "90px 24px"
+          padding: mobile ? "60px 20px" : "90px 24px"
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "44px", marginBottom: "18px" }}>
-            Why This Matters
-          </h2>
-
-          <p
-            style={{
-              fontSize: "20px",
-              color: "#475569",
-              maxWidth: "900px"
-            }}
-          >
-            Many transactions underperform not because the acquisition logic was
-            wrong, but because execution risk was not properly understood before
-            close.
-          </p>
-
-          <div
-            style={{
-              marginTop: "36px",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
-              gap: "20px"
-            }}
-          >
-            {[
-              ["Synergy Slippage", "Savings prove harder than expected."],
-              ["Migration Delays", "Systems and customers become the hidden critical path."],
-              ["TSA Dependency", "Seller reliance slows value capture."],
-              ["Management Distraction", "Growth teams lose focus during integration."]
-            ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "26px",
-                  borderRadius: "22px",
-                  background: "#F8FAFC",
-                  border: "1px solid #E2E8F0"
-                }}
-              >
-                <h3 style={{ marginTop: 0 }}>{item[0]}</h3>
-                <p style={{ color: "#64748B", marginBottom: 0 }}>{item[1]}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT COULD WORK */}
-      <section
-        style={{
-          background: "#F8FAFC",
-          color: "#111827",
-          padding: "90px 24px"
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "44px", marginBottom: "36px" }}>
-            How It Could Work
-          </h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))",
-              gap: "24px"
-            }}
-          >
-            <div
-              style={{
-                background: "white",
-                padding: "32px",
-                borderRadius: "24px",
-                border: "1px solid #E2E8F0"
-              }}
-            >
-              <h3>Inputs</h3>
-              <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
-                <li>Investment committee papers</li>
-                <li>Board approval memos</li>
-                <li>Commercial / financial diligence</li>
-                <li>Synergy models</li>
-                <li>Management presentations</li>
-                <li>Transaction documents</li>
-              </ul>
-            </div>
-
-            <div
-              style={{
-                background: "white",
-                padding: "32px",
-                borderRadius: "24px",
-                border: "1px solid #E2E8F0"
-              }}
-            >
-              <h3>Outputs</h3>
-              <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
-                <li>Board-level integration risk assessments</li>
-                <li>Management execution blueprints</li>
-                <li>Synergy capture diagnostics</li>
-                <li>Day 1 / 100-day plans</li>
-                <li>TSA & separation watchpoints</li>
-                <li>Deal-specific KPI frameworks</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROCESS */}
-      <section
-        style={{
-          background: "white",
-          color: "#111827",
-          padding: "90px 24px"
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "44px", marginBottom: "36px" }}>
+          <h2 style={{ fontSize: mobile ? "34px" : "44px", marginBottom: "36px" }}>
             Process Overview
           </h2>
 
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+              gridTemplateColumns: mobile
+                ? "1fr"
+                : "repeat(auto-fit,minmax(220px,1fr))",
               gap: "18px"
             }}
           >
@@ -321,44 +191,56 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          <p
+            style={{
+              marginTop: "28px",
+              color: "#475569",
+              fontSize: "16px",
+              maxWidth: "900px"
+            }}
+          >
+            Designed with confidential deal data in mind: private environments,
+            controlled access, secure document handling and enterprise
+            deployment options.
+          </p>
+
+          <p
+            style={{
+              marginTop: "10px",
+              color: "#64748B",
+              fontSize: "15px"
+            }}
+          >
+            Flexible commercial models under review: secure hosted,
+            subscription and private deployment.
+          </p>
         </div>
       </section>
 
-      {/* EXAMPLE */}
+      {/* CASE STUDY */}
       <section
         id="example"
         style={{
           background: "#11162B",
           color: "white",
-          padding: "95px 24px"
+          padding: mobile ? "60px 20px" : "95px 24px"
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "44px", marginBottom: "14px" }}>
+          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
             Illustrative Case Study — Fintech Acquisition
           </h2>
-
-          <p
-            style={{
-              color: "#94A3B8",
-              fontSize: "18px",
-              maxWidth: "760px"
-            }}
-          >
-            Anonymised example showing how raw transaction materials may be
-            transformed into decision-grade integration intelligence.
-          </p>
 
           <div
             style={{
               marginTop: "34px",
               display: "grid",
-              gridTemplateColumns: "1fr 180px 1.2fr",
+              gridTemplateColumns: mobile ? "1fr" : "1fr 180px 1.2fr",
               gap: "24px",
               alignItems: "center"
             }}
           >
-            {/* INPUTS */}
             <div>
               {[
                 "Confidential Information Memorandum",
@@ -381,40 +263,37 @@ export default function Home() {
               ))}
             </div>
 
-            {/* ENGINE */}
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
-                  fontSize: "72px",
+                  fontSize: mobile ? "56px" : "72px",
                   color: "#7C4DFF",
-                  fontWeight: "700",
-                  lineHeight: 1
+                  fontWeight: "700"
                 }}
               >
-                →
+                {mobile ? "↓" : "→"}
               </div>
+
               <div
                 style={{
-                  marginTop: "12px",
-                  color: "#FFFFFF",
-                  fontSize: "18px",
+                  fontSize: mobile ? "18px" : "20px",
                   fontWeight: "700"
                 }}
               >
                 Integration Intelligence Engine
               </div>
+
               <div
                 style={{
-                  marginTop: "6px",
                   color: "#CBD5E1",
-                  fontSize: "13px"
+                  fontSize: "14px",
+                  marginTop: "8px"
                 }}
               >
                 Documents into decision-grade insight
               </div>
             </div>
 
-            {/* OUTPUT */}
             <div
               style={{
                 background: "white",
@@ -426,96 +305,24 @@ export default function Home() {
               <h3>Illustrative Board Output</h3>
 
               <ul style={{ color: "#475569", paddingLeft: "18px", lineHeight: 1.7 }}>
-                <li><strong>68% of projected value relies on synergy execution rather than core growth</strong></li>
-                <li><strong>Management capacity appears misaligned to a 24-month integration programme</strong></li>
-                <li><strong>Revenue case likely overstated relative to commercial evidence</strong></li>
-                <li><strong>Platform migration is the single biggest threat to value delivery</strong></li>
-                <li><strong>Board should require monthly integration governance from Day 1</strong></li>
-                <li><strong>Deal logic attractive, execution confidence only moderate</strong></li>
+                <li>68% of value depends on synergy delivery</li>
+                <li>Management bandwidth appears stretched</li>
+                <li>Migration is the critical path risk</li>
+                <li>Board governance should begin Day 1</li>
+                <li>Execution confidence moderate</li>
               </ul>
-
-              <div style={{ marginTop: "24px" }}>
-                <div style={{ fontSize: "14px", fontWeight: "700", marginBottom: "14px" }}>
-                  Illustrative Deal Value Mix
-                </div>
-
-                <div style={{ fontSize: "13px", marginBottom: "6px", color: "#475569" }}>
-                  Core Business Value — 32%
-                </div>
-                <div style={{ height: "10px", background: "#E5E7EB", borderRadius: "999px", overflow: "hidden", marginBottom: "12px" }}>
-                  <div style={{ width: "32%", height: "100%", background: "#475569" }} />
-                </div>
-
-                <div style={{ fontSize: "13px", marginBottom: "6px", color: "#475569" }}>
-                  Cost Synergies — 48%
-                </div>
-                <div style={{ height: "10px", background: "#E5E7EB", borderRadius: "999px", overflow: "hidden", marginBottom: "12px" }}>
-                  <div style={{ width: "48%", height: "100%", background: "#7C4DFF" }} />
-                </div>
-
-                <div style={{ fontSize: "13px", marginBottom: "6px", color: "#475569" }}>
-                  Revenue Synergies — 20%
-                </div>
-                <div style={{ height: "10px", background: "#E5E7EB", borderRadius: "999px", overflow: "hidden" }}>
-                  <div style={{ width: "20%", height: "100%", background: "#C4B5FD" }} />
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHO FOR */}
-      <section
-        style={{
-          background: "white",
-          color: "#111827",
-          padding: "90px 24px"
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "44px", marginBottom: "34px" }}>
-            Who We’d Value Feedback From
-          </h2>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
-              gap: "18px"
-            }}
-          >
-            {[
-              "Private Equity Partners",
-              "Operating Partners",
-              "Corporate Development",
-              "Technical Builders"
-            ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "22px",
-                  borderRadius: "18px",
-                  border: "1px solid #E2E8F0",
-                  background: "#F8FAFC",
-                  textAlign: "center",
-                  fontWeight: "600"
-                }}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA / SURVEY */}
+      {/* SURVEY */}
       <section
         id="feedback"
         style={{
           background: "#1A237E",
           color: "white",
-          padding: "100px 24px"
+          padding: mobile ? "70px 20px" : "100px 24px"
         }}
       >
         <div
@@ -525,21 +332,20 @@ export default function Home() {
             textAlign: "center"
           }}
         >
-          <h2 style={{ fontSize: "48px", marginBottom: "18px" }}>
+          <h2 style={{ fontSize: mobile ? "34px" : "48px" }}>
             Currently Exploring Market Demand
           </h2>
 
           <p
             style={{
               color: "#E2E8F0",
-              fontSize: "22px",
+              fontSize: mobile ? "18px" : "22px",
               maxWidth: "760px",
-              margin: "0 auto"
+              margin: "18px auto 0"
             }}
           >
             We are testing whether transaction execution intelligence is a
-            product sophisticated dealmakers would value. If this resonates,
-            I would genuinely value your perspective.
+            product sophisticated dealmakers would value.
           </p>
 
           <div
@@ -555,7 +361,7 @@ export default function Home() {
           >
             <div
               style={{
-                fontSize: "24px",
+                fontSize: mobile ? "22px" : "24px",
                 fontWeight: "700",
                 marginBottom: "18px"
               }}
@@ -565,19 +371,19 @@ export default function Home() {
 
             {!submitted ? (
               <div style={{ display: "grid", gap: "12px" }}>
-                <button onClick={() => vote("yes")} disabled={loading} style={neutralButton}>
+                <button onClick={() => vote("yes")} style={neutralButton}>
                   Yes — I'd use this
                 </button>
 
-                <button onClick={() => vote("interesting")} disabled={loading} style={neutralButton}>
+                <button onClick={() => vote("interesting")} style={neutralButton}>
                   Interesting — tell me more
                 </button>
 
-                <button onClick={() => vote("unsure")} disabled={loading} style={neutralButton}>
+                <button onClick={() => vote("unsure")} style={neutralButton}>
                   Unsure
                 </button>
 
-                <button onClick={() => vote("no_need")} disabled={loading} style={neutralButton}>
+                <button onClick={() => vote("no_need")} style={neutralButton}>
                   I do not currently see the need
                 </button>
               </div>
@@ -594,124 +400,36 @@ export default function Home() {
               </div>
             )}
           </div>
+        </div>
+      </section>
 
-          <div style={{ marginTop: "28px" }}>
-            <a
-              href="mailto:jon_milsted@hotmail.com"
-              style={{
-                background: "#7C4DFF",
-                color: "white",
-                textDecoration: "none",
-                padding: "16px 26px",
-                borderRadius: "14px",
-                fontWeight: "700"
-              }}
-            >
-              Contact Jon Milsted
-            </a>
-          </div>
+      {/* ABOUT JON */}
+      <section
+        style={{
+          background: "white",
+          color: "#111827",
+          padding: mobile ? "60px 20px" : "90px 24px"
+        }}
+      >
+        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: mobile ? "34px" : "42px" }}>
+            About Jon Milsted
+          </h2>
 
           <p
             style={{
-              marginTop: "22px",
-              color: "#C7D2FE",
-              fontSize: "14px"
+              fontSize: mobile ? "18px" : "20px",
+              color: "#475569",
+              lineHeight: 1.8
             }}
           >
-            Brand, domain and formal company identity in development.
+            Jon Milsted has spent more than 20 years across M&A, post-merger
+            integration, separation and transformation. He has held leadership
+            roles at GoCardless, OVO, Mastercard and Deloitte, delivering
+            integrations, synergy programmes and complex change at scale.
           </p>
         </div>
       </section>
-    <section
-  style={{
-    background: "white",
-    color: "#111827",
-    padding: "90px 24px",
-    borderTop: "1px solid #E5E7EB"
-  }}
->
-  <div
-    style={{
-      maxWidth: "1000px",
-      margin: "0 auto"
-    }}
-  >
-    <h2
-      style={{
-        fontSize: "42px",
-        marginBottom: "24px"
-      }}
-    >
-      About Jon Milsted
-    </h2>
-
-    <p
-      style={{
-        fontSize: "20px",
-        color: "#475569",
-        lineHeight: 1.8,
-        maxWidth: "900px"
-      }}
-    >
-      Jon Milsted has spent more than 20 years working across M&A,
-      post-merger integration, separation and large-scale business
-      transformation. He has led complex integrations and turnarounds
-      across fintech, energy, payments and advisory environments —
-      including leadership roles at GoCardless, OVO, Mastercard and
-      Deloitte.
-    </p>
-
-    <p
-      style={{
-        fontSize: "20px",
-        color: "#475569",
-        lineHeight: 1.8,
-        maxWidth: "900px",
-        marginTop: "18px"
-      }}
-    >
-      His experience includes delivering £100m+ synergy programmes,
-      integrating multi-billion-pound acquisitions, removing complex
-      TSA structures, leading customer and systems migrations, and
-      helping transform a £60m annual loss into profitability.
-      Integration Intelligence is built from that practical experience,
-      combined with a belief that modern AI can materially improve how
-      deals are assessed and executed.
-    </p>
-
-    <div
-      style={{
-        marginTop: "34px",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
-        gap: "16px"
-      }}
-    >
-      {[
-        "M&A Integration",
-        "Separation / TSA Exit",
-        "Transformation",
-        "Synergy Delivery",
-        "Executive Leadership",
-        "AI Opportunity Assessment"
-      ].map((item, i) => (
-        <div
-          key={i}
-          style={{
-            background: "#F8FAFC",
-            border: "1px solid #E2E8F0",
-            borderRadius: "16px",
-            padding: "16px",
-            fontWeight: "600",
-            textAlign: "center"
-          }}
-        >
-          {item}
-        </div>
-      ))}
     </div>
-  </div>
-</section>
-        </div>
   );
 }
