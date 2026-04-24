@@ -1,4 +1,31 @@
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+);
+
 export default function Home() {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const vote = async (choice) => {
+    if (submitted || loading) return;
+
+    setLoading(true);
+
+    try {
+      await supabase.from("votes").insert([{ choice }]);
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+      alert("Unable to save feedback right now.");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <div
       style={{
@@ -390,38 +417,21 @@ export default function Home() {
                 <div style={{ fontSize: "13px", marginBottom: "6px", color: "#475569" }}>
                   Core Business Value — 32%
                 </div>
-                <div style={{
-                  height: "10px",
-                  background: "#E5E7EB",
-                  borderRadius: "999px",
-                  overflow: "hidden",
-                  marginBottom: "12px"
-                }}>
+                <div style={{ height: "10px", background: "#E5E7EB", borderRadius: "999px", overflow: "hidden", marginBottom: "12px" }}>
                   <div style={{ width: "32%", height: "100%", background: "#475569" }} />
                 </div>
 
                 <div style={{ fontSize: "13px", marginBottom: "6px", color: "#475569" }}>
                   Cost Synergies — 48%
                 </div>
-                <div style={{
-                  height: "10px",
-                  background: "#E5E7EB",
-                  borderRadius: "999px",
-                  overflow: "hidden",
-                  marginBottom: "12px"
-                }}>
+                <div style={{ height: "10px", background: "#E5E7EB", borderRadius: "999px", overflow: "hidden", marginBottom: "12px" }}>
                   <div style={{ width: "48%", height: "100%", background: "#7C4DFF" }} />
                 </div>
 
                 <div style={{ fontSize: "13px", marginBottom: "6px", color: "#475569" }}>
                   Revenue Synergies — 20%
                 </div>
-                <div style={{
-                  height: "10px",
-                  background: "#E5E7EB",
-                  borderRadius: "999px",
-                  overflow: "hidden"
-                }}>
+                <div style={{ height: "10px", background: "#E5E7EB", borderRadius: "999px", overflow: "hidden" }}>
                   <div style={{ width: "20%", height: "100%", background: "#C4B5FD" }} />
                 </div>
               </div>
@@ -474,7 +484,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA / SURVEY */}
       <section
         id="feedback"
         style={{
@@ -528,38 +538,66 @@ export default function Home() {
               Would a tool like this be valuable to you?
             </div>
 
-            <div style={{ display: "grid", gap: "12px" }}>
-              <button style={{
-                padding: "14px",
-                borderRadius: "14px",
-                border: "none",
-                background: "#7C4DFF",
-                color: "white",
-                fontWeight: "700"
-              }}>
-                Yes — I'd use this
-              </button>
+            {!submitted ? (
+              <div style={{ display: "grid", gap: "12px" }}>
+                <button
+                  onClick={() => vote("yes")}
+                  disabled={loading}
+                  style={{
+                    padding: "14px",
+                    borderRadius: "14px",
+                    border: "none",
+                    background: "#7C4DFF",
+                    color: "white",
+                    fontWeight: "700",
+                    cursor: "pointer"
+                  }}
+                >
+                  Yes — I'd use this
+                </button>
 
-              <button style={{
-                padding: "14px",
-                borderRadius: "14px",
-                border: "1px solid rgba(255,255,255,0.18)",
-                background: "transparent",
-                color: "white"
-              }}>
-                Interesting — tell me more
-              </button>
+                <button
+                  onClick={() => vote("interesting")}
+                  disabled={loading}
+                  style={{
+                    padding: "14px",
+                    borderRadius: "14px",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    background: "transparent",
+                    color: "white",
+                    cursor: "pointer"
+                  }}
+                >
+                  Interesting — tell me more
+                </button>
 
-              <button style={{
-                padding: "14px",
-                borderRadius: "14px",
-                border: "1px solid rgba(255,255,255,0.18)",
-                background: "transparent",
-                color: "white"
-              }}>
-                Unsure
-              </button>
-            </div>
+                <button
+                  onClick={() => vote("unsure")}
+                  disabled={loading}
+                  style={{
+                    padding: "14px",
+                    borderRadius: "14px",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                    background: "transparent",
+                    color: "white",
+                    cursor: "pointer"
+                  }}
+                >
+                  Unsure
+                </button>
+              </div>
+            ) : (
+              <div
+                style={{
+                  background: "rgba(255,255,255,0.08)",
+                  padding: "18px",
+                  borderRadius: "14px",
+                  fontWeight: "700"
+                }}
+              >
+                Thank you — feedback received.
+              </div>
+            )}
           </div>
 
           <div style={{ marginTop: "28px" }}>
