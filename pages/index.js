@@ -297,7 +297,7 @@ export default function Home() {
               "Upload Deal Materials",
               "Engine Diagnoses Value & Risk",
               "Board-Level Insight Produced",
-              "Management Blueprint Generated"
+              "Management Execution Outputs Generated"
             ].map((step, i) => (
               <div
                 key={i}
