@@ -26,6 +26,17 @@ export default function Home() {
     setLoading(false);
   };
 
+  const neutralButton = {
+    padding: "16px",
+    borderRadius: "14px",
+    border: "1px solid rgba(255,255,255,0.18)",
+    background: "rgba(255,255,255,0.08)",
+    color: "white",
+    fontSize: "18px",
+    fontWeight: "600",
+    cursor: "pointer"
+  };
+
   return (
     <div
       style={{
@@ -342,11 +353,12 @@ export default function Home() {
             style={{
               marginTop: "34px",
               display: "grid",
-              gridTemplateColumns: "1fr 140px 1.2fr",
+              gridTemplateColumns: "1fr 180px 1.2fr",
               gap: "24px",
               alignItems: "center"
             }}
           >
+            {/* INPUTS */}
             <div>
               {[
                 "Confidential Information Memorandum",
@@ -357,8 +369,8 @@ export default function Home() {
                 <div
                   key={i}
                   style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.08)",
+                    background: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.18)",
                     padding: "18px",
                     borderRadius: "18px",
                     marginBottom: "14px"
@@ -369,27 +381,40 @@ export default function Home() {
               ))}
             </div>
 
+            {/* ENGINE */}
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
-                  fontSize: "48px",
+                  fontSize: "72px",
                   color: "#7C4DFF",
-                  fontWeight: "700"
+                  fontWeight: "700",
+                  lineHeight: 1
                 }}
               >
                 →
               </div>
               <div
                 style={{
-                  marginTop: "10px",
-                  color: "#CBD5E1",
-                  fontSize: "14px"
+                  marginTop: "12px",
+                  color: "#FFFFFF",
+                  fontSize: "18px",
+                  fontWeight: "700"
                 }}
               >
                 Integration Intelligence Engine
               </div>
+              <div
+                style={{
+                  marginTop: "6px",
+                  color: "#CBD5E1",
+                  fontSize: "13px"
+                }}
+              >
+                Documents into decision-grade insight
+              </div>
             </div>
 
+            {/* OUTPUT */}
             <div
               style={{
                 background: "white",
@@ -523,14 +548,14 @@ export default function Home() {
               background: "rgba(255,255,255,0.08)",
               padding: "28px",
               borderRadius: "22px",
-              maxWidth: "520px",
+              maxWidth: "560px",
               marginLeft: "auto",
               marginRight: "auto"
             }}
           >
             <div
               style={{
-                fontSize: "22px",
+                fontSize: "24px",
                 fontWeight: "700",
                 marginBottom: "18px"
               }}
@@ -540,50 +565,20 @@ export default function Home() {
 
             {!submitted ? (
               <div style={{ display: "grid", gap: "12px" }}>
-                <button
-                  onClick={() => vote("yes")}
-                  disabled={loading}
-                  style={{
-                    padding: "14px",
-                    borderRadius: "14px",
-                    border: "none",
-                    background: "#7C4DFF",
-                    color: "white",
-                    fontWeight: "700",
-                    cursor: "pointer"
-                  }}
-                >
+                <button onClick={() => vote("yes")} disabled={loading} style={neutralButton}>
                   Yes — I'd use this
                 </button>
 
-                <button
-                  onClick={() => vote("interesting")}
-                  disabled={loading}
-                  style={{
-                    padding: "14px",
-                    borderRadius: "14px",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    background: "transparent",
-                    color: "white",
-                    cursor: "pointer"
-                  }}
-                >
+                <button onClick={() => vote("interesting")} disabled={loading} style={neutralButton}>
                   Interesting — tell me more
                 </button>
 
-                <button
-                  onClick={() => vote("unsure")}
-                  disabled={loading}
-                  style={{
-                    padding: "14px",
-                    borderRadius: "14px",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    background: "transparent",
-                    color: "white",
-                    cursor: "pointer"
-                  }}
-                >
+                <button onClick={() => vote("unsure")} disabled={loading} style={neutralButton}>
                   Unsure
+                </button>
+
+                <button onClick={() => vote("no_need")} disabled={loading} style={neutralButton}>
+                  I do not currently see the need
                 </button>
               </div>
             ) : (
