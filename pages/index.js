@@ -52,7 +52,7 @@ export default function Home() {
           }}
         >
           Combining years of integration experience with modern AI thinking,
-          we help investors and acquirers understand whether deal value can
+          we want to help investors and acquirers understand whether deal value can
           actually be delivered — quickly, objectively and cost-effectively.
         </p>
 
