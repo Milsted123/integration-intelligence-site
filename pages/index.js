@@ -1,81 +1,578 @@
-export default function LandingPage(){return (<div className='min-h-screen bg-white text-slate-900 font-sans'>
-<section className='bg-gradient-to-br from-[#1A237E] via-[#2432A8] to-[#11162B] text-white'>
-<div className='max-w-6xl mx-auto px-8 py-28'>
-<div className='inline-block px-4 py-2 rounded-full bg-white/10 border border-white/10 text-sm tracking-wide'>Private Proof of Concept</div>
-<h1 className='mt-8 text-7xl md:text-8xl font-bold tracking-tight max-w-4xl leading-tight'>Integration Intelligence</h1>
-<p className='mt-6 text-2xl text-slate-200 max-w-4xl leading-relaxed'>Combining years of integration experience with modern AI thinking, we help investors and acquirers understand whether deal value can actually be delivered — quickly, objectively and cost-effectively.</p>
-<div className='mt-10 flex gap-4 flex-wrap'>
-<a href='#case-study' className='px-6 py-3 rounded-2xl bg-[#7C4DFF] font-semibold shadow-xl'>View Example Output</a>
-<a href='#feedback' className='px-6 py-3 rounded-2xl border border-white/20'>Share Perspective</a>
-</div>
-<div className='mt-14 grid md:grid-cols-4 gap-4 text-sm text-slate-200'>
-<div className='rounded-2xl bg-white/10 p-4'>Board-grade outputs in hours</div>
-<div className='rounded-2xl bg-white/10 p-4'>Built from lived deal experience</div>
-<div className='rounded-2xl bg-white/10 p-4'>Designed for PE & acquirers</div>
-<div className='rounded-2xl bg-white/10 p-4'>Early validation phase</div>
-</div>
-</div>
-</section>
-<section className='bg-white'>
-<div className='max-w-6xl mx-auto px-8 py-24'>
-<h2 className='text-4xl font-bold'>Why This Matters</h2>
-<p className='mt-4 text-xl text-slate-600 max-w-4xl'>Many transactions underperform not because the acquisition logic was wrong, but because execution risk was not properly understood before close.</p>
-<div className='grid md:grid-cols-4 gap-6 mt-10'>
-{[['Synergy Slippage','Savings prove harder than expected'],['Migration Delays','Systems and customers become the hidden critical path'],['TSA Dependency','Seller reliance slows value capture'],['Management Distraction','Growth teams lose focus during integration']].map((x,i)=><div key={i} className='rounded-3xl p-6 bg-slate-50 border border-slate-200 shadow-xl shadow-slate-200/50'><h3 className='font-semibold'>{x[0]}</h3><p className='mt-3 text-slate-600 text-sm'>{x[1]}</p></div>)}
-</div>
-</div>
-</section>
-<section className='bg-slate-50'>
-<div className='max-w-6xl mx-auto px-8 py-24'>
-<h2 className='text-4xl font-bold'>How It Could Work</h2>
-<div className='grid md:grid-cols-4 gap-6 mt-10'>
-{['Upload Deal Materials','Engine Diagnoses Value & Risk','Board-Level Insight Produced','Management Blueprint Generated'].map((x,i)=><div key={i} className='rounded-3xl p-6 bg-white border border-slate-200 shadow-xl shadow-slate-200/50'><div className='text-[#7C4DFF] font-bold text-sm'>STEP {i+1}</div><div className='mt-2 font-semibold'>{x}</div></div>)}
-</div>
-</div>
-</section>
-<section id='case-study' className='bg-[#11162B] text-white'>
-<div className='max-w-6xl mx-auto px-8 py-24'>
-<h2 className='text-4xl font-bold'>Illustrative Case Study — Fintech Acquisition</h2>
-<p className='mt-4 text-slate-300 max-w-3xl'>Anonymised example showing how raw transaction documents may be transformed into decision-grade integration intelligence.</p>
-<div className='grid md:grid-cols-3 gap-8 mt-12 items-start'>
-<div>
-<div className='rounded-2xl p-5 bg-white/5 border border-white/10 mb-4'>Confidential Information Memorandum</div>
-<div className='rounded-2xl p-5 bg-white/5 border border-white/10 mb-4'>Board Approval Paper</div>
-<div className='rounded-2xl p-5 bg-white/5 border border-white/10 mb-4'>Synergy Model</div>
-<div className='rounded-2xl p-5 bg-white/5 border border-white/10'>Due Diligence Reports</div>
-</div>
-<div className='flex items-center justify-center h-full'>
-<div className='text-center'><div className='text-4xl text-[#7C4DFF] font-bold'>→</div><div className='mt-3 text-sm text-slate-300'>Integration Intelligence Engine</div></div>
-</div>
-<div className='rounded-3xl p-8 bg-white text-slate-900 shadow-2xl'>
-<h3 className='text-2xl font-bold'>Illustrative Board Output</h3>
-<ul className='mt-5 space-y-3 text-slate-700'>
-<li>• Strong strategic logic, but execution-heavy value case</li>
-<li>• ~70% of upside linked to synergy delivery</li>
-<li>• Cost synergies appear credible and near-term</li>
-<li>• Revenue upside likely slower than plan</li>
-<li>• Platform migration is the critical path</li>
-<li>• Growth culture may resist multi-year cost focus</li>
-<li>• Monthly board oversight recommended</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section className='bg-white'>
-<div className='max-w-6xl mx-auto px-8 py-24'>
-<h2 className='text-4xl font-bold'>Who We’d Value Feedback From</h2>
-<div className='grid md:grid-cols-4 gap-6 mt-10'>
-{['Private Equity Partners','Operating Partners','Corporate Development','Technical Builders'].map((x,i)=><div key={i} className='rounded-3xl p-6 bg-slate-50 border border-slate-200 text-center font-semibold'>{x}</div>)}
-</div>
-</div>
-</section>
-<section id='feedback' className='bg-gradient-to-br from-[#1A237E] to-[#11162B] text-white'>
-<div className='max-w-4xl mx-auto px-8 py-24 text-center'>
-<h2 className='text-4xl font-bold'>Currently Exploring Market Demand</h2>
-<p className='mt-5 text-xl text-slate-200'>We are testing whether transaction execution intelligence is a product sophisticated dealmakers would value. If this resonates, I would genuinely value your perspective.</p>
-<a href='mailto:jon_milsted@hotmail.com' className='inline-block mt-8 px-6 py-3 rounded-2xl bg-[#7C4DFF] font-semibold shadow-xl'>Contact Jon Milsted</a>
-<p className='mt-4 text-slate-300'>jon_milsted@hotmail.com</p>
-</div>
-</section>
-</div>)}
+export default function Home() {
+  return (
+    <div
+      style={{
+        margin: 0,
+        padding: 0,
+        fontFamily: "Inter, Arial, sans-serif",
+        background: "#1A237E",
+        color: "white",
+        lineHeight: 1.5
+      }}
+    >
+
+      {/* HERO */}
+      <section
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "95px 24px 85px"
+        }}
+      >
+        <div
+          style={{
+            display: "inline-block",
+            padding: "8px 14px",
+            borderRadius: "999px",
+            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            fontSize: "14px"
+          }}
+        >
+          Private Proof of Concept
+        </div>
+
+        <h1
+          style={{
+            fontSize: "72px",
+            lineHeight: 1.03,
+            marginTop: "24px",
+            marginBottom: "24px",
+            maxWidth: "920px"
+          }}
+        >
+          Integration Intelligence
+        </h1>
+
+        <p
+          style={{
+            fontSize: "26px",
+            color: "#E2E8F0",
+            maxWidth: "860px"
+          }}
+        >
+          Combining years of integration experience with modern AI thinking,
+          we help investors and acquirers understand whether deal value can
+          actually be delivered — quickly, objectively and cost-effectively.
+        </p>
+
+        <div
+          style={{
+            marginTop: "36px",
+            display: "flex",
+            gap: "16px",
+            flexWrap: "wrap"
+          }}
+        >
+          <a
+            href="#example"
+            style={{
+              background: "#7C4DFF",
+              color: "white",
+              textDecoration: "none",
+              padding: "14px 22px",
+              borderRadius: "14px",
+              fontWeight: "600"
+            }}
+          >
+            View Example Output
+          </a>
+
+          <a
+            href="#feedback"
+            style={{
+              border: "1px solid rgba(255,255,255,0.18)",
+              color: "white",
+              textDecoration: "none",
+              padding: "14px 22px",
+              borderRadius: "14px"
+            }}
+          >
+            Share Perspective
+          </a>
+        </div>
+      </section>
+
+      {/* TRUST BAR */}
+      <section
+        style={{
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          padding: "22px 24px",
+          color: "#C7D2FE"
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+            gap: "18px",
+            fontSize: "14px"
+          }}
+        >
+          <div>Built from lived integration experience</div>
+          <div>Designed for investors & acquirers</div>
+          <div>Board-grade outputs in hours, not weeks</div>
+          <div>Early validation phase underway</div>
+        </div>
+      </section>
+
+      {/* PROBLEM */}
+      <section
+        style={{
+          background: "white",
+          color: "#111827",
+          padding: "90px 24px"
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "44px", marginBottom: "18px" }}>
+            Why This Matters
+          </h2>
+
+          <p
+            style={{
+              fontSize: "20px",
+              color: "#475569",
+              maxWidth: "900px"
+            }}
+          >
+            Many transactions underperform not because the acquisition logic was
+            wrong, but because execution risk was not properly understood before
+            close.
+          </p>
+
+          <div
+            style={{
+              marginTop: "36px",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
+              gap: "20px"
+            }}
+          >
+            {[
+              [
+                "Synergy Slippage",
+                "Savings prove harder than expected."
+              ],
+              [
+                "Migration Delays",
+                "Systems and customers become the hidden critical path."
+              ],
+              [
+                "TSA Dependency",
+                "Seller reliance slows value capture."
+              ],
+              [
+                "Management Distraction",
+                "Growth teams lose focus during integration."
+              ]
+            ].map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: "26px",
+                  borderRadius: "22px",
+                  background: "#F8FAFC",
+                  border: "1px solid #E2E8F0"
+                }}
+              >
+                <h3 style={{ marginTop: 0 }}>{item[0]}</h3>
+                <p style={{ color: "#64748B", marginBottom: 0 }}>
+                  {item[1]}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT IT DOES */}
+      <section
+        style={{
+          background: "#F8FAFC",
+          color: "#111827",
+          padding: "90px 24px"
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "44px", marginBottom: "36px" }}>
+            How It Could Work
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(340px,1fr))",
+              gap: "24px"
+            }}
+          >
+            <div
+              style={{
+                background: "white",
+                padding: "32px",
+                borderRadius: "24px",
+                border: "1px solid #E2E8F0"
+              }}
+            >
+              <h3>Inputs</h3>
+              <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
+                <li>Investment committee papers</li>
+                <li>Board approval memos</li>
+                <li>Commercial / financial diligence</li>
+                <li>Synergy models</li>
+                <li>Management presentations</li>
+                <li>Transaction documents</li>
+              </ul>
+            </div>
+
+            <div
+              style={{
+                background: "white",
+                padding: "32px",
+                borderRadius: "24px",
+                border: "1px solid #E2E8F0"
+              }}
+            >
+              <h3>Outputs</h3>
+              <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
+                <li>Board-level integration risk assessments</li>
+                <li>Management execution blueprints</li>
+                <li>Synergy capture diagnostics</li>
+                <li>Day 1 / 100-day plans</li>
+                <li>TSA & separation watchpoints</li>
+                <li>Deal-specific KPI frameworks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section
+        style={{
+          background: "white",
+          color: "#111827",
+          padding: "90px 24px"
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "44px", marginBottom: "36px" }}>
+            Process Overview
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+              gap: "18px"
+            }}
+          >
+            {[
+              "Upload Deal Materials",
+              "Engine Diagnoses Value & Risk",
+              "Board-Level Insight Produced",
+              "Management Blueprint Generated"
+            ].map((step, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "#F8FAFC",
+                  border: "1px solid #E2E8F0",
+                  borderRadius: "22px",
+                  padding: "24px"
+                }}
+              >
+                <div
+                  style={{
+                    color: "#7C4DFF",
+                    fontWeight: "700",
+                    marginBottom: "8px"
+                  }}
+                >
+                  Step {i + 1}
+                </div>
+                <div>{step}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EXAMPLE */}
+      <section
+        id="example"
+        style={{
+          background: "#11162B",
+          color: "white",
+          padding: "95px 24px"
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "44px", marginBottom: "14px" }}>
+            Illustrative Case Study — Fintech Acquisition
+          </h2>
+
+          <p
+            style={{
+              color: "#94A3B8",
+              fontSize: "18px",
+              maxWidth: "760px"
+            }}
+          >
+            Anonymised example showing how raw transaction materials may be
+            transformed into decision-grade integration intelligence.
+          </p>
+
+          <div
+            style={{
+              marginTop: "34px",
+              display: "grid",
+              gridTemplateColumns: "1fr 140px 1.2fr",
+              gap: "24px",
+              alignItems: "center"
+            }}
+          >
+            {/* INPUT DOCS */}
+            <div>
+              {[
+                "Confidential Information Memorandum",
+                "Board Approval Paper",
+                "Synergy Model",
+                "Due Diligence Reports"
+              ].map((doc, i) => (
+                <div
+                  key={i}
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    padding: "18px",
+                    borderRadius: "18px",
+                    marginBottom: "14px"
+                  }}
+                >
+                  {doc}
+                </div>
+              ))}
+            </div>
+
+            {/* ARROW */}
+            <div style={{ textAlign: "center" }}>
+              <div
+                style={{
+                  fontSize: "48px",
+                  color: "#7C4DFF",
+                  fontWeight: "700"
+                }}
+              >
+                →
+              </div>
+              <div
+                style={{
+                  marginTop: "10px",
+                  color: "#CBD5E1",
+                  fontSize: "14px"
+                }}
+              >
+                Integration Intelligence Engine
+              </div>
+            </div>
+
+            {/* OUTPUT */}
+            <div
+              style={{
+                background: "white",
+                color: "#111827",
+                borderRadius: "24px",
+                padding: "28px"
+              }}
+            >
+              <h3>Illustrative Board Output</h3>
+
+              <ul style={{ color: "#475569", paddingLeft: "18px" }}>
+                <li>Strong strategic logic, but execution-heavy value case</li>
+                <li>~70% of upside linked to synergy delivery</li>
+                <li>Cost synergies appear credible and near-term</li>
+                <li>Revenue upside likely slower than plan</li>
+                <li>Platform migration is the critical path</li>
+                <li>Monthly board oversight recommended</li>
+              </ul>
+
+              <div style={{ marginTop: "20px" }}>
+                <div style={{ fontSize: "14px", marginBottom: "10px" }}>
+                  Value Dependence
+                </div>
+
+                <div
+                  style={{
+                    height: "10px",
+                    background: "#E5E7EB",
+                    borderRadius: "999px",
+                    overflow: "hidden",
+                    marginBottom: "8px"
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "35%",
+                      height: "100%",
+                      background: "#475569"
+                    }}
+                  />
+                </div>
+
+                <div
+                  style={{
+                    height: "10px",
+                    background: "#E5E7EB",
+                    borderRadius: "999px",
+                    overflow: "hidden",
+                    marginBottom: "8px"
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "68%",
+                      height: "100%",
+                      background: "#7C4DFF"
+                    }}
+                  />
+                </div>
+
+                <div
+                  style={{
+                    height: "10px",
+                    background: "#E5E7EB",
+                    borderRadius: "999px",
+                    overflow: "hidden"
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      background: "#C4B5FD"
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHO FOR */}
+      <section
+        style={{
+          background: "white",
+          color: "#111827",
+          padding: "90px 24px"
+        }}
+      >
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "44px", marginBottom: "34px" }}>
+            Who We’d Value Feedback From
+          </h2>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+              gap: "18px"
+            }}
+          >
+            {[
+              "Private Equity Partners",
+              "Operating Partners",
+              "Corporate Development",
+              "Technical Builders"
+            ].map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  padding: "22px",
+                  borderRadius: "18px",
+                  border: "1px solid #E2E8F0",
+                  background: "#F8FAFC",
+                  textAlign: "center",
+                  fontWeight: "600"
+                }}
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section
+        id="feedback"
+        style={{
+          background: "#1A237E",
+          color: "white",
+          padding: "100px 24px"
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            textAlign: "center"
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "48px",
+              marginBottom: "18px"
+            }}
+          >
+            Currently Exploring Market Demand
+          </h2>
+
+          <p
+            style={{
+              color: "#E2E8F0",
+              fontSize: "22px",
+              maxWidth: "760px",
+              margin: "0 auto"
+            }}
+          >
+            We are testing whether transaction execution intelligence is a
+            product sophisticated dealmakers would value. If this resonates,
+            I would genuinely value your perspective.
+          </p>
+
+          <div style={{ marginTop: "34px" }}>
+            <a
+              href="mailto:jon_milsted@hotmail.com"
+              style={{
+                background: "#7C4DFF",
+                color: "white",
+                textDecoration: "none",
+                padding: "16px 26px",
+                borderRadius: "14px",
+                fontWeight: "700"
+              }}
+            >
+              Contact Jon Milsted
+            </a>
+          </div>
+
+          <p
+            style={{
+              marginTop: "22px",
+              color: "#C7D2FE",
+              fontSize: "14px"
+            }}
+          >
+            Brand, domain and formal company identity in development.
+          </p>
+        </div>
+      </section>
+
+    </div>
+  );
+}
