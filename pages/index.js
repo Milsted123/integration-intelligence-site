@@ -622,6 +622,96 @@ export default function Home() {
           </p>
         </div>
       </section>
+    <section
+  style={{
+    background: "white",
+    color: "#111827",
+    padding: "90px 24px",
+    borderTop: "1px solid #E5E7EB"
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1000px",
+      margin: "0 auto"
+    }}
+  >
+    <h2
+      style={{
+        fontSize: "42px",
+        marginBottom: "24px"
+      }}
+    >
+      About Jon Milsted
+    </h2>
+
+    <p
+      style={{
+        fontSize: "20px",
+        color: "#475569",
+        lineHeight: 1.8,
+        maxWidth: "900px"
+      }}
+    >
+      Jon Milsted has spent more than 20 years working across M&A,
+      post-merger integration, separation and large-scale business
+      transformation. He has led complex integrations and turnarounds
+      across fintech, energy, payments and advisory environments —
+      including leadership roles at GoCardless, OVO, Mastercard and
+      Deloitte.
+    </p>
+
+    <p
+      style={{
+        fontSize: "20px",
+        color: "#475569",
+        lineHeight: 1.8,
+        maxWidth: "900px",
+        marginTop: "18px"
+      }}
+    >
+      His experience includes delivering £100m+ synergy programmes,
+      integrating multi-billion-pound acquisitions, removing complex
+      TSA structures, leading customer and systems migrations, and
+      helping transform a £60m annual loss into profitability.
+      Integration Intelligence is built from that practical experience,
+      combined with a belief that modern AI can materially improve how
+      deals are assessed and executed.
+    </p>
+
+    <div
+      style={{
+        marginTop: "34px",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+        gap: "16px"
+      }}
+    >
+      {[
+        "M&A Integration",
+        "Separation / TSA Exit",
+        "Transformation",
+        "Synergy Delivery",
+        "Executive Leadership",
+        "AI Opportunity Assessment"
+      ].map((item, i) => (
+        <div
+          key={i}
+          style={{
+            background: "#F8FAFC",
+            border: "1px solid #E2E8F0",
+            borderRadius: "16px",
+            padding: "16px",
+            fontWeight: "600",
+            textAlign: "center"
+          }}
+        >
+          {item}
+        </div>
+      ))}
     </div>
+  </div>
+</section>
+        </div>
   );
 }
