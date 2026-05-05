@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-
+ 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
-
+ 
 export default function Home() {
   const [mobile, setMobile] = useState(false);
   const [voteChoice, setVoteChoice] = useState(null);
@@ -14,22 +14,24 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [voteError, setVoteError] = useState("");
-
+ 
   const POSITIVE_VOTES = ["yes", "interesting"];
-
+ 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
+ 
   const vote = async (choice) => {
     if (voteChoice || loading) return;
     if (POSITIVE_VOTES.includes(choice)) {
+      // Show email capture instead of submitting immediately
       setVoteChoice(choice);
       return;
     }
+    // For unsure / no_need — submit straight away
     setLoading(true);
     setVoteError("");
     try {
@@ -42,7 +44,7 @@ export default function Home() {
     }
     setLoading(false);
   };
-
+ 
   const submitEmail = async (e) => {
     e.preventDefault();
     setEmailError("");
@@ -63,7 +65,7 @@ export default function Home() {
     }
     setLoading(false);
   };
-
+ 
   const skipEmail = async () => {
     setLoading(true);
     setEmailError("");
@@ -79,7 +81,7 @@ export default function Home() {
     }
     setLoading(false);
   };
-
+ 
   const buttonStyle = {
     width: "100%",
     padding: "16px",
@@ -93,9 +95,9 @@ export default function Home() {
     opacity: loading ? 0.6 : 1,
     transition: "opacity 0.2s"
   };
-
+ 
   const sectionPad = mobile ? "60px 20px" : "95px 24px";
-
+ 
   return (
     <div
       style={{
@@ -157,7 +159,7 @@ export default function Home() {
             gap: "16px"
           }}
         >
-          
+          <a
             href="#example"
             style={{
               background: "#7C4DFF",
@@ -171,7 +173,7 @@ export default function Home() {
           >
             View Example Output
           </a>
-          
+          <a
             href="#feedback"
             style={{
               border: "1px solid rgba(255,255,255,0.18)",
@@ -186,7 +188,7 @@ export default function Home() {
           </a>
         </div>
       </section>
-
+ 
       {/* TRUST BAR */}
       <section
         style={{
@@ -214,7 +216,7 @@ export default function Home() {
           <div>Early validation phase underway</div>
         </div>
       </section>
-
+ 
       {/* WHY */}
       <section
         style={{
@@ -270,7 +272,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* HOW */}
       <section
         style={{
@@ -330,7 +332,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* PROCESS */}
       <section
         style={{
@@ -381,18 +383,30 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p style={{ marginTop: "28px", color: "#475569", fontSize: "16px" }}>
+          <p
+            style={{
+              marginTop: "28px",
+              color: "#475569",
+              fontSize: "16px"
+            }}
+          >
             Designed with confidential deal data in mind: private
             environments, controlled access, secure document handling and
             enterprise deployment options.
           </p>
-          <p style={{ marginTop: "10px", color: "#64748B", fontSize: "15px" }}>
+          <p
+            style={{
+              marginTop: "10px",
+              color: "#64748B",
+              fontSize: "15px"
+            }}
+          >
             Flexible commercial models under review: secure hosted,
             subscription and private deployment.
           </p>
         </div>
       </section>
-
+ 
       {/* CASE STUDY */}
       <section
         id="example"
@@ -453,7 +467,13 @@ export default function Home() {
               <div style={{ fontWeight: "700", fontSize: "20px" }}>
                 Integration Intelligence Engine
               </div>
-              <div style={{ color: "#CBD5E1", fontSize: "14px", marginTop: "8px" }}>
+              <div
+                style={{
+                  color: "#CBD5E1",
+                  fontSize: "14px",
+                  marginTop: "8px"
+                }}
+              >
                 Documents into decision-grade insight
               </div>
             </div>
@@ -478,7 +498,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* WHO */}
       <section
         style={{
@@ -524,7 +544,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* FEEDBACK */}
       <section
         id="feedback"
@@ -534,7 +554,13 @@ export default function Home() {
           padding: mobile ? "70px 20px" : "100px 24px"
         }}
       >
-        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
+        <div
+          style={{
+            maxWidth: "900px",
+            margin: "0 auto",
+            textAlign: "center"
+          }}
+        >
           <h2 style={{ fontSize: mobile ? "34px" : "48px" }}>
             Currently Exploring Market Demand
           </h2>
@@ -572,8 +598,9 @@ export default function Home() {
               >
                 Thank you — feedback received.
               </div>
-
+ 
             ) : voteChoice ? (
+              /* EMAIL CAPTURE — shown after positive vote */
               <form onSubmit={submitEmail}>
                 <div
                   style={{
@@ -641,8 +668,9 @@ export default function Home() {
                   No thanks — just record my vote
                 </button>
               </form>
-
+ 
             ) : (
+              /* INITIAL VOTE BUTTONS */
               <>
                 <div
                   style={{
@@ -654,16 +682,32 @@ export default function Home() {
                   Would a tool like this be valuable to you?
                 </div>
                 <div style={{ display: "grid", gap: "12px" }}>
-                  <button onClick={() => vote("yes")} disabled={loading} style={buttonStyle}>
+                  <button
+                    onClick={() => vote("yes")}
+                    disabled={loading}
+                    style={buttonStyle}
+                  >
                     Yes — I'd use this
                   </button>
-                  <button onClick={() => vote("interesting")} disabled={loading} style={buttonStyle}>
+                  <button
+                    onClick={() => vote("interesting")}
+                    disabled={loading}
+                    style={buttonStyle}
+                  >
                     Interesting — tell me more
                   </button>
-                  <button onClick={() => vote("unsure")} disabled={loading} style={buttonStyle}>
+                  <button
+                    onClick={() => vote("unsure")}
+                    disabled={loading}
+                    style={buttonStyle}
+                  >
                     Unsure
                   </button>
-                  <button onClick={() => vote("no_need")} disabled={loading} style={buttonStyle}>
+                  <button
+                    onClick={() => vote("no_need")}
+                    disabled={loading}
+                    style={buttonStyle}
+                  >
                     I do not currently see the need
                   </button>
                 </div>
@@ -677,7 +721,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* ABOUT JON */}
       <section
         style={{
@@ -723,3 +767,4 @@ export default function Home() {
     </div>
   );
 }
+ 
