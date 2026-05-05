@@ -8,8 +8,14 @@ const supabase = createClient(
 
 export default function Home() {
   const [mobile, setMobile] = useState(false);
+  const [voteChoice, setVoteChoice] = useState(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [voteError, setVoteError] = useState("");
+
+  const POSITIVE_VOTES = ["yes", "interesting"];
 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 768);
@@ -19,17 +25,58 @@ export default function Home() {
   }, []);
 
   const vote = async (choice) => {
-    if (submitted || loading) return;
-
+    if (voteChoice || loading) return;
+    if (POSITIVE_VOTES.includes(choice)) {
+      setVoteChoice(choice);
+      return;
+    }
     setLoading(true);
-
+    setVoteError("");
     try {
-      await supabase.from("votes").insert([{ choice }]);
+      const { error } = await supabase.from("votes").insert([{ choice }]);
+      if (error) throw error;
       setSubmitted(true);
     } catch (e) {
-      alert("Unable to save feedback right now.");
+      console.error("Vote error:", e);
+      setVoteError("Unable to save feedback right now. Please try again.");
     }
+    setLoading(false);
+  };
 
+  const submitEmail = async (e) => {
+    e.preventDefault();
+    setEmailError("");
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ choice: voteChoice, email }]);
+      if (error) throw error;
+      setSubmitted(true);
+    } catch (e) {
+      console.error("Email submission error:", e);
+      setEmailError("Unable to save your details right now. Please try again.");
+    }
+    setLoading(false);
+  };
+
+  const skipEmail = async () => {
+    setLoading(true);
+    setEmailError("");
+    try {
+      const { error } = await supabase
+        .from("votes")
+        .insert([{ choice: voteChoice }]);
+      if (error) throw error;
+      setSubmitted(true);
+    } catch (e) {
+      console.error("Skip email error:", e);
+      setVoteError("Unable to save feedback right now. Please try again.");
+    }
     setLoading(false);
   };
 
@@ -42,7 +89,9 @@ export default function Home() {
     color: "white",
     fontSize: mobile ? "16px" : "18px",
     fontWeight: "600",
-    cursor: "pointer"
+    cursor: loading ? "not-allowed" : "pointer",
+    opacity: loading ? 0.6 : 1,
+    transition: "opacity 0.2s"
   };
 
   const sectionPad = mobile ? "60px 20px" : "95px 24px";
@@ -78,7 +127,6 @@ export default function Home() {
         >
           Private Proof of Concept
         </div>
-
         <h1
           style={{
             fontSize: mobile ? "44px" : "72px",
@@ -90,7 +138,6 @@ export default function Home() {
         >
           Integration Intelligence
         </h1>
-
         <p
           style={{
             fontSize: mobile ? "20px" : "26px",
@@ -102,7 +149,6 @@ export default function Home() {
           we help investors and acquirers understand whether deal value can
           actually be delivered — quickly, objectively and cost-effectively.
         </p>
-
         <div
           style={{
             marginTop: "36px",
@@ -111,7 +157,7 @@ export default function Home() {
             gap: "16px"
           }}
         >
-          <a
+          
             href="#example"
             style={{
               background: "#7C4DFF",
@@ -125,8 +171,7 @@ export default function Home() {
           >
             View Example Output
           </a>
-
-          <a
+          
             href="#feedback"
             style={{
               border: "1px solid rgba(255,255,255,0.18)",
@@ -164,7 +209,7 @@ export default function Home() {
           }}
         >
           <div>Built from lived integration experience</div>
-          <div>Designed for investors & acquirers</div>
+          <div>Designed for investors &amp; acquirers</div>
           <div>Board-grade outputs in hours, not weeks</div>
           <div>Early validation phase underway</div>
         </div>
@@ -182,7 +227,6 @@ export default function Home() {
           <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
             Why This Matters
           </h2>
-
           <p
             style={{
               fontSize: mobile ? "18px" : "20px",
@@ -194,7 +238,6 @@ export default function Home() {
             wrong, but because execution risk was not fully understood before
             close.
           </p>
-
           <div
             style={{
               marginTop: "34px",
@@ -240,7 +283,6 @@ export default function Home() {
           <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
             How It Could Work
           </h2>
-
           <div
             style={{
               marginTop: "30px",
@@ -267,7 +309,6 @@ export default function Home() {
                 <li>Transaction documents</li>
               </ul>
             </div>
-
             <div
               style={{
                 background: "white",
@@ -282,7 +323,7 @@ export default function Home() {
                 <li>Management execution outputs</li>
                 <li>Synergy capture diagnostics</li>
                 <li>Day 1 / 100-day plans</li>
-                <li>TSA & separation watchpoints</li>
+                <li>TSA &amp; separation watchpoints</li>
                 <li>Deal KPI frameworks</li>
               </ul>
             </div>
@@ -302,7 +343,6 @@ export default function Home() {
           <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
             Process Overview
           </h2>
-
           <div
             style={{
               marginTop: "30px",
@@ -341,26 +381,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          <p
-            style={{
-              marginTop: "28px",
-              color: "#475569",
-              fontSize: "16px"
-            }}
-          >
+          <p style={{ marginTop: "28px", color: "#475569", fontSize: "16px" }}>
             Designed with confidential deal data in mind: private
             environments, controlled access, secure document handling and
             enterprise deployment options.
           </p>
-
-          <p
-            style={{
-              marginTop: "10px",
-              color: "#64748B",
-              fontSize: "15px"
-            }}
-          >
+          <p style={{ marginTop: "10px", color: "#64748B", fontSize: "15px" }}>
             Flexible commercial models under review: secure hosted,
             subscription and private deployment.
           </p>
@@ -380,12 +406,10 @@ export default function Home() {
           <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
             Illustrative Case Study — Fintech Acquisition
           </h2>
-
           <p style={{ color: "#94A3B8", maxWidth: "760px" }}>
             Anonymised example showing how raw transaction materials may be
             transformed into decision-grade integration intelligence.
           </p>
-
           <div
             style={{
               marginTop: "34px",
@@ -416,7 +440,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
@@ -427,22 +450,13 @@ export default function Home() {
               >
                 {mobile ? "↓" : "→"}
               </div>
-
               <div style={{ fontWeight: "700", fontSize: "20px" }}>
                 Integration Intelligence Engine
               </div>
-
-              <div
-                style={{
-                  color: "#CBD5E1",
-                  fontSize: "14px",
-                  marginTop: "8px"
-                }}
-              >
+              <div style={{ color: "#CBD5E1", fontSize: "14px", marginTop: "8px" }}>
                 Documents into decision-grade insight
               </div>
             </div>
-
             <div
               style={{
                 background: "white",
@@ -452,7 +466,6 @@ export default function Home() {
               }}
             >
               <h3>Illustrative Board Output</h3>
-
               <ul style={{ color: "#475569", paddingLeft: "18px", lineHeight: 1.7 }}>
                 <li><strong>68% of value depends on synergy execution</strong></li>
                 <li><strong>Management bandwidth appears stretched</strong></li>
@@ -476,9 +489,8 @@ export default function Home() {
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Who We’d Value Feedback From
+            Who We'd Value Feedback From
           </h2>
-
           <div
             style={{
               marginTop: "30px",
@@ -522,17 +534,10 @@ export default function Home() {
           padding: mobile ? "70px 20px" : "100px 24px"
         }}
       >
-        <div
-          style={{
-            maxWidth: "900px",
-            margin: "0 auto",
-            textAlign: "center"
-          }}
-        >
+        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
           <h2 style={{ fontSize: mobile ? "34px" : "48px" }}>
             Currently Exploring Market Demand
           </h2>
-
           <p
             style={{
               color: "#E2E8F0",
@@ -544,7 +549,6 @@ export default function Home() {
             We are testing whether transaction execution intelligence is a
             product sophisticated dealmakers would value.
           </p>
-
           <div
             style={{
               marginTop: "34px",
@@ -556,42 +560,119 @@ export default function Home() {
               marginRight: "auto"
             }}
           >
-            <div
-              style={{
-                fontSize: mobile ? "22px" : "24px",
-                fontWeight: "700",
-                marginBottom: "18px"
-              }}
-            >
-              Would a tool like this be valuable to you?
-            </div>
-
-            {!submitted ? (
-              <div style={{ display: "grid", gap: "12px" }}>
-                <button onClick={() => vote("yes")} style={buttonStyle}>
-                  Yes — I'd use this
-                </button>
-                <button onClick={() => vote("interesting")} style={buttonStyle}>
-                  Interesting — tell me more
-                </button>
-                <button onClick={() => vote("unsure")} style={buttonStyle}>
-                  Unsure
-                </button>
-                <button onClick={() => vote("no_need")} style={buttonStyle}>
-                  I do not currently see the need
-                </button>
-              </div>
-            ) : (
+            {submitted ? (
               <div
                 style={{
                   background: "rgba(255,255,255,0.08)",
-                  padding: "18px",
+                  padding: "24px",
                   borderRadius: "14px",
-                  fontWeight: "700"
+                  fontWeight: "700",
+                  fontSize: "18px"
                 }}
               >
                 Thank you — feedback received.
               </div>
+
+            ) : voteChoice ? (
+              <form onSubmit={submitEmail}>
+                <div
+                  style={{
+                    fontSize: mobile ? "20px" : "22px",
+                    fontWeight: "700",
+                    marginBottom: "8px"
+                  }}
+                >
+                  {voteChoice === "yes"
+                    ? "Great — we'd love to follow up."
+                    : "We'd be happy to tell you more."}
+                </div>
+                <p style={{ color: "#C7D2FE", fontSize: "15px", marginBottom: "20px" }}>
+                  Leave your email and we'll be in touch. No spam — just a
+                  short conversation if you're open to it.
+                </p>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    width: "100%",
+                    padding: "14px 16px",
+                    borderRadius: "12px",
+                    border: emailError
+                      ? "1px solid #F87171"
+                      : "1px solid rgba(255,255,255,0.25)",
+                    background: "rgba(255,255,255,0.1)",
+                    color: "white",
+                    fontSize: "16px",
+                    outline: "none",
+                    boxSizing: "border-box",
+                    marginBottom: "8px"
+                  }}
+                />
+                {emailError && (
+                  <p style={{ color: "#F87171", fontSize: "14px", marginBottom: "12px", textAlign: "left" }}>
+                    {emailError}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  style={{
+                    ...buttonStyle,
+                    background: "#7C4DFF",
+                    border: "none",
+                    marginBottom: "10px"
+                  }}
+                >
+                  {loading ? "Submitting…" : "Submit"}
+                </button>
+                <button
+                  type="button"
+                  onClick={skipEmail}
+                  disabled={loading}
+                  style={{
+                    ...buttonStyle,
+                    fontSize: "14px",
+                    padding: "10px",
+                    opacity: loading ? 0.4 : 0.6
+                  }}
+                >
+                  No thanks — just record my vote
+                </button>
+              </form>
+
+            ) : (
+              <>
+                <div
+                  style={{
+                    fontSize: mobile ? "22px" : "24px",
+                    fontWeight: "700",
+                    marginBottom: "18px"
+                  }}
+                >
+                  Would a tool like this be valuable to you?
+                </div>
+                <div style={{ display: "grid", gap: "12px" }}>
+                  <button onClick={() => vote("yes")} disabled={loading} style={buttonStyle}>
+                    Yes — I'd use this
+                  </button>
+                  <button onClick={() => vote("interesting")} disabled={loading} style={buttonStyle}>
+                    Interesting — tell me more
+                  </button>
+                  <button onClick={() => vote("unsure")} disabled={loading} style={buttonStyle}>
+                    Unsure
+                  </button>
+                  <button onClick={() => vote("no_need")} disabled={loading} style={buttonStyle}>
+                    I do not currently see the need
+                  </button>
+                </div>
+                {voteError && (
+                  <p style={{ color: "#F87171", fontSize: "14px", marginTop: "12px" }}>
+                    {voteError}
+                  </p>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -609,7 +690,6 @@ export default function Home() {
           <h2 style={{ fontSize: mobile ? "34px" : "42px" }}>
             About Jon Milsted
           </h2>
-
           <p
             style={{
               fontSize: mobile ? "18px" : "20px",
@@ -623,7 +703,6 @@ export default function Home() {
             Deloitte, delivering multi-billion-pound integrations, synergy
             programmes, TSA exits and complex operational change.
           </p>
-
           <p
             style={{
               fontSize: mobile ? "18px" : "20px",
