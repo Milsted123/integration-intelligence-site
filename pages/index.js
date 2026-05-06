@@ -249,7 +249,7 @@ export default function Home() {
           <a
             href="#pilot"
             style={{
-              background: "#7C4DFF",
+              border: "1px solid rgba(255,255,255,0.18)",
               color: "white",
               textDecoration: "none",
               padding: "14px 22px",
