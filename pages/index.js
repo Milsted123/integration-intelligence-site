@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-
+ 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
-
+ 
 export default function Home() {
   const [mobile, setMobile] = useState(false);
-
+ 
   // Vote state
   const [voteChoice, setVoteChoice] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -16,7 +16,7 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [voteError, setVoteError] = useState("");
-
+ 
   // Pilot request state
   const [pilotName, setPilotName] = useState("");
   const [pilotFirm, setPilotFirm] = useState("");
@@ -25,16 +25,16 @@ export default function Home() {
   const [pilotSubmitted, setPilotSubmitted] = useState(false);
   const [pilotLoading, setPilotLoading] = useState(false);
   const [pilotError, setPilotError] = useState("");
-
+ 
   const POSITIVE_VOTES = ["yes", "interesting"];
-
+ 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
+ 
   const vote = async (choice) => {
     if (voteChoice || loading) return;
     if (POSITIVE_VOTES.includes(choice)) {
@@ -53,7 +53,7 @@ export default function Home() {
     }
     setLoading(false);
   };
-
+ 
   const submitEmail = async (e) => {
     e.preventDefault();
     setEmailError("");
@@ -74,7 +74,7 @@ export default function Home() {
     }
     setLoading(false);
   };
-
+ 
   const skipEmail = async () => {
     setLoading(true);
     setEmailError("");
@@ -90,7 +90,7 @@ export default function Home() {
     }
     setLoading(false);
   };
-
+ 
   const submitPilot = async (e) => {
     e.preventDefault();
     setPilotError("");
@@ -118,7 +118,7 @@ export default function Home() {
     }
     setPilotLoading(false);
   };
-
+ 
   const buttonStyle = {
     width: "100%",
     padding: "16px",
@@ -132,7 +132,7 @@ export default function Home() {
     opacity: loading ? 0.6 : 1,
     transition: "opacity 0.2s"
   };
-
+ 
   const inputStyle = {
     width: "100%",
     padding: "14px 16px",
@@ -145,9 +145,9 @@ export default function Home() {
     boxSizing: "border-box",
     marginBottom: "12px"
   };
-
+ 
   const sectionPad = mobile ? "60px 20px" : "95px 24px";
-
+ 
   return (
     <div
       style={{
@@ -167,7 +167,6 @@ export default function Home() {
           padding: mobile ? "60px 20px" : "95px 24px 85px"
         }}
       >
-        {/* CHANGE #3 — badge updated */}
         <div
           style={{
             display: "inline-block",
@@ -200,10 +199,9 @@ export default function Home() {
         >
           Combining years of integration experience with modern AI thinking,
           we help investors and acquirers understand whether deal value can
-          actually be delivered — quickly, objectively and cost-effectively.
+          actually be delivered quickly, objectively and cost-effectively.
         </p>
-
-        {/* CHANGE #2 — example output pull quote */}
+ 
         <div
           style={{
             marginTop: "36px",
@@ -225,7 +223,7 @@ export default function Home() {
               marginBottom: "10px"
             }}
           >
-            Example output — illustrative fintech acquisition
+            Example output - illustrative fintech acquisition
           </div>
           <div
             style={{
@@ -239,7 +237,7 @@ export default function Home() {
             appears stretched. Migration is the critical path risk."
           </div>
         </div>
-
+ 
         <div
           style={{
             marginTop: "36px",
@@ -248,7 +246,7 @@ export default function Home() {
             gap: "16px"
           }}
         >
-          
+          <a
             href="#pilot"
             style={{
               background: "#7C4DFF",
@@ -262,7 +260,7 @@ export default function Home() {
           >
             Request a Pilot
           </a>
-          
+          <a
             href="#example"
             style={{
               border: "1px solid rgba(255,255,255,0.18)",
@@ -275,7 +273,7 @@ export default function Home() {
           >
             View Example Output
           </a>
-          
+          <a
             href="#feedback"
             style={{
               border: "1px solid rgba(255,255,255,0.18)",
@@ -290,7 +288,7 @@ export default function Home() {
           </a>
         </div>
       </section>
-
+ 
       {/* TRUST BAR */}
       <section
         style={{
@@ -305,50 +303,31 @@ export default function Home() {
             maxWidth: "1200px",
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: mobile
-              ? "1fr"
-              : "repeat(auto-fit,minmax(220px,1fr))",
+            gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(220px,1fr))",
             gap: "18px",
             fontSize: "14px"
           }}
         >
           <div>Built from lived integration experience</div>
-          <div>Designed for investors &amp; acquirers</div>
+          <div>Designed for investors and acquirers</div>
           <div>Board-grade outputs in hours, not weeks</div>
           <div>Early validation phase underway</div>
         </div>
       </section>
-
+ 
       {/* WHY */}
-      <section
-        style={{
-          background: "white",
-          color: "#111827",
-          padding: sectionPad
-        }}
-      >
+      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Why This Matters
-          </h2>
-          <p
-            style={{
-              fontSize: mobile ? "18px" : "20px",
-              color: "#475569",
-              maxWidth: "900px"
-            }}
-          >
+          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Why This Matters</h2>
+          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", maxWidth: "900px" }}>
             Many transactions underperform not because the deal thesis was
-            wrong, but because execution risk was not fully understood before
-            close.
+            wrong, but because execution risk was not fully understood before close.
           </p>
           <div
             style={{
               marginTop: "34px",
               display: "grid",
-              gridTemplateColumns: mobile
-                ? "1fr"
-                : "repeat(auto-fit,minmax(250px,1fr))",
+              gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(250px,1fr))",
               gap: "20px"
             }}
           >
@@ -374,19 +353,11 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* HOW */}
-      <section
-        style={{
-          background: "#F8FAFC",
-          color: "#111827",
-          padding: sectionPad
-        }}
-      >
+      <section style={{ background: "#F8FAFC", color: "#111827", padding: sectionPad }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            How It Could Work
-          </h2>
+          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>How It Could Work</h2>
           <div
             style={{
               marginTop: "30px",
@@ -395,71 +366,47 @@ export default function Home() {
               gap: "24px"
             }}
           >
-            <div
-              style={{
-                background: "white",
-                padding: "32px",
-                borderRadius: "24px",
-                border: "1px solid #E2E8F0"
-              }}
-            >
+            <div style={{ background: "white", padding: "32px", borderRadius: "24px", border: "1px solid #E2E8F0" }}>
               <h3>Inputs</h3>
               <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
                 <li>Investment committee papers</li>
                 <li>Board approval memos</li>
-                <li>Commercial / financial diligence</li>
+                <li>Commercial and financial diligence</li>
                 <li>Synergy models</li>
                 <li>Management presentations</li>
                 <li>Transaction documents</li>
               </ul>
             </div>
-            <div
-              style={{
-                background: "white",
-                padding: "32px",
-                borderRadius: "24px",
-                border: "1px solid #E2E8F0"
-              }}
-            >
+            <div style={{ background: "white", padding: "32px", borderRadius: "24px", border: "1px solid #E2E8F0" }}>
               <h3>Outputs</h3>
               <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
                 <li>Board-level integration risk assessments</li>
                 <li>Management execution outputs</li>
                 <li>Synergy capture diagnostics</li>
-                <li>Day 1 / 100-day plans</li>
-                <li>TSA &amp; separation watchpoints</li>
+                <li>Day 1 and 100-day plans</li>
+                <li>TSA and separation watchpoints</li>
                 <li>Deal KPI frameworks</li>
               </ul>
             </div>
           </div>
         </div>
       </section>
-
+ 
       {/* PROCESS */}
-      <section
-        style={{
-          background: "white",
-          color: "#111827",
-          padding: sectionPad
-        }}
-      >
+      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Process Overview
-          </h2>
+          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Process Overview</h2>
           <div
             style={{
               marginTop: "30px",
               display: "grid",
-              gridTemplateColumns: mobile
-                ? "1fr"
-                : "repeat(auto-fit,minmax(220px,1fr))",
+              gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(220px,1fr))",
               gap: "18px"
             }}
           >
             {[
               "Upload Deal Materials",
-              "Engine Diagnoses Value & Risk",
+              "Engine Diagnoses Value and Risk",
               "Board-Level Insight Produced",
               "Management Execution Outputs Generated"
             ].map((step, i) => (
@@ -472,13 +419,7 @@ export default function Home() {
                   padding: "24px"
                 }}
               >
-                <div
-                  style={{
-                    color: "#7C4DFF",
-                    fontWeight: "700",
-                    marginBottom: "8px"
-                  }}
-                >
+                <div style={{ color: "#7C4DFF", fontWeight: "700", marginBottom: "8px" }}>
                   Step {i + 1}
                 </div>
                 <div>{step}</div>
@@ -486,29 +427,20 @@ export default function Home() {
             ))}
           </div>
           <p style={{ marginTop: "28px", color: "#475569", fontSize: "16px" }}>
-            Designed with confidential deal data in mind: private
-            environments, controlled access, secure document handling and
-            enterprise deployment options.
+            Designed with confidential deal data in mind: private environments,
+            controlled access, secure document handling and enterprise deployment options.
           </p>
           <p style={{ marginTop: "10px", color: "#64748B", fontSize: "15px" }}>
-            Flexible commercial models under review: secure hosted,
-            subscription and private deployment.
+            Flexible commercial models under review: secure hosted, subscription and private deployment.
           </p>
         </div>
       </section>
-
+ 
       {/* CASE STUDY */}
-      <section
-        id="example"
-        style={{
-          background: "#11162B",
-          color: "white",
-          padding: sectionPad
-        }}
-      >
+      <section id="example" style={{ background: "#11162B", color: "white", padding: sectionPad }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Illustrative Case Study — Fintech Acquisition
+            Illustrative Case Study - Fintech Acquisition
           </h2>
           <p style={{ color: "#94A3B8", maxWidth: "760px" }}>
             Anonymised example showing how raw transaction materials may be
@@ -545,14 +477,8 @@ export default function Home() {
               ))}
             </div>
             <div style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  fontSize: mobile ? "56px" : "72px",
-                  color: "#7C4DFF",
-                  fontWeight: "700"
-                }}
-              >
-                {mobile ? "↓" : "→"}
+              <div style={{ fontSize: mobile ? "56px" : "72px", color: "#7C4DFF", fontWeight: "700" }}>
+                {mobile ? "v" : ">"}
               </div>
               <div style={{ fontWeight: "700", fontSize: "20px" }}>
                 Integration Intelligence Engine
@@ -561,14 +487,7 @@ export default function Home() {
                 Documents into decision-grade insight
               </div>
             </div>
-            <div
-              style={{
-                background: "white",
-                color: "#111827",
-                borderRadius: "24px",
-                padding: "28px"
-              }}
-            >
+            <div style={{ background: "white", color: "#111827", borderRadius: "24px", padding: "28px" }}>
               <h3>Illustrative Board Output</h3>
               <ul style={{ color: "#475569", paddingLeft: "18px", lineHeight: 1.7 }}>
                 <li><strong>68% of value depends on synergy execution</strong></li>
@@ -582,26 +501,16 @@ export default function Home() {
           </div>
         </div>
       </section>
-
+ 
       {/* WHO */}
-      <section
-        style={{
-          background: "white",
-          color: "#111827",
-          padding: sectionPad
-        }}
-      >
+      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Who We'd Value Feedback From
-          </h2>
+          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Who We'd Value Feedback From</h2>
           <div
             style={{
               marginTop: "30px",
               display: "grid",
-              gridTemplateColumns: mobile
-                ? "1fr"
-                : "repeat(auto-fit,minmax(220px,1fr))",
+              gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(220px,1fr))",
               gap: "18px"
             }}
           >
@@ -628,31 +537,15 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* CHANGE #1 — PILOT REQUEST */}
-      <section
-        id="pilot"
-        style={{
-          background: "#F8FAFC",
-          color: "#111827",
-          padding: sectionPad
-        }}
-      >
+ 
+      {/* PILOT REQUEST */}
+      <section id="pilot" style={{ background: "#F8FAFC", color: "#111827", padding: sectionPad }}>
         <div style={{ maxWidth: "760px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Request a Pilot
-          </h2>
-          <p
-            style={{
-              fontSize: mobile ? "18px" : "20px",
-              color: "#475569",
-              marginTop: "12px",
-              marginBottom: "32px"
-            }}
-          >
-            If you have a live or recent deal you'd like to run through the
-            engine, we'd welcome the conversation. Share your details and
-            we'll be in touch within 48 hours.
+          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Request a Pilot</h2>
+          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", marginTop: "12px", marginBottom: "32px" }}>
+            If you have a live or recent deal you would like to run through the
+            engine, we would welcome the conversation. Share your details and
+            we will be in touch within 48 hours.
           </p>
           {pilotSubmitted ? (
             <div
@@ -664,11 +557,9 @@ export default function Home() {
                 textAlign: "center"
               }}
             >
-              <div style={{ fontSize: "32px", marginBottom: "12px" }}>
-                Thank you
-              </div>
+              <div style={{ fontSize: "32px", marginBottom: "12px" }}>Thank you</div>
               <p style={{ color: "#475569", fontSize: "18px" }}>
-                We'll be in touch within 48 hours to arrange a conversation.
+                We will be in touch within 48 hours to arrange a conversation.
               </p>
             </div>
           ) : (
@@ -689,15 +580,7 @@ export default function Home() {
                 }}
               >
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "14px",
-                      fontWeight: "600",
-                      color: "#374151",
-                      marginBottom: "6px"
-                    }}
-                  >
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
                     Your name
                   </label>
                   <input
@@ -709,15 +592,7 @@ export default function Home() {
                   />
                 </div>
                 <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontSize: "14px",
-                      fontWeight: "600",
-                      color: "#374151",
-                      marginBottom: "6px"
-                    }}
-                  >
+                  <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
                     Firm
                   </label>
                   <input
@@ -729,15 +604,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#374151",
-                  marginBottom: "6px"
-                }}
-              >
+              <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
                 Email
               </label>
               <input
@@ -747,35 +614,19 @@ export default function Home() {
                 onChange={(e) => setPilotEmail(e.target.value)}
                 style={inputStyle}
               />
-              <label
-                style={{
-                  display: "block",
-                  fontSize: "14px",
-                  fontWeight: "600",
-                  color: "#374151",
-                  marginBottom: "6px"
-                }}
-              >
+              <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
                 Brief deal description{" "}
-                <span style={{ fontWeight: "400", color: "#94A3B8" }}>
-                  (optional)
-                </span>
+                <span style={{ fontWeight: "400", color: "#94A3B8" }}>(optional)</span>
               </label>
               <textarea
                 placeholder="e.g. Mid-market SaaS acquisition, carve-out from listed business, buy-and-build bolt-on..."
                 value={pilotDeal}
                 onChange={(e) => setPilotDeal(e.target.value)}
                 rows={3}
-                style={{
-                  ...inputStyle,
-                  resize: "vertical",
-                  fontFamily: "inherit"
-                }}
+                style={{ ...inputStyle, resize: "vertical", fontFamily: "inherit" }}
               />
               {pilotError && (
-                <p style={{ color: "#EF4444", fontSize: "14px", marginBottom: "12px" }}>
-                  {pilotError}
-                </p>
+                <p style={{ color: "#EF4444", fontSize: "14px", marginBottom: "12px" }}>{pilotError}</p>
               )}
               <button
                 type="submit"
@@ -799,28 +650,12 @@ export default function Home() {
           )}
         </div>
       </section>
-
+ 
       {/* FEEDBACK */}
-      <section
-        id="feedback"
-        style={{
-          background: "#1A237E",
-          color: "white",
-          padding: mobile ? "70px 20px" : "100px 24px"
-        }}
-      >
+      <section id="feedback" style={{ background: "#1A237E", color: "white", padding: mobile ? "70px 20px" : "100px 24px" }}>
         <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "48px" }}>
-            Currently Exploring Market Demand
-          </h2>
-          <p
-            style={{
-              color: "#E2E8F0",
-              fontSize: mobile ? "18px" : "22px",
-              maxWidth: "760px",
-              margin: "18px auto 0"
-            }}
-          >
+          <h2 style={{ fontSize: mobile ? "34px" : "48px" }}>Currently Exploring Market Demand</h2>
+          <p style={{ color: "#E2E8F0", fontSize: mobile ? "18px" : "22px", maxWidth: "760px", margin: "18px auto 0" }}>
             We are testing whether transaction execution intelligence is a
             product sophisticated dealmakers would value.
           </p>
@@ -836,29 +671,15 @@ export default function Home() {
             }}
           >
             {submitted ? (
-              // CHANGE #5 — stronger thank you
-              <div
-                style={{
-                  padding: "8px"
-                }}
-              >
-                <div style={{ fontSize: "28px", marginBottom: "12px" }}>
-                  Thank you
-                </div>
-                <p
-                  style={{
-                    color: "#C7D2FE",
-                    fontSize: "16px",
-                    lineHeight: 1.7,
-                    marginBottom: "20px"
-                  }}
-                >
-                  We'll be in touch as the product develops. If you'd like to
-                  stay connected in the meantime, feel free to connect with
+              <div style={{ padding: "8px" }}>
+                <div style={{ fontSize: "28px", marginBottom: "12px" }}>Thank you</div>
+                <p style={{ color: "#C7D2FE", fontSize: "16px", lineHeight: 1.7, marginBottom: "20px" }}>
+                  We will be in touch as the product develops. If you would like
+                  to stay connected in the meantime, feel free to connect with
                   Jon on LinkedIn.
                 </p>
-                
-                  href="https://www.linkedin.com/in/jon-milsted"
+                <a
+                  href="https://www.linkedin.com/in/jon-milsted-a807a321/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -875,23 +696,14 @@ export default function Home() {
                   Connect on LinkedIn
                 </a>
               </div>
-
             ) : voteChoice ? (
               <form onSubmit={submitEmail}>
-                <div
-                  style={{
-                    fontSize: mobile ? "20px" : "22px",
-                    fontWeight: "700",
-                    marginBottom: "8px"
-                  }}
-                >
-                  {voteChoice === "yes"
-                    ? "Great — we'd love to follow up."
-                    : "We'd be happy to tell you more."}
+                <div style={{ fontSize: mobile ? "20px" : "22px", fontWeight: "700", marginBottom: "8px" }}>
+                  {voteChoice === "yes" ? "Great - we would love to follow up." : "We would be happy to tell you more."}
                 </div>
                 <p style={{ color: "#C7D2FE", fontSize: "15px", marginBottom: "20px" }}>
-                  Leave your email and we'll be in touch. No spam — just a
-                  short conversation if you're open to it.
+                  Leave your email and we will be in touch. No spam - just a
+                  short conversation if you are open to it.
                 </p>
                 <input
                   type="email"
@@ -902,9 +714,7 @@ export default function Home() {
                     width: "100%",
                     padding: "14px 16px",
                     borderRadius: "12px",
-                    border: emailError
-                      ? "1px solid #F87171"
-                      : "1px solid rgba(255,255,255,0.25)",
+                    border: emailError ? "1px solid #F87171" : "1px solid rgba(255,255,255,0.25)",
                     background: "rgba(255,255,255,0.1)",
                     color: "white",
                     fontSize: "16px",
@@ -921,12 +731,7 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={loading}
-                  style={{
-                    ...buttonStyle,
-                    background: "#7C4DFF",
-                    border: "none",
-                    marginBottom: "10px"
-                  }}
+                  style={{ ...buttonStyle, background: "#7C4DFF", border: "none", marginBottom: "10px" }}
                 >
                   {loading ? "Submitting..." : "Submit"}
                 </button>
@@ -934,34 +739,22 @@ export default function Home() {
                   type="button"
                   onClick={skipEmail}
                   disabled={loading}
-                  style={{
-                    ...buttonStyle,
-                    fontSize: "14px",
-                    padding: "10px",
-                    opacity: loading ? 0.4 : 0.6
-                  }}
+                  style={{ ...buttonStyle, fontSize: "14px", padding: "10px", opacity: loading ? 0.4 : 0.6 }}
                 >
-                  No thanks — just record my vote
+                  No thanks - just record my vote
                 </button>
               </form>
-
             ) : (
               <>
-                <div
-                  style={{
-                    fontSize: mobile ? "22px" : "24px",
-                    fontWeight: "700",
-                    marginBottom: "18px"
-                  }}
-                >
+                <div style={{ fontSize: mobile ? "22px" : "24px", fontWeight: "700", marginBottom: "18px" }}>
                   Would a tool like this be valuable to you?
                 </div>
                 <div style={{ display: "grid", gap: "12px" }}>
                   <button onClick={() => vote("yes")} disabled={loading} style={buttonStyle}>
-                    Yes — I'd use this
+                    Yes - I would use this
                   </button>
                   <button onClick={() => vote("interesting")} disabled={loading} style={buttonStyle}>
-                    Interesting — tell me more
+                    Interesting - tell me more
                   </button>
                   <button onClick={() => vote("unsure")} disabled={loading} style={buttonStyle}>
                     Unsure
@@ -971,58 +764,35 @@ export default function Home() {
                   </button>
                 </div>
                 {voteError && (
-                  <p style={{ color: "#F87171", fontSize: "14px", marginTop: "12px" }}>
-                    {voteError}
-                  </p>
+                  <p style={{ color: "#F87171", fontSize: "14px", marginTop: "12px" }}>{voteError}</p>
                 )}
               </>
             )}
           </div>
         </div>
       </section>
-
+ 
       {/* ABOUT JON */}
-      <section
-        style={{
-          background: "white",
-          color: "#111827",
-          padding: sectionPad
-        }}
-      >
+      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "42px" }}>
-            About Jon Milsted
-          </h2>
-          <p
-            style={{
-              fontSize: mobile ? "18px" : "20px",
-              color: "#475569",
-              lineHeight: 1.8
-            }}
-          >
+          <h2 style={{ fontSize: mobile ? "34px" : "42px" }}>About Jon Milsted</h2>
+          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", lineHeight: 1.8 }}>
             Jon Milsted has spent more than 20 years across M&A,
             post-merger integration, separation and transformation. He has
-            held leadership roles at GoCardless, OVO, Mastercard and
-            Deloitte, delivering multi-billion-pound integrations, synergy
-            programmes, TSA exits and complex operational change.
+            held leadership roles at GoCardless, OVO, Mastercard and Deloitte,
+            delivering multi-billion-pound integrations, synergy programmes,
+            TSA exits and complex operational change.
           </p>
-          <p
-            style={{
-              fontSize: mobile ? "18px" : "20px",
-              color: "#475569",
-              lineHeight: 1.8,
-              marginTop: "18px"
-            }}
-          >
-            His experience includes delivering £100m+ run-rate savings,
+          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", lineHeight: 1.8, marginTop: "18px" }}>
+            His experience includes delivering 100m+ run-rate savings,
             leading 8,000+ FTE integrations, customer migrations and helping
-            transform a £60m annual loss into profitability. Integration
-            Intelligence is built from that practical experience combined
-            with a belief that AI can materially improve how deals are
-            assessed and executed.
+            transform a 60m annual loss into profitability. Integration
+            Intelligence is built from that practical experience combined with
+            a belief that AI can materially improve how deals are assessed and executed.
           </p>
         </div>
       </section>
     </div>
   );
 }
+ 
