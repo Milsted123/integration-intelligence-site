@@ -790,9 +790,17 @@ export default function Home() {
             Intelligence is built from that practical experience combined with
             a belief that AI can materially improve how deals are assessed and executed.
           </p>
+          <p style={{ fontSize: "16px", color: "#94A3B8", marginTop: "28px" }}>
+            Questions or thoughts?{" "}
+            <a
+              href="mailto:jon_milsted@hotmail.com"
+              style={{ color: "#7C4DFF", textDecoration: "none", fontWeight: "600" }}
+            >
+              Get in touch
+            </a>
+          </p>
         </div>
       </section>
     </div>
   );
 }
- 
