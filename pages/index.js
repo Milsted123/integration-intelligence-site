@@ -177,7 +177,7 @@ export default function Home() {
             fontSize: "14px"
           }}
         >
-          Early Access
+          Early Access - Built on Real Experience
         </div>
         <h1
           style={{
@@ -197,9 +197,9 @@ export default function Home() {
             maxWidth: "860px"
           }}
         >
-          Combining years of integration experience with modern AI thinking,
-          we help investors and acquirers understand whether deal value can
-          actually be delivered quickly, objectively and cost-effectively.
+          Built from 20+ years of delivering real integrations. The expertise
+          and judgement that typically sits with a senior advisor - structured
+          into a proprietary system and available at the speed of AI.
         </p>
  
         <div
@@ -308,8 +308,8 @@ export default function Home() {
             fontSize: "14px"
           }}
         >
-          <div>Built from lived integration experience</div>
-          <div>Designed for investors and acquirers</div>
+          <div>20+ years of real integration experience encoded into the engine</div>
+          <div>Human judgement applied faster and across more information</div>
           <div>Board-grade outputs in hours, not weeks</div>
           <div>Early validation phase underway</div>
         </div>
@@ -322,6 +322,8 @@ export default function Home() {
           <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", maxWidth: "900px" }}>
             Many transactions underperform not because the deal thesis was
             wrong, but because execution risk was not fully understood before close.
+            These are not theoretical risks. They are patterns seen repeatedly
+            across real integrations - and the engine is built to catch them.
           </p>
           <div
             style={{
@@ -406,7 +408,7 @@ export default function Home() {
           >
             {[
               "Upload Deal Materials",
-              "Engine Diagnoses Value and Risk",
+              "Engine Applies 20+ Years of Integration Logic",
               "Board-Level Insight Produced",
               "Management Execution Outputs Generated"
             ].map((step, i) => (
@@ -777,18 +779,18 @@ export default function Home() {
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <h2 style={{ fontSize: mobile ? "34px" : "42px" }}>About Jon Milsted</h2>
           <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", lineHeight: 1.8 }}>
-            Jon Milsted has spent more than 20 years across M&A,
-            post-merger integration, separation and transformation. He has
-            held leadership roles at GoCardless, OVO, Mastercard and Deloitte,
-            delivering multi-billion-pound integrations, synergy programmes,
-            TSA exits and complex operational change.
+            Integration Intelligence is built from over 20 years of personally
+            delivering integrations - not observing them. Jon Milsted has held
+            senior leadership roles at GoCardless, OVO, Mastercard and Deloitte,
+            leading multi-billion-pound integrations, synergy programmes, TSA exits
+            and complex operational change.
           </p>
           <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", lineHeight: 1.8, marginTop: "18px" }}>
-            His experience includes delivering 100m+ run-rate savings,
-            leading 8,000+ FTE integrations, customer migrations and helping
-            transform a 60m annual loss into profitability. Integration
-            Intelligence is built from that practical experience combined with
-            a belief that AI can materially improve how deals are assessed and executed.
+            That experience - 100m+ run-rate savings delivered, 8,000+ FTE
+            integrations led, a 60m annual loss turned into profitability - is what
+            is encoded into the engine. The AI does not replace that judgement.
+            It structures it, scales it, and applies it faster and across more
+            information than was previously possible.
           </p>
           <p style={{ fontSize: "16px", color: "#94A3B8", marginTop: "28px" }}>
             Questions or thoughts?{" "}
