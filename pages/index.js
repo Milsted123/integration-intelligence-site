@@ -104,7 +104,7 @@ export default function Home() {
             <span style={{ color: "#B39DFF" }}>before</span> the decisions that determine returns have been taken.
           </p>
           <p style={{ fontSize: mobile ? "16px" : "17px", color: "#94A3B8", maxWidth: "580px", lineHeight: 1.75, marginBottom: "36px" }}>
-            Senior integration analysis typically arrives weeks after close — when the retention windows have passed, the governance asks weren't in the SPA, and the architecture decisions got deferred to Day 1. Integration Intelligence changes that.
+            Senior integration analysis typically arrives weeks after signing — when the retention windows have passed, the governance asks weren't in the SPA, and the architecture decisions got deferred to Day 1. Integration Intelligence changes that.
           </p>
           <a href="#pilot" style={{ display: "inline-block", background: PURPLE, color: "white", padding: "14px 28px", borderRadius: "12px", fontWeight: "600", fontSize: "16px", textDecoration: "none" }}>
             Request a pilot
