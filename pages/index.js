@@ -8,16 +8,9 @@ const supabase = createClient(
  
 export default function Home() {
   const [mobile, setMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState("summary");
  
-  // Vote state
-  const [voteChoice, setVoteChoice] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [voteError, setVoteError] = useState("");
- 
-  // Pilot request state
+  // Pilot form state
   const [pilotName, setPilotName] = useState("");
   const [pilotFirm, setPilotFirm] = useState("");
   const [pilotEmail, setPilotEmail] = useState("");
@@ -26,8 +19,6 @@ export default function Home() {
   const [pilotLoading, setPilotLoading] = useState(false);
   const [pilotError, setPilotError] = useState("");
  
-  const POSITIVE_VOTES = ["yes", "interesting"];
- 
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 768);
     check();
@@ -35,67 +26,11 @@ export default function Home() {
     return () => window.removeEventListener("resize", check);
   }, []);
  
-  const vote = async (choice) => {
-    if (voteChoice || loading) return;
-    if (POSITIVE_VOTES.includes(choice)) {
-      setVoteChoice(choice);
-      return;
-    }
-    setLoading(true);
-    setVoteError("");
-    try {
-      const { error } = await supabase.from("votes").insert([{ choice }]);
-      if (error) throw error;
-      setSubmitted(true);
-    } catch (e) {
-      console.error("Vote error:", e);
-      setVoteError("Unable to save feedback right now. Please try again.");
-    }
-    setLoading(false);
-  };
- 
-  const submitEmail = async (e) => {
-    e.preventDefault();
-    setEmailError("");
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
-    setLoading(true);
-    try {
-      const { error } = await supabase
-        .from("votes")
-        .insert([{ choice: voteChoice, email }]);
-      if (error) throw error;
-      setSubmitted(true);
-    } catch (e) {
-      console.error("Email submission error:", e);
-      setEmailError("Unable to save your details right now. Please try again.");
-    }
-    setLoading(false);
-  };
- 
-  const skipEmail = async () => {
-    setLoading(true);
-    setEmailError("");
-    try {
-      const { error } = await supabase
-        .from("votes")
-        .insert([{ choice: voteChoice }]);
-      if (error) throw error;
-      setSubmitted(true);
-    } catch (e) {
-      console.error("Skip email error:", e);
-      setVoteError("Unable to save feedback right now. Please try again.");
-    }
-    setLoading(false);
-  };
- 
   const submitPilot = async (e) => {
     e.preventDefault();
     setPilotError("");
     if (!pilotName || !pilotFirm || !pilotEmail) {
-      setPilotError("Please fill in your name, firm and email.");
+      setPilotError("Please fill in all required fields.");
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pilotEmail)) {
@@ -104,705 +39,377 @@ export default function Home() {
     }
     setPilotLoading(true);
     try {
-      const { error } = await supabase.from("pilot_requests").insert([{
-        name: pilotName,
-        firm: pilotFirm,
-        email: pilotEmail,
-        deal_description: pilotDeal
+      await supabase.from("pilot_requests").insert([{
+        name: pilotName, firm: pilotFirm, email: pilotEmail, deal_context: pilotDeal
       }]);
-      if (error) throw error;
       setPilotSubmitted(true);
     } catch (e) {
-      console.error("Pilot request error:", e);
-      setPilotError("Unable to submit right now. Please try again.");
+      setPilotError("Unable to submit — please email directly.");
     }
     setPilotLoading(false);
   };
  
-  const buttonStyle = {
-    width: "100%",
-    padding: "16px",
-    borderRadius: "14px",
-    border: "1px solid rgba(255,255,255,0.18)",
-    background: "rgba(255,255,255,0.08)",
-    color: "white",
-    fontSize: mobile ? "16px" : "18px",
-    fontWeight: "600",
-    cursor: loading ? "not-allowed" : "pointer",
-    opacity: loading ? 0.6 : 1,
-    transition: "opacity 0.2s"
-  };
+  const PURPLE = "#7C4DFF";
+  const DARK = "#0D1117";
+  const sp = mobile ? "60px 20px" : "80px 24px";
  
-  const inputStyle = {
-    width: "100%",
-    padding: "14px 16px",
-    borderRadius: "12px",
-    border: "1px solid #E2E8F0",
-    background: "white",
-    color: "#111827",
-    fontSize: "16px",
-    outline: "none",
-    boxSizing: "border-box",
-    marginBottom: "12px"
-  };
+  const tabs = [
+    { key: "summary", label: "Executive summary" },
+    { key: "scorecard", label: "Scorecard" },
+    { key: "risks", label: "Key risks" },
+    { key: "actions", label: "Board actions" },
+  ];
  
-  const sectionPad = mobile ? "60px 20px" : "95px 24px";
+  const scorecard = [
+    { status: "red", dim: "Leadership & organisation", note: "Founder-led target; organisation design uncommitted; no Integration Sponsor appointed; reporting lines unresolved" },
+    { status: "red", dim: "Technology & platform", note: "Full platform decommission required; ERP architecture not agreed; integration due diligence adviser flags Year 2 timeline already at risk before signing" },
+    { status: "red", dim: "Execution readiness", note: "Integration resourcing quality weak; management bandwidth constrained by concurrent international expansion programme" },
+    { status: "amber", dim: "Strategic fit", note: "Thesis commercially sound; buyer's growth-oriented model creates structural tension with the multi-year cost discipline the programme requires" },
+    { status: "amber", dim: "Synergy delivery", note: "Cost case independently validated and defensible; revenue case carries a three-way estimate dispute (£8m IC underwrites vs £18m management assumption)" },
+    { status: "amber", dim: "Customer & commercial", note: "Cross-sell infrastructure decisions partial; Group Commercial Director personally holds top enterprise relationships with no documented transition plan" },
+    { status: "green", dim: "Intelligence coverage", note: "Five source documents reviewed including integration assessment, financial DD, commercial DD, IC paper, and board pack — strong evidence base" },
+  ];
+ 
+  const scColor = {
+    red:   { bg: "#FCEBEB", border: "#F09595", dot: "#E24B4A", text: "#791F1F", badge: "#F7C1C1" },
+    amber: { bg: "#FAEEDA", border: "#FAC775", dot: "#BA7517", text: "#633806", badge: "#FAC775" },
+    green: { bg: "#EAF3DE", border: "#C0DD97", dot: "#3B6D11", text: "#27500A", badge: "#C0DD97" },
+  };
  
   return (
-    <div
-      style={{
-        margin: 0,
-        padding: 0,
-        fontFamily: "Inter, Arial, sans-serif",
-        background: "#1A237E",
-        color: "white",
-        lineHeight: 1.5
-      }}
-    >
-      {/* HERO */}
-      <section
-        style={{
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: mobile ? "60px 20px" : "95px 24px 85px"
-        }}
-      >
-        <div
-          style={{
-            display: "inline-block",
-            padding: "8px 14px",
-            borderRadius: "999px",
-            background: "rgba(255,255,255,0.08)",
-            border: "1px solid rgba(255,255,255,0.08)",
-            fontSize: "14px"
-          }}
-        >
-          Early Access - Built on Real Experience
-        </div>
-        <h1
-          style={{
-            fontSize: mobile ? "44px" : "72px",
-            lineHeight: 1.03,
-            marginTop: "24px",
-            marginBottom: "24px",
-            maxWidth: "920px"
-          }}
-        >
-          Integration Intelligence
-        </h1>
-        <p
-          style={{
-            fontSize: mobile ? "20px" : "26px",
-            color: "#E2E8F0",
-            maxWidth: "860px"
-          }}
-        >
-          Built from 20+ years of delivering real integrations. The expertise
-          and judgement that typically sits with a senior advisor - structured
-          into a proprietary system and available at the speed of AI.
-        </p>
+    <div style={{ fontFamily: "Inter, system-ui, sans-serif", color: "#111827", background: "white" }}>
  
-        <div
-          style={{
-            marginTop: "36px",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            borderLeft: "4px solid #7C4DFF",
-            borderRadius: "14px",
-            padding: "20px 24px",
-            maxWidth: "700px"
-          }}
-        >
-          <div
-            style={{
-              fontSize: "11px",
-              fontWeight: "700",
-              letterSpacing: "0.1em",
-              color: "#7C4DFF",
-              textTransform: "uppercase",
-              marginBottom: "10px"
-            }}
-          >
-            Example output - illustrative fintech acquisition
+      {/* ── NAV ── */}
+      <nav style={{ background: DARK, padding: "0 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, zIndex: 100 }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", height: "56px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ color: "white", fontWeight: "600", fontSize: "17px", letterSpacing: "-0.01em" }}>Integration Intelligence</span>
+          <a href="#pilot" style={{ background: PURPLE, color: "white", padding: "8px 18px", borderRadius: "10px", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>
+            Request a pilot
+          </a>
+        </div>
+      </nav>
+ 
+      {/* ── HERO ── */}
+      <section style={{ background: DARK, color: "white", padding: mobile ? "60px 20px 56px" : "80px 24px 72px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ display: "inline-block", background: "rgba(124,77,255,0.16)", color: "#B39DFF", border: "0.5px solid rgba(124,77,255,0.35)", padding: "5px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: "600", letterSpacing: "0.04em", marginBottom: "22px" }}>
+            Available at diligence &middot; before you sign
           </div>
-          <div
-            style={{
-              fontSize: mobile ? "16px" : "18px",
-              color: "#E2E8F0",
-              lineHeight: 1.6,
-              fontStyle: "italic"
-            }}
-          >
-            "68% of value depends on synergy execution. Management bandwidth
-            appears stretched. Migration is the critical path risk."
-          </div>
-        </div>
- 
-        <div
-          style={{
-            marginTop: "36px",
-            display: "flex",
-            flexDirection: mobile ? "column" : "row",
-            gap: "16px"
-          }}
-        >
-          <a
-            href="#pilot"
-            style={{
-              border: "1px solid rgba(255,255,255,0.18)",
-              color: "white",
-              textDecoration: "none",
-              padding: "14px 22px",
-              borderRadius: "14px",
-              fontWeight: "600",
-              textAlign: "center"
-            }}
-          >
-            Request a Pilot
-          </a>
-          <a
-            href="#example"
-            style={{
-              border: "1px solid rgba(255,255,255,0.18)",
-              color: "white",
-              textDecoration: "none",
-              padding: "14px 22px",
-              borderRadius: "14px",
-              textAlign: "center"
-            }}
-          >
-            View Example Output
-          </a>
-          <a
-            href="#feedback"
-            style={{
-              border: "1px solid rgba(255,255,255,0.18)",
-              color: "white",
-              textDecoration: "none",
-              padding: "14px 22px",
-              borderRadius: "14px",
-              textAlign: "center"
-            }}
-          >
-            Share Perspective
-          </a>
-        </div>
-      </section>
- 
-      {/* TRUST BAR */}
-      <section
-        style={{
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          borderBottom: "1px solid rgba(255,255,255,0.08)",
-          padding: "22px 24px",
-          color: "#C7D2FE"
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(220px,1fr))",
-            gap: "18px",
-            fontSize: "14px"
-          }}
-        >
-          <div>20+ years of real integration experience encoded into the engine</div>
-          <div>Human judgement applied faster and across more information</div>
-          <div>Board-grade outputs in hours, not weeks</div>
-          <div>Early validation phase underway</div>
-        </div>
-      </section>
- 
-      {/* WHY */}
-      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Why This Matters</h2>
-          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", maxWidth: "900px" }}>
-            Many transactions underperform not because the deal thesis was
-            wrong, but because execution risk was not fully understood before close.
-            These are not theoretical risks. They are patterns seen repeatedly
-            across real integrations - and the engine is built to catch them.
+          <h1 style={{ fontSize: mobile ? "36px" : "56px", fontWeight: "600", lineHeight: 1.1, maxWidth: "860px", marginBottom: "18px", letterSpacing: "-0.02em" }}>
+            Integration intelligence that reads the deal —{" "}
+            <span style={{ color: "#B39DFF" }}>not just the documents.</span>
+          </h1>
+          <p style={{ fontSize: mobile ? "19px" : "22px", color: "#E2E8F0", maxWidth: "680px", lineHeight: 1.5, marginBottom: "16px", fontWeight: "500", letterSpacing: "-0.01em" }}>
+            Detailed integration advisory{" "}
+            <span style={{ color: "#B39DFF" }}>before</span> the decisions that determine returns have been taken.
           </p>
-          <div
-            style={{
-              marginTop: "34px",
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(250px,1fr))",
-              gap: "20px"
-            }}
-          >
+          <p style={{ fontSize: mobile ? "16px" : "17px", color: "#94A3B8", maxWidth: "580px", lineHeight: 1.75, marginBottom: "36px" }}>
+            Senior integration analysis typically arrives weeks after close — when the retention windows have passed, the governance asks weren't in the SPA, and the architecture decisions got deferred to Day 1. Integration Intelligence changes that.
+          </p>
+          <a href="#pilot" style={{ display: "inline-block", background: PURPLE, color: "white", padding: "14px 28px", borderRadius: "12px", fontWeight: "600", fontSize: "16px", textDecoration: "none" }}>
+            Request a pilot
+          </a>
+        </div>
+      </section>
+ 
+      {/* ── TIMING PROBLEM ── */}
+      <section style={{ background: "#F8FAFC", padding: sp }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: PURPLE, textTransform: "uppercase", marginBottom: "10px" }}>The timing problem</div>
+          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", marginBottom: "12px", letterSpacing: "-0.01em" }}>Integration advice early enough to make a difference.</h2>
+          <p style={{ color: "#475569", fontSize: "17px", maxWidth: "640px", lineHeight: 1.7, marginBottom: "36px" }}>
+            The integration questions that matter most — who leads the programme, which systems survive, where the key person risk sits — all have windows. Those windows are at diligence and signing, not Day 30.
+          </p>
+ 
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "16px", marginBottom: "36px" }}>
             {[
-              ["Synergy Slippage", "Savings prove harder than expected."],
-              ["Migration Delays", "Systems become the hidden critical path."],
-              ["TSA Dependency", "Seller reliance slows value capture."],
-              ["Management Distraction", "Growth teams lose focus."]
-            ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  background: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "22px",
-                  padding: "26px"
-                }}
-              >
-                <h3>{item[0]}</h3>
-                <p style={{ color: "#64748B" }}>{item[1]}</p>
+              {
+                head: "Traditional integration advisory",
+                accent: false,
+                items: ["Delivered weeks post-close", "Retention windows already closed", "Architecture decisions already deferred", "Governance asks weren't in the SPA", "Board briefed after commitment, not before"]
+              },
+              {
+                head: "Integration Intelligence",
+                accent: true,
+                items: ["Produced at diligence or signing stage", "Retention packages flagged before announcement", "Architecture decisions on the pre-close checklist", "Governance requirements in the IC paper", "Board engaged with execution risks before they commit"]
+              }
+            ].map((col, i) => (
+              <div key={i} style={{ background: "white", border: `1px solid ${col.accent ? PURPLE + "44" : "#E2E8F0"}`, borderRadius: "16px", padding: "28px 24px" }}>
+                <div style={{ fontSize: "13px", fontWeight: "700", color: col.accent ? PURPLE : "#64748B", marginBottom: "16px" }}>{col.head}</div>
+                {col.items.map((item, j) => (
+                  <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: "10px", marginBottom: "10px" }}>
+                    <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: col.accent ? PURPLE : "#CBD5E1", marginTop: "7px", flexShrink: 0 }} />
+                    <span style={{ fontSize: "14px", color: col.accent ? "#1E293B" : "#94A3B8", lineHeight: 1.55 }}>{item}</span>
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        </div>
-      </section>
  
-      {/* HOW */}
-      <section style={{ background: "#F8FAFC", color: "#111827", padding: sectionPad }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>How It Could Work</h2>
-          <div
-            style={{
-              marginTop: "30px",
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
-              gap: "24px"
-            }}
-          >
-            <div style={{ background: "white", padding: "32px", borderRadius: "24px", border: "1px solid #E2E8F0" }}>
-              <h3>Inputs</h3>
-              <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
-                <li>Investment committee papers</li>
-                <li>Board approval memos</li>
-                <li>Commercial and financial diligence</li>
-                <li>Synergy models</li>
-                <li>Management presentations</li>
-                <li>Transaction documents</li>
-              </ul>
-            </div>
-            <div style={{ background: "white", padding: "32px", borderRadius: "24px", border: "1px solid #E2E8F0" }}>
-              <h3>Outputs</h3>
-              <ul style={{ color: "#64748B", paddingLeft: "18px" }}>
-                <li>Board-level integration risk assessments</li>
-                <li>Management execution outputs</li>
-                <li>Synergy capture diagnostics</li>
-                <li>Day 1 and 100-day plans</li>
-                <li>TSA and separation watchpoints</li>
-                <li>Deal KPI frameworks</li>
-              </ul>
-            </div>
+          <div style={{ background: "white", borderLeft: `4px solid ${PURPLE}`, padding: "18px 22px", maxWidth: "780px" }}>
+            <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.08em", color: PURPLE, textTransform: "uppercase", marginBottom: "8px" }}>Example — Project Aurora</div>
+            <p style={{ fontSize: "15px", color: "#1E293B", lineHeight: 1.7, margin: 0 }}>
+              The engine identified that the Year 2 technology migration was <strong>already at risk before signing</strong> — based on a finding buried in the due diligence pack. Surfaced at diligence, that is a renegotiation point. Surfaced at Day 30, it is a problem.
+            </p>
           </div>
         </div>
       </section>
  
-      {/* PROCESS */}
-      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Process Overview</h2>
-          <div
-            style={{
-              marginTop: "30px",
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(220px,1fr))",
-              gap: "18px"
-            }}
-          >
-            {[
-              "Upload Deal Materials",
-              "Engine Applies 20+ Years of Integration Logic",
-              "Board-Level Insight Produced",
-              "Management Execution Outputs Generated"
-            ].map((step, i) => (
-              <div
-                key={i}
-                style={{
-                  background: "#F8FAFC",
-                  border: "1px solid #E2E8F0",
-                  borderRadius: "22px",
-                  padding: "24px"
-                }}
-              >
-                <div style={{ color: "#7C4DFF", fontWeight: "700", marginBottom: "8px" }}>
-                  Step {i + 1}
-                </div>
-                <div>{step}</div>
-              </div>
+      {/* ── STATS STRIP ── */}
+      <section style={{ background: DARK, padding: mobile ? "36px 20px" : "44px 24px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: "24px" }}>
+          {[
+            { n: "As early as diligence", label: "integration intelligence available from the moment you have deal documents" },
+            { n: "200+", label: "analytical signals, patterns & rules evaluated on every deal" },
+            { n: "Any volume", label: "2 documents or 20 — the engine reads everything you have" },
+            { n: "20yrs", label: "of delivered integrations encoded in the system" },
+          ].map((s, i) => (
+            <div key={i} style={{ textAlign: mobile ? "left" : "center" }}>
+              <div style={{ fontSize: mobile ? "28px" : "34px", fontWeight: "700", color: "white", letterSpacing: "-0.02em" }}>{s.n}</div>
+              <div style={{ fontSize: "13px", color: "#64748B", marginTop: "6px", lineHeight: 1.45 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+ 
+      {/* ── OUTPUT PREVIEW ── */}
+      <section id="output" style={{ background: "white", padding: sp }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: PURPLE, textTransform: "uppercase", marginBottom: "10px" }}>Engine output</div>
+          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", marginBottom: "10px", letterSpacing: "-0.01em" }}>Project Aurora — illustrative output</h2>
+          <p style={{ color: "#64748B", fontSize: "16px", maxWidth: "640px", lineHeight: 1.65, marginBottom: "28px" }}>
+            A £355m geographic expansion acquisition. Five source documents into the engine. Below is a sample of what was produced.
+          </p>
+ 
+          {/* Tabs */}
+          <div style={{ display: "flex", borderBottom: "1px solid #E2E8F0", marginBottom: "24px", overflowX: "auto" }}>
+            {tabs.map(t => (
+              <button key={t.key} onClick={() => setActiveTab(t.key)} style={{ padding: "10px 18px", fontSize: "14px", fontWeight: activeTab === t.key ? "600" : "400", color: activeTab === t.key ? PURPLE : "#64748B", background: "transparent", border: "none", borderBottom: activeTab === t.key ? `2px solid ${PURPLE}` : "2px solid transparent", cursor: "pointer", whiteSpace: "nowrap", marginBottom: "-1px" }}>
+                {t.label}
+              </button>
             ))}
           </div>
-          <p style={{ marginTop: "28px", color: "#475569", fontSize: "16px" }}>
-            Designed with confidential deal data in mind: private environments,
-            controlled access, secure document handling and enterprise deployment options.
-          </p>
-          <p style={{ marginTop: "10px", color: "#64748B", fontSize: "15px" }}>
-            Flexible commercial models under review: secure hosted, subscription and private deployment.
-          </p>
-        </div>
-      </section>
  
-      {/* CASE STUDY */}
-      <section id="example" style={{ background: "#11162B", color: "white", padding: sectionPad }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>
-            Illustrative Case Study - Fintech Acquisition
-          </h2>
-          <p style={{ color: "#94A3B8", maxWidth: "760px" }}>
-            Anonymised example showing how raw transaction materials may be
-            transformed into decision-grade integration intelligence.
-          </p>
-          <div
-            style={{
-              marginTop: "34px",
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "1fr 180px 1.2fr",
-              gap: "24px",
-              alignItems: "center"
-            }}
-          >
+          {/* Summary */}
+          {activeTab === "summary" && (
             <div>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px", background: "#FFF8E1", border: "1px solid #EF9F27", borderRadius: "12px", padding: "16px 20px", marginBottom: "16px" }}>
+                <div>
+                  <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: "#854F0B", marginBottom: "4px" }}>Overall integration confidence</div>
+                  <div style={{ fontSize: "16px", fontWeight: "600", color: "#633806" }}>Cautious — Intensive execution tier</div>
+                </div>
+                <div style={{ fontSize: "12px", color: "#854F0B" }}>11.6x EBITDA &nbsp;·&nbsp; £355m &nbsp;·&nbsp; Geographic Expansion</div>
+              </div>
+              <div style={{ background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: "12px", padding: "20px 22px", fontSize: "15px", color: "#1E293B", lineHeight: 1.8 }}>
+                This is a geographic gap-fill at premium price — a PE-backed growth platform paying 11.6x earnings for continental European market access it could not build organically, with a £24m synergy programme that must land within a 3–5 year exit window. The cost synergy case, independently validated, provides a defensible floor: at 100% delivery it alone produces a satisfactory return on the acquisition price. The revenue synergies are genuine upside, not base case. The primary confidence risk is that the programme has not been resourced to execute what the thesis requires: management is thin and managing a concurrent international expansion, no Integration Sponsor has been appointed, and the pre-close planning infrastructure is materially incomplete.
+              </div>
+            </div>
+          )}
+ 
+          {/* Scorecard */}
+          {activeTab === "scorecard" && (
+            <div style={{ display: "grid", gap: "8px" }}>
+              {scorecard.map((row, i) => {
+                const c = scColor[row.status];
+                return (
+                  <div key={i} style={{ display: "grid", gridTemplateColumns: "16px 1fr auto", gap: "12px", alignItems: "start", background: c.bg, border: `1px solid ${c.border}`, borderRadius: "10px", padding: "12px 16px" }}>
+                    <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: c.dot, marginTop: "4px" }} />
+                    <div>
+                      <div style={{ fontSize: "13px", fontWeight: "600", color: c.text, marginBottom: "3px" }}>{row.dim}</div>
+                      <div style={{ fontSize: "12px", color: c.text, lineHeight: 1.55, opacity: 0.85 }}>{row.note}</div>
+                    </div>
+                    <div style={{ fontSize: "11px", fontWeight: "600", background: c.badge, color: c.text, padding: "3px 10px", borderRadius: "999px", whiteSpace: "nowrap", textTransform: "capitalize" }}>{row.status}</div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+ 
+          {/* Risks */}
+          {activeTab === "risks" && (
+            <div style={{ display: "grid", gap: "12px" }}>
               {[
-                "Confidential Information Memorandum",
-                "Board Approval Paper",
-                "Synergy Model",
-                "Due Diligence Reports"
-              ].map((doc, i) => (
-                <div
-                  key={i}
-                  style={{
-                    background: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.18)",
-                    padding: "18px",
-                    borderRadius: "18px",
-                    marginBottom: "14px"
-                  }}
-                >
-                  {doc}
+                { sev: "Critical", title: "Programme not staffed to execute", body: "No Integration Sponsor appointed. Management bandwidth is weak — the acquirer is simultaneously managing an international expansion programme. The integration is not resourced to operate at the pace the exit window requires." },
+                { sev: "Critical", title: "Key person concentration risk", body: "The target CEO and Group Commercial Director together represent the target's core customer relationships and the entire enterprise growth programme. No documented transition plans exist for either. Their combined departure is the scenario that determines the size of the downside case." },
+                { sev: "High", title: "Technology architecture decision deferred", body: "No ERP target architecture decision made at time of diligence. The Year 2 migration timeline is already at risk before signing. The £4m technology synergy is contingent on a decision being made within 60 days of close." },
+              ].map((r, i) => (
+                <div key={i} style={{ border: "1px solid #E2E8F0", borderRadius: "12px", padding: "18px 20px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "8px" }}>
+                    <span style={{ fontSize: "11px", fontWeight: "700", padding: "3px 10px", borderRadius: "999px", background: r.sev === "Critical" ? "#FCEBEB" : "#FAEEDA", color: r.sev === "Critical" ? "#791F1F" : "#633806" }}>{r.sev}</span>
+                    <span style={{ fontSize: "15px", fontWeight: "600", color: "#1E293B" }}>{r.title}</span>
+                  </div>
+                  <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.7, margin: 0 }}>{r.body}</p>
                 </div>
               ))}
             </div>
-            <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: mobile ? "56px" : "72px", color: "#7C4DFF", fontWeight: "700" }}>
-                {mobile ? "v" : ">"}
-              </div>
-              <div style={{ fontWeight: "700", fontSize: "20px" }}>
-                Integration Intelligence Engine
-              </div>
-              <div style={{ color: "#CBD5E1", fontSize: "14px", marginTop: "8px" }}>
-                Documents into decision-grade insight
-              </div>
+          )}
+ 
+          {/* Actions */}
+          {activeTab === "actions" && (
+            <div style={{ display: "grid", gap: "10px" }}>
+              {[
+                { action: "Appoint a dedicated Integration Sponsor before the programme is approved", detail: "Not the CEO, not the CFO. A functional executive with full-time allocation and authority to make integration decisions without CEO sign-off below a defined materiality threshold." },
+                { action: "Require key person retention packages signed before public announcement — not at close", detail: "The pre-announcement period is the departure window. Deferring to close removes the most important leverage point the acquirer has." },
+                { action: "Confirm ERP architecture and organisation design decisions are in formal resolution processes before close", detail: "Both must have named owners and mandatory timelines. Neither should remain advisory or deferred at the point of signing." },
+              ].map((a, i) => (
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: "14px", border: "1px solid #E2E8F0", borderRadius: "12px", padding: "16px 18px", alignItems: "start" }}>
+                  <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: PURPLE, color: "white", fontSize: "13px", fontWeight: "700", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{i + 1}</div>
+                  <div>
+                    <div style={{ fontSize: "14px", fontWeight: "600", color: "#1E293B", marginBottom: "5px" }}>{a.action}</div>
+                    <div style={{ fontSize: "13px", color: "#64748B", lineHeight: 1.65 }}>{a.detail}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div style={{ background: "white", color: "#111827", borderRadius: "24px", padding: "28px" }}>
-              <h3>Illustrative Board Output</h3>
-              <ul style={{ color: "#475569", paddingLeft: "18px", lineHeight: 1.7 }}>
-                <li><strong>68% of value depends on synergy execution</strong></li>
-                <li><strong>Management bandwidth appears stretched</strong></li>
-                <li><strong>Migration is the critical path risk</strong></li>
-                <li><strong>Revenue assumptions likely optimistic</strong></li>
-                <li><strong>Board governance should begin Day 1</strong></li>
-                <li><strong>Execution confidence moderate</strong></li>
-              </ul>
-            </div>
-          </div>
+          )}
+ 
+          <p style={{ fontSize: "12px", color: "#94A3B8", marginTop: "20px", fontStyle: "italic" }}>
+            Project Aurora is a fictional transaction created to demonstrate engine capabilities. All company names, financial figures, and individuals are illustrative.
+          </p>
         </div>
       </section>
  
-      {/* WHO */}
-      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Who We'd Value Feedback From</h2>
-          <div
-            style={{
-              marginTop: "30px",
-              display: "grid",
-              gridTemplateColumns: mobile ? "1fr" : "repeat(auto-fit,minmax(220px,1fr))",
-              gap: "18px"
-            }}
-          >
+      {/* ── WHY NOT JUST AI ── */}
+      <section style={{ background: "#F8FAFC", padding: sp }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "48px", alignItems: "center" }}>
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: PURPLE, textTransform: "uppercase", marginBottom: "10px" }}>The operator angle</div>
+            <h2 style={{ fontSize: mobile ? "26px" : "34px", fontWeight: "600", marginBottom: "16px", letterSpacing: "-0.01em" }}>Why not just ask a general AI?</h2>
+            <p style={{ fontSize: "16px", color: "#475569", lineHeight: 1.8, marginBottom: "16px" }}>
+              You can. You'll get a reasonable read and generic risk frameworks — analysis calibrated to what sounds right.
+            </p>
+            <p style={{ fontSize: "16px", color: "#475569", lineHeight: 1.8 }}>
+              What you won't get is output grounded in what actually fails. The failure signatures, the pre-close flags, the governance asks that boards actually need — these come from <strong style={{ color: "#1E293B" }}>delivered integrations</strong>, not from training data. The AI structures and scales the judgement. The judgement itself is the product.
+            </p>
+          </div>
+          <div style={{ display: "grid", gap: "12px" }}>
             {[
-              "Private Equity Partners",
-              "Operating Partners",
-              "Corporate Development",
-              "Technical Builders"
+              { n: "94", label: "risk patterns", desc: "Built from real M&A failure modes — not generic frameworks" },
+              { n: "53", label: "deal states", desc: "Combinations of signals that define how a deal will behave in execution" },
+              { n: "200+", label: "analytical elements", desc: "Signals, composites, risks, and decisions evaluated on every deal" },
             ].map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "22px",
-                  borderRadius: "18px",
-                  border: "1px solid #E2E8F0",
-                  background: "#F8FAFC",
-                  textAlign: "center",
-                  fontWeight: "600"
-                }}
-              >
-                {item}
+              <div key={i} style={{ background: "white", border: "1px solid #E2E8F0", borderRadius: "12px", padding: "18px 20px", display: "flex", gap: "16px", alignItems: "center" }}>
+                <div style={{ fontSize: "22px", fontWeight: "700", color: PURPLE, minWidth: "48px" }}>{item.n}</div>
+                <div>
+                  <div style={{ fontSize: "14px", fontWeight: "600", color: "#1E293B" }}>{item.label}</div>
+                  <div style={{ fontSize: "13px", color: "#64748B", marginTop: "2px" }}>{item.desc}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
  
-      {/* PILOT REQUEST */}
-      <section id="pilot" style={{ background: "#F8FAFC", color: "#111827", padding: sectionPad }}>
-        <div style={{ maxWidth: "760px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "44px" }}>Request a Pilot</h2>
-          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", marginTop: "12px", marginBottom: "32px" }}>
-            If you have a live or recent deal you would like to run through the
-            engine, we would welcome the conversation. Share your details and
-            we will be in touch within 48 hours.
+      {/* ── HOW IT WORKS + SECURITY ── */}
+      <section style={{ background: "white", padding: sp }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: PURPLE, textTransform: "uppercase", marginBottom: "10px" }}>Process</div>
+          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", marginBottom: "10px", letterSpacing: "-0.01em" }}>From documents to advisory output</h2>
+          <p style={{ color: "#64748B", fontSize: "16px", maxWidth: "580px", lineHeight: 1.65, marginBottom: "36px" }}>
+            A structured analytical process, reviewed by a senior practitioner before delivery. Every output is traceable to a source document.
+          </p>
+ 
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(4, 1fr)", gap: "2px", marginBottom: "36px" }}>
+            {[
+              { n: "01", title: "Share your deal pack", desc: "IC paper, board pack, FDD, synergy model, management presentations. Secure, confidential, isolated per deal." },
+              { n: "02", title: "Deep document analysis", desc: "Every document is read in full. Signals, contradictions, and gaps are identified across 16 analytical domains. Nothing is skimmed." },
+              { n: "03", title: "Integration pattern matching", desc: "The analysis runs against risk patterns, deal states, and governance requirements built from real delivered integrations — not generic frameworks." },
+              { n: "04", title: "Practitioner review and output", desc: "A senior practitioner reviews the full analysis before delivery — a board report and management blueprint, written at the level of senior advisory." },
+            ].map((step, i) => (
+              <div key={i} style={{ background: "#F8FAFC", borderTop: `3px solid ${i === 0 ? PURPLE : "#E2E8F0"}`, padding: "22px 20px" }}>
+                <div style={{ fontSize: "11px", fontWeight: "700", color: PURPLE, letterSpacing: "0.1em", marginBottom: "10px" }}>{step.n}</div>
+                <div style={{ fontSize: "14px", fontWeight: "600", color: "#1E293B", marginBottom: "8px" }}>{step.title}</div>
+                <div style={{ fontSize: "13px", color: "#64748B", lineHeight: 1.65 }}>{step.desc}</div>
+              </div>
+            ))}
+          </div>
+ 
+          <div style={{ background: DARK, borderRadius: "16px", padding: "28px 32px", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr 1fr", gap: "28px" }}>
+            {[
+              { head: "Confidentiality", body: "Deal documents are processed in isolated environments. Each deal is stored under a unique identifier — company names never appear in storage paths." },
+              { head: "Data security", body: "Encryption at rest and in transit. Access-controlled per deal. Immutable audit log on every operation. No deal data is used for model training." },
+              { head: "Deployment", body: "Flexible deployment options under development including private and enterprise configurations for organisations that cannot use public AI tooling on sensitive materials." },
+            ].map((s, i) => (
+              <div key={i}>
+                <div style={{ fontSize: "12px", fontWeight: "700", color: PURPLE, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: "8px" }}>{s.head}</div>
+                <div style={{ fontSize: "13px", color: "#94A3B8", lineHeight: 1.7 }}>{s.body}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+ 
+      {/* ── ABOUT ── */}
+      <section style={{ background: "#F8FAFC", padding: sp }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: PURPLE, textTransform: "uppercase", marginBottom: "10px" }}>About</div>
+          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", marginBottom: "18px", letterSpacing: "-0.01em" }}>Built by someone who has done it</h2>
+          <p style={{ fontSize: mobile ? "16px" : "18px", color: "#475569", lineHeight: 1.8, maxWidth: "740px", marginBottom: "16px" }}>
+            Jon Milsted has spent 20+ years personally delivering integrations — at GoCardless, OVO Energy, Mastercard, and Deloitte. Not advising on them. Delivering them.
+          </p>
+          <p style={{ fontSize: "16px", color: "#64748B", lineHeight: 1.8, maxWidth: "740px", marginBottom: "36px" }}>
+            The patterns in the engine — how deals fail, what boards miss, where execution falls apart — come from that delivery experience. Integration Intelligence combines that judgement with AI to make it available at the point in a deal when it actually changes outcomes.
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(3, 1fr)", gap: "16px", maxWidth: "640px" }}>
+            {[
+              { n: "£100m+", label: "run-rate savings delivered" },
+              { n: "8,000+", label: "FTE integrations led" },
+              { n: "£60m", label: "annual loss turned to profitability" },
+            ].map((c, i) => (
+              <div key={i} style={{ background: "white", border: "1px solid #E2E8F0", borderRadius: "12px", padding: "18px 16px" }}>
+                <div style={{ fontSize: "22px", fontWeight: "700", color: PURPLE }}>{c.n}</div>
+                <div style={{ fontSize: "12px", color: "#64748B", marginTop: "4px", lineHeight: 1.4 }}>{c.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+ 
+      {/* ── PILOT REQUEST ── */}
+      <section id="pilot" style={{ background: DARK, padding: sp }}>
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: "#B39DFF", textTransform: "uppercase", marginBottom: "10px" }}>Get access</div>
+          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", color: "white", marginBottom: "12px", letterSpacing: "-0.01em" }}>Request a pilot</h2>
+          <p style={{ color: "#64748B", fontSize: "16px", marginBottom: "32px", lineHeight: 1.65 }}>
+            We're running a limited pilot with PE firms and corporate M&amp;A teams. If you have a live deal or a recent transaction you'd like to test the engine on, get in touch.
           </p>
           {pilotSubmitted ? (
-            <div
-              style={{
-                background: "white",
-                border: "1px solid #E2E8F0",
-                borderRadius: "22px",
-                padding: "36px",
-                textAlign: "center"
-              }}
-            >
-              <div style={{ fontSize: "32px", marginBottom: "12px" }}>Thank you</div>
-              <p style={{ color: "#475569", fontSize: "18px" }}>
-                We will be in touch within 48 hours to arrange a conversation.
-              </p>
+            <div style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "14px", padding: "32px 24px", textAlign: "center" }}>
+              <div style={{ fontSize: "20px", fontWeight: "600", color: "white", marginBottom: "8px" }}>Request received.</div>
+              <p style={{ color: "#64748B", fontSize: "15px" }}>We'll be in touch shortly. Thank you.</p>
             </div>
           ) : (
-            <form
-              onSubmit={submitPilot}
-              style={{
-                background: "white",
-                border: "1px solid #E2E8F0",
-                borderRadius: "22px",
-                padding: mobile ? "28px" : "40px"
-              }}
-            >
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: mobile ? "1fr" : "1fr 1fr",
-                  gap: "0 16px"
-                }}
-              >
-                <div>
-                  <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
-                    Your name
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Jon Milsted"
-                    value={pilotName}
-                    onChange={(e) => setPilotName(e.target.value)}
-                    style={inputStyle}
-                  />
-                </div>
-                <div>
-                  <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
-                    Firm
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Acme Capital"
-                    value={pilotFirm}
-                    onChange={(e) => setPilotFirm(e.target.value)}
-                    style={inputStyle}
-                  />
-                </div>
-              </div>
-              <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="you@firm.com"
-                value={pilotEmail}
-                onChange={(e) => setPilotEmail(e.target.value)}
-                style={inputStyle}
-              />
-              <label style={{ display: "block", fontSize: "14px", fontWeight: "600", color: "#374151", marginBottom: "6px" }}>
-                Brief deal description{" "}
-                <span style={{ fontWeight: "400", color: "#94A3B8" }}>(optional)</span>
-              </label>
-              <textarea
-                placeholder="e.g. Mid-market SaaS acquisition, carve-out from listed business, buy-and-build bolt-on..."
-                value={pilotDeal}
-                onChange={(e) => setPilotDeal(e.target.value)}
-                rows={3}
-                style={{ ...inputStyle, resize: "vertical", fontFamily: "inherit" }}
-              />
-              {pilotError && (
-                <p style={{ color: "#EF4444", fontSize: "14px", marginBottom: "12px" }}>{pilotError}</p>
-              )}
-              <button
-                type="submit"
-                disabled={pilotLoading}
-                style={{
-                  width: "100%",
-                  padding: "16px",
-                  borderRadius: "14px",
-                  border: "none",
-                  background: "#7C4DFF",
-                  color: "white",
-                  fontSize: "18px",
-                  fontWeight: "600",
-                  cursor: pilotLoading ? "not-allowed" : "pointer",
-                  opacity: pilotLoading ? 0.6 : 1
-                }}
-              >
-                {pilotLoading ? "Submitting..." : "Request a Pilot"}
+            <form onSubmit={submitPilot} style={{ display: "grid", gap: "12px" }}>
+              {[
+                { placeholder: "Your name", value: pilotName, setter: setPilotName, type: "text" },
+                { placeholder: "Firm or organisation", value: pilotFirm, setter: setPilotFirm, type: "text" },
+                { placeholder: "Email address", value: pilotEmail, setter: setPilotEmail, type: "email" },
+              ].map((f, i) => (
+                <input key={i} type={f.type} placeholder={f.placeholder} value={f.value} onChange={e => f.setter(e.target.value)}
+                  style={{ padding: "13px 16px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)", color: "white", fontSize: "15px", outline: "none", width: "100%", boxSizing: "border-box" }} />
+              ))}
+              <textarea placeholder="Brief deal context (optional — deal type, sector, stage)" value={pilotDeal} onChange={e => setPilotDeal(e.target.value)} rows={3}
+                style={{ padding: "13px 16px", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.06)", color: "white", fontSize: "15px", outline: "none", resize: "vertical", fontFamily: "inherit", width: "100%", boxSizing: "border-box" }} />
+              {pilotError && <p style={{ color: "#F87171", fontSize: "14px", margin: 0 }}>{pilotError}</p>}
+              <button type="submit" disabled={pilotLoading} style={{ background: PURPLE, color: "white", padding: "14px", borderRadius: "12px", border: "none", fontWeight: "600", fontSize: "16px", cursor: "pointer", marginTop: "4px" }}>
+                {pilotLoading ? "Submitting…" : "Submit request"}
               </button>
+              <p style={{ fontSize: "13px", color: "#475569", textAlign: "center", margin: 0 }}>
+                Or email directly:{" "}
+                <a href="mailto:jon@integration-intelligence.com" style={{ color: "#B39DFF", textDecoration: "none" }}>
+                  jon@integration-intelligence.com
+                </a>
+              </p>
             </form>
           )}
         </div>
       </section>
  
-      {/* FEEDBACK */}
-      <section id="feedback" style={{ background: "#1A237E", color: "white", padding: mobile ? "70px 20px" : "100px 24px" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto", textAlign: "center" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "48px" }}>Currently Exploring Market Demand</h2>
-          <p style={{ color: "#E2E8F0", fontSize: mobile ? "18px" : "22px", maxWidth: "760px", margin: "18px auto 0" }}>
-            We are testing whether transaction execution intelligence is a
-            product sophisticated dealmakers would value.
-          </p>
-          <div
-            style={{
-              marginTop: "34px",
-              background: "rgba(255,255,255,0.08)",
-              padding: "28px",
-              borderRadius: "22px",
-              maxWidth: "560px",
-              marginLeft: "auto",
-              marginRight: "auto"
-            }}
-          >
-            {submitted ? (
-              <div style={{ padding: "8px" }}>
-                <div style={{ fontSize: "28px", marginBottom: "12px" }}>Thank you</div>
-                <p style={{ color: "#C7D2FE", fontSize: "16px", lineHeight: 1.7, marginBottom: "20px" }}>
-                  We will be in touch as the product develops. If you would like
-                  to stay connected in the meantime, feel free to connect with
-                  Jon on LinkedIn.
-                </p>
-                <a
-                  href="https://www.linkedin.com/in/jon-milsted-a807a321/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-block",
-                    background: "#0A66C2",
-                    color: "white",
-                    textDecoration: "none",
-                    padding: "12px 22px",
-                    borderRadius: "12px",
-                    fontWeight: "600",
-                    fontSize: "15px"
-                  }}
-                >
-                  Connect on LinkedIn
-                </a>
-              </div>
-            ) : voteChoice ? (
-              <form onSubmit={submitEmail}>
-                <div style={{ fontSize: mobile ? "20px" : "22px", fontWeight: "700", marginBottom: "8px" }}>
-                  {voteChoice === "yes" ? "Great - we would love to follow up." : "We would be happy to tell you more."}
-                </div>
-                <p style={{ color: "#C7D2FE", fontSize: "15px", marginBottom: "20px" }}>
-                  Leave your email and we will be in touch. No spam - just a
-                  short conversation if you are open to it.
-                </p>
-                <input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{
-                    width: "100%",
-                    padding: "14px 16px",
-                    borderRadius: "12px",
-                    border: emailError ? "1px solid #F87171" : "1px solid rgba(255,255,255,0.25)",
-                    background: "rgba(255,255,255,0.1)",
-                    color: "white",
-                    fontSize: "16px",
-                    outline: "none",
-                    boxSizing: "border-box",
-                    marginBottom: "8px"
-                  }}
-                />
-                {emailError && (
-                  <p style={{ color: "#F87171", fontSize: "14px", marginBottom: "12px", textAlign: "left" }}>
-                    {emailError}
-                  </p>
-                )}
-                <button
-                  type="submit"
-                  disabled={loading}
-                  style={{ ...buttonStyle, background: "#7C4DFF", border: "none", marginBottom: "10px" }}
-                >
-                  {loading ? "Submitting..." : "Submit"}
-                </button>
-                <button
-                  type="button"
-                  onClick={skipEmail}
-                  disabled={loading}
-                  style={{ ...buttonStyle, fontSize: "14px", padding: "10px", opacity: loading ? 0.4 : 0.6 }}
-                >
-                  No thanks - just record my vote
-                </button>
-              </form>
-            ) : (
-              <>
-                <div style={{ fontSize: mobile ? "22px" : "24px", fontWeight: "700", marginBottom: "18px" }}>
-                  Would a tool like this be valuable to you?
-                </div>
-                <div style={{ display: "grid", gap: "12px" }}>
-                  <button onClick={() => vote("yes")} disabled={loading} style={buttonStyle}>
-                    Yes - I would use this
-                  </button>
-                  <button onClick={() => vote("interesting")} disabled={loading} style={buttonStyle}>
-                    Interesting - tell me more
-                  </button>
-                  <button onClick={() => vote("unsure")} disabled={loading} style={buttonStyle}>
-                    Unsure
-                  </button>
-                  <button onClick={() => vote("no_need")} disabled={loading} style={buttonStyle}>
-                    I do not currently see the need
-                  </button>
-                </div>
-                {voteError && (
-                  <p style={{ color: "#F87171", fontSize: "14px", marginTop: "12px" }}>{voteError}</p>
-                )}
-              </>
-            )}
-          </div>
-        </div>
-      </section>
+      {/* ── FOOTER ── */}
+      <footer style={{ background: "#0D1117", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "24px", textAlign: "center" }}>
+        <p style={{ fontSize: "13px", color: "#334155" }}>Integration Intelligence &nbsp;·&nbsp; 2026</p>
+      </footer>
  
-      {/* ABOUT JON */}
-      <section style={{ background: "white", color: "#111827", padding: sectionPad }}>
-        <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-          <h2 style={{ fontSize: mobile ? "34px" : "42px" }}>About Jon Milsted</h2>
-          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", lineHeight: 1.8 }}>
-            Integration Intelligence is built from over 20 years of personally
-            delivering integrations - not observing them. Jon Milsted has held
-            senior leadership roles at GoCardless, OVO, Mastercard and Deloitte,
-            leading multi-billion-pound integrations, synergy programmes, TSA exits
-            and complex operational change.
-          </p>
-          <p style={{ fontSize: mobile ? "18px" : "20px", color: "#475569", lineHeight: 1.8, marginTop: "18px" }}>
-            That experience - 100m+ run-rate savings delivered, 8,000+ FTE
-            integrations led, a 60m annual loss turned into profitability - is what
-            is encoded into the engine. The AI does not replace that judgement.
-            It structures it, scales it, and applies it faster and across more
-            information than was previously possible.
-          </p>
-          <p style={{ fontSize: "16px", color: "#94A3B8", marginTop: "28px" }}>
-            Questions or thoughts?{" "}
-            <a
-              href="mailto:jon_milsted@hotmail.com"
-              style={{ color: "#7C4DFF", textDecoration: "none", fontWeight: "600" }}
-            >
-              Get in touch
-            </a>
-          </p>
-        </div>
-      </section>
     </div>
   );
 }
