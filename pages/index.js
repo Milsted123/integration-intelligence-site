@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
- 
+
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 );
- 
+
 export default function Home() {
   const [mobile, setMobile] = useState(false);
   const [activeTab, setActiveTab] = useState("summary");
- 
+
   // Pilot form state
   const [pilotName, setPilotName] = useState("");
   const [pilotFirm, setPilotFirm] = useState("");
@@ -18,14 +18,14 @@ export default function Home() {
   const [pilotSubmitted, setPilotSubmitted] = useState(false);
   const [pilotLoading, setPilotLoading] = useState(false);
   const [pilotError, setPilotError] = useState("");
- 
+
   useEffect(() => {
     const check = () => setMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
- 
+
   const submitPilot = async (e) => {
     e.preventDefault();
     setPilotError("");
@@ -39,28 +39,28 @@ export default function Home() {
     }
     setPilotLoading(true);
     try {
-  const { error: insertError } = await supabase.from("pilot_requests").insert([{
-    name: pilotName, firm: pilotFirm, email: pilotEmail, deal_context: pilotDeal
-  }]);
-  if (insertError) throw insertError;
-  setPilotSubmitted(true);
+      const { error: insertError } = await supabase.from("pilot_requests").insert([{
+        name: pilotName, firm: pilotFirm, email: pilotEmail, deal_context: pilotDeal
+      }]);
+      if (insertError) throw insertError;
+      setPilotSubmitted(true);
     } catch (e) {
       setPilotError("Unable to submit — please email directly.");
     }
     setPilotLoading(false);
   };
- 
+
   const PURPLE = "#7C4DFF";
   const DARK = "#0D1117";
   const sp = mobile ? "60px 20px" : "80px 24px";
- 
+
   const tabs = [
     { key: "summary", label: "Executive summary" },
     { key: "scorecard", label: "Scorecard" },
     { key: "risks", label: "Key risks" },
     { key: "actions", label: "Board actions" },
   ];
- 
+
   const scorecard = [
     { status: "red", dim: "Leadership & organisation", note: "Founder-led target; organisation design uncommitted; no Integration Sponsor appointed; reporting lines unresolved" },
     { status: "red", dim: "Technology & platform", note: "Full platform decommission required; ERP architecture not agreed; integration due diligence adviser flags Year 2 timeline already at risk before signing" },
@@ -70,26 +70,26 @@ export default function Home() {
     { status: "amber", dim: "Customer & commercial", note: "Cross-sell infrastructure decisions partial; Group Commercial Director personally holds top enterprise relationships with no documented transition plan" },
     { status: "green", dim: "Intelligence coverage", note: "Five source documents reviewed including integration assessment, financial DD, commercial DD, IC paper, and board pack — strong evidence base" },
   ];
- 
+
   const scColor = {
     red:   { bg: "#FCEBEB", border: "#F09595", dot: "#E24B4A", text: "#791F1F", badge: "#F7C1C1" },
     amber: { bg: "#FAEEDA", border: "#FAC775", dot: "#BA7517", text: "#633806", badge: "#FAC775" },
     green: { bg: "#EAF3DE", border: "#C0DD97", dot: "#3B6D11", text: "#27500A", badge: "#C0DD97" },
   };
- 
+
   return (
     <div style={{ fontFamily: "Inter, system-ui, sans-serif", color: "#111827", background: "white" }}>
- 
+
       {/* ── NAV ── */}
       <nav style={{ background: DARK, padding: "0 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", height: "56px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <span style={{ color: "white", fontWeight: "600", fontSize: "17px", letterSpacing: "-0.01em" }}>Integration Intelligence</span>
           <a href="#pilot" style={{ background: PURPLE, color: "white", padding: "8px 18px", borderRadius: "10px", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>
-            Request a pilot
+            Register interest
           </a>
         </div>
       </nav>
- 
+
       {/* ── HERO ── */}
       <section style={{ background: DARK, color: "white", padding: mobile ? "60px 20px 56px" : "80px 24px 72px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -105,14 +105,14 @@ export default function Home() {
             <span style={{ color: "#B39DFF" }}>before</span> the decisions that determine returns have been taken.
           </p>
           <p style={{ fontSize: mobile ? "16px" : "17px", color: "#94A3B8", maxWidth: "580px", lineHeight: 1.75, marginBottom: "36px" }}>
-            Senior integration analysis typically arrives weeks after signing — when the retention windows have passed, the governance asks weren't in the SPA, and the architecture decisions got deferred to Day 1. Integration Intelligence changes that.
+            Senior integration analysis typically arrives weeks after close — when the retention windows have passed, the governance asks weren't in the SPA, and the architecture decisions got deferred to Day 1. Integration Intelligence changes that.
           </p>
           <a href="#pilot" style={{ display: "inline-block", background: PURPLE, color: "white", padding: "14px 28px", borderRadius: "12px", fontWeight: "600", fontSize: "16px", textDecoration: "none" }}>
-            Request a pilot
+            Register interest
           </a>
         </div>
       </section>
- 
+
       {/* ── TIMING PROBLEM ── */}
       <section style={{ background: "#F8FAFC", padding: sp }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -121,7 +121,7 @@ export default function Home() {
           <p style={{ color: "#475569", fontSize: "17px", maxWidth: "640px", lineHeight: 1.7, marginBottom: "36px" }}>
             The integration questions that matter most — who leads the programme, which systems survive, where the key person risk sits — all have windows. Those windows are at diligence and signing, not Day 30.
           </p>
- 
+
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "16px", marginBottom: "36px" }}>
             {[
               {
@@ -146,7 +146,7 @@ export default function Home() {
               </div>
             ))}
           </div>
- 
+
           <div style={{ background: "white", borderLeft: `4px solid ${PURPLE}`, padding: "18px 22px", maxWidth: "780px" }}>
             <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.08em", color: PURPLE, textTransform: "uppercase", marginBottom: "8px" }}>Example — Project Aurora</div>
             <p style={{ fontSize: "15px", color: "#1E293B", lineHeight: 1.7, margin: 0 }}>
@@ -155,7 +155,7 @@ export default function Home() {
           </div>
         </div>
       </section>
- 
+
       {/* ── STATS STRIP ── */}
       <section style={{ background: DARK, padding: mobile ? "36px 20px" : "44px 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: mobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: "24px" }}>
@@ -172,7 +172,7 @@ export default function Home() {
           ))}
         </div>
       </section>
- 
+
       {/* ── OUTPUT PREVIEW ── */}
       <section id="output" style={{ background: "white", padding: sp }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -181,7 +181,7 @@ export default function Home() {
           <p style={{ color: "#64748B", fontSize: "16px", maxWidth: "640px", lineHeight: 1.65, marginBottom: "28px" }}>
             A £355m geographic expansion acquisition. Five source documents into the engine. Below is a sample of what was produced.
           </p>
- 
+
           {/* Tabs */}
           <div style={{ display: "flex", borderBottom: "1px solid #E2E8F0", marginBottom: "24px", overflowX: "auto" }}>
             {tabs.map(t => (
@@ -190,7 +190,7 @@ export default function Home() {
               </button>
             ))}
           </div>
- 
+
           {/* Summary */}
           {activeTab === "summary" && (
             <div>
@@ -206,7 +206,7 @@ export default function Home() {
               </div>
             </div>
           )}
- 
+
           {/* Scorecard */}
           {activeTab === "scorecard" && (
             <div style={{ display: "grid", gap: "8px" }}>
@@ -225,7 +225,7 @@ export default function Home() {
               })}
             </div>
           )}
- 
+
           {/* Risks */}
           {activeTab === "risks" && (
             <div style={{ display: "grid", gap: "12px" }}>
@@ -244,7 +244,7 @@ export default function Home() {
               ))}
             </div>
           )}
- 
+
           {/* Actions */}
           {activeTab === "actions" && (
             <div style={{ display: "grid", gap: "10px" }}>
@@ -263,13 +263,13 @@ export default function Home() {
               ))}
             </div>
           )}
- 
+
           <p style={{ fontSize: "12px", color: "#94A3B8", marginTop: "20px", fontStyle: "italic" }}>
             Project Aurora is a fictional transaction created to demonstrate engine capabilities. All company names, financial figures, and individuals are illustrative.
           </p>
         </div>
       </section>
- 
+
       {/* ── WHY NOT JUST AI ── */}
       <section style={{ background: "#F8FAFC", padding: sp }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr", gap: "48px", alignItems: "center" }}>
@@ -300,7 +300,7 @@ export default function Home() {
           </div>
         </div>
       </section>
- 
+
       {/* ── HOW IT WORKS + SECURITY ── */}
       <section style={{ background: "white", padding: sp }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -309,7 +309,7 @@ export default function Home() {
           <p style={{ color: "#64748B", fontSize: "16px", maxWidth: "580px", lineHeight: 1.65, marginBottom: "36px" }}>
             A structured analytical process, reviewed by a senior practitioner before delivery. Every output is traceable to a source document.
           </p>
- 
+
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(4, 1fr)", gap: "2px", marginBottom: "36px" }}>
             {[
               { n: "01", title: "Share your deal pack", desc: "IC paper, board pack, FDD, synergy model, management presentations. Secure, confidential, isolated per deal." },
@@ -324,7 +324,7 @@ export default function Home() {
               </div>
             ))}
           </div>
- 
+
           <div style={{ background: DARK, borderRadius: "16px", padding: "28px 32px", display: "grid", gridTemplateColumns: mobile ? "1fr" : "1fr 1fr 1fr", gap: "28px" }}>
             {[
               { head: "Confidentiality", body: "Deal documents are processed in isolated environments. Each deal is stored under a unique identifier — company names never appear in storage paths." },
@@ -339,7 +339,7 @@ export default function Home() {
           </div>
         </div>
       </section>
- 
+
       {/* ── ABOUT ── */}
       <section style={{ background: "#F8FAFC", padding: sp }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
@@ -365,14 +365,14 @@ export default function Home() {
           </div>
         </div>
       </section>
- 
+
       {/* ── PILOT REQUEST ── */}
       <section id="pilot" style={{ background: DARK, padding: sp }}>
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: "#B39DFF", textTransform: "uppercase", marginBottom: "10px" }}>Get access</div>
-          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", color: "white", marginBottom: "12px", letterSpacing: "-0.01em" }}>Request a pilot</h2>
+          <div style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", color: "#B39DFF", textTransform: "uppercase", marginBottom: "10px" }}>Get in touch</div>
+          <h2 style={{ fontSize: mobile ? "28px" : "38px", fontWeight: "600", color: "white", marginBottom: "12px", letterSpacing: "-0.01em" }}>Register interest</h2>
           <p style={{ color: "#64748B", fontSize: "16px", marginBottom: "32px", lineHeight: 1.65 }}>
-            We're running a limited pilot with PE firms and corporate M&amp;A teams. If you have a live deal or a recent transaction you'd like to test the engine on, get in touch.
+            If you have a live deal or upcoming transaction and want to know more, get in touch. We work with PE firms and corporate M&amp;A teams and typically deliver within 5–7 working days of receiving deal documentation.
           </p>
           {pilotSubmitted ? (
             <div style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: "14px", padding: "32px 24px", textAlign: "center" }}>
@@ -405,12 +405,12 @@ export default function Home() {
           )}
         </div>
       </section>
- 
+
       {/* ── FOOTER ── */}
       <footer style={{ background: "#0D1117", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "24px", textAlign: "center" }}>
         <p style={{ fontSize: "13px", color: "#334155" }}>Integration Intelligence &nbsp;·&nbsp; 2026</p>
       </footer>
- 
+
     </div>
   );
 }
