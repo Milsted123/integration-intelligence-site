@@ -39,10 +39,11 @@ export default function Home() {
     }
     setPilotLoading(true);
     try {
-      await supabase.from("pilot_requests").insert([{
-        name: pilotName, firm: pilotFirm, email: pilotEmail, deal_context: pilotDeal
-      }]);
-      setPilotSubmitted(true);
+  const { error: insertError } = await supabase.from("pilot_requests").insert([{
+    name: pilotName, firm: pilotFirm, email: pilotEmail, deal_context: pilotDeal
+  }]);
+  if (insertError) throw insertError;
+  setPilotSubmitted(true);
     } catch (e) {
       setPilotError("Unable to submit — please email directly.");
     }
