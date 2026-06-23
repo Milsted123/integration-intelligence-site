@@ -78,7 +78,7 @@ nav.visible { opacity: 1; }
 .fade-up.delay-4 { transition-delay: .4s; }
 
 /* ─── HERO ───────────────────────────────────────────────── */
-.hero { background: var(--navy); height: 100vh; display: flex; flex-direction: column; padding: 80px 52px 0; position: relative; overflow: hidden; }
+.hero { background: var(--navy); height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 80px 52px 0; position: relative; overflow: hidden; }
 .hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
 .hero-tag {
   font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
@@ -477,7 +477,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 }
 @media (max-width: 768px) {
   .hero-visual {
-    right: auto; left: 50%; width: min(90vw, 420px);
+    right: auto; left: 50%; top: 50%; width: min(90vw, 420px);
     transform: translate(-50%, -50%);
     opacity: 0.5;
   }
@@ -500,11 +500,11 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 }
 /* Short viewports (landscape phone, small laptop): fall back to min-height */
 @media (max-height: 680px) {
-  .hero { height: auto; min-height: 100vh; }
+  .hero { height: auto; min-height: 100vh; min-height: 100dvh; }
 }
 /* Mobile: height: auto so content can breathe */
 @media (max-width: 768px) {
-  .hero { height: auto; min-height: 100vh; }
+  .hero { height: auto; min-height: 100vh; min-height: 100dvh; }
 }
 .footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
 .footer-email { font-size: 11px; color: rgba(196,146,74,.55); text-decoration: none; }
