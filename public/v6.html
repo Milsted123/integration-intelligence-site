@@ -78,8 +78,8 @@ nav.visible { opacity: 1; }
 .fade-up.delay-4 { transition-delay: .4s; }
 
 /* ─── HERO ───────────────────────────────────────────────── */
-.hero { background: var(--navy); min-height: 100vh; display: flex; flex-direction: column; padding: 80px 52px 0; }
-.hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.hero { background: var(--navy); height: 100vh; display: flex; flex-direction: column; padding: 80px 52px 0; position: relative; overflow: hidden; }
+.hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
 .hero-tag {
   font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
   color: var(--amber); margin-bottom: 32px;
@@ -107,7 +107,7 @@ nav.visible { opacity: 1; }
 }
 .btn-ghost:hover { color: var(--cream); }
 
-.hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,.07); padding-top: 32px; padding-bottom: 44px; margin-top: 44px; }
+.hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,.07); padding-top: 32px; padding-bottom: 44px; margin-top: 44px; position: relative; z-index: 1; }
 .hstat { flex: 1; padding-right: 40px; border-right: 1px solid rgba(255,255,255,.06); margin-right: 40px; }
 .hstat:last-child { border-right: none; margin-right: 0; }
 .hstat-n { font-family: 'EB Garamond', Georgia, serif; font-size: 30px; font-weight: 400; color: var(--amber); line-height: 1; margin-bottom: 5px; }
@@ -365,15 +365,14 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 @media (max-width: 768px) {
   nav { padding: 0 24px; }
-  .nav-wm-sub { display: none; }
+  .nav-wm-sub { letter-spacing: .18em; }
 
   #intro-content { gap: 24px; flex-direction: column; }
   #animSvg { width: 160px; height: 120px; }
   .intro-wm-name { font-size: 44px; }
 
   .hero { padding: 80px 24px 0; }
-  .hero-stats { padding-bottom: 36px; }
-  .hero-stats { flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.07); padding-top: 28px; gap: 0; }
+  .hero-stats { flex-wrap: wrap; padding-top: 28px; padding-bottom: 36px; gap: 0; }
   .hstat { flex: 1 1 45%; border-right: none; margin-right: 0; padding-right: 0; margin-bottom: 24px; }
 
   .fail-section { padding: 52px 24px; }
@@ -434,17 +433,78 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 }
 .slide-pause-btn:hover { color: var(--amber); }
 .slide-pause-btn svg { flex-shrink: 0; }
+/* ─── HERO VISUAL ────────────────────────────────────────── */
+.hero-visual {
+  position: absolute;
+  right: -60px;
+  top: 100px;
+  transform: none;
+  width: min(54vw, 680px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+}
+.hero-visual svg { width: 100%; height: auto; display: block; }
+.hero-orbit-arc {
+  animation: heroOrbit 16s linear infinite;
+}
+.hero-orbit-arc-2 {
+  animation: heroOrbitReverse 11s linear infinite;
+}
+@keyframes heroOrbit {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -549.8; }
+}
+@keyframes heroOrbitReverse {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: 722.6; }
+}
+.hero-ring-pulse {
+  animation: ringPulse 6s ease-in-out infinite;
+}
+.hero-ring-pulse-2 {
+  animation: ringPulse 6s ease-in-out 2s infinite;
+}
+.hero-ring-pulse-3 {
+  animation: ringPulse 6s ease-in-out 4s infinite;
+}
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.035; }
+  50%       { opacity: 0.075; }
+}
+@media (max-width: 900px) {
+  .hero-visual { width: min(70vw, 520px); right: -80px; }
+}
+@media (max-width: 768px) {
+  .hero-visual {
+    right: auto; left: 50%; width: min(90vw, 420px);
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+}
+@media (max-width: 480px) {
+  .hero-visual { width: 86vw; opacity: 0.35; }
+}
 /* ─── SCROLL HINT ────────────────────────────────────────── */
 .scroll-hint {
   text-align: center; padding-bottom: 24px;
   opacity: 0; pointer-events: none;
   transition: opacity .6s ease;
+  position: relative; z-index: 1;
 }
 .scroll-hint.visible { animation: scrollBounce 2.2s ease-in-out infinite; }
 .scroll-hint.hidden { opacity: 0 !important; }
 @keyframes scrollBounce {
   0%, 100% { opacity: 0.3; transform: translateY(0); }
   50%       { opacity: 0.65; transform: translateY(7px); }
+}
+/* Short viewports (landscape phone, small laptop): fall back to min-height */
+@media (max-height: 680px) {
+  .hero { height: auto; min-height: 100vh; }
+}
+/* Mobile: height: auto so content can breathe */
+@media (max-width: 768px) {
+  .hero { height: auto; min-height: 100vh; }
 }
 .footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
 .footer-email { font-size: 11px; color: rgba(196,146,74,.55); text-decoration: none; }
@@ -500,6 +560,47 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section class="hero">
+  <!-- ── HERO VISUAL ──────────────────────────────────────── -->
+  <div class="hero-visual" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <!-- Outer concentric rings — pulsing -->
+      <circle cx="300" cy="300" r="142" stroke="#F5F0E8" stroke-width="0.5" class="hero-ring-pulse"/>
+      <circle cx="300" cy="300" r="200" stroke="#F5F0E8" stroke-width="0.5" class="hero-ring-pulse-2"/>
+      <circle cx="300" cy="300" r="258" stroke="#F5F0E8" stroke-width="0.5" class="hero-ring-pulse-3"/>
+      <!-- Radial lines (diagonals only) -->
+      <line x1="361.9" y1="361.9" x2="482.4" y2="482.4" stroke="#F5F0E8" stroke-width="0.6" opacity="0.06"/>
+      <line x1="238.1" y1="361.9" x2="117.6" y2="482.4" stroke="#F5F0E8" stroke-width="0.6" opacity="0.06"/>
+      <line x1="238.1" y1="238.1" x2="117.6" y2="117.6" stroke="#F5F0E8" stroke-width="0.6" opacity="0.06"/>
+      <line x1="361.9" y1="238.1" x2="482.4" y2="117.6" stroke="#F5F0E8" stroke-width="0.6" opacity="0.06"/>
+      <!-- Nodes at outer ring intersections -->
+      <circle cx="482.4" cy="482.4" r="3" fill="none" stroke="#C4924A" stroke-width="0.8" opacity="0.14"/>
+      <circle cx="117.6" cy="482.4" r="3" fill="none" stroke="#C4924A" stroke-width="0.8" opacity="0.14"/>
+      <circle cx="117.6" cy="117.6" r="3" fill="none" stroke="#C4924A" stroke-width="0.8" opacity="0.14"/>
+      <circle cx="482.4" cy="117.6" r="3" fill="none" stroke="#C4924A" stroke-width="0.8" opacity="0.14"/>
+      <!-- II logo mark — cream, very faint -->
+      <g transform="translate(150,150) scale(2.5)" opacity="0.13">
+        <line x1="46" y1="40" x2="46" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="square"/>
+        <line x1="32" y1="40" x2="60" y2="40" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+        <line x1="32" y1="80" x2="60" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+        <line x1="74" y1="40" x2="74" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="square"/>
+        <line x1="88" y1="40" x2="60" y2="40" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+        <line x1="88" y1="80" x2="60" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+      </g>
+      <!-- Amber logo circle -->
+      <circle cx="300" cy="300" r="87.5" stroke="#C4924A" stroke-width="2.8" opacity="0.22"/>
+      <!-- Orbiting arc — amber dash moving around the logo circle -->
+      <circle cx="300" cy="300" r="87.5" stroke="#C4924A" stroke-width="2"
+        stroke-dasharray="38 511.8" opacity="0.5"
+        class="hero-orbit-arc"/>
+      <!-- Second counter-orbit ring -->
+      <circle cx="300" cy="300" r="115" stroke="#C4924A" stroke-width="1"
+        opacity="0.13"/>
+      <!-- Counter-orbiting arc — slightly larger circle, opposite direction, faster -->
+      <circle cx="300" cy="300" r="115" stroke="#C4924A" stroke-width="1.5"
+        stroke-dasharray="26 696.6" opacity="0.38"
+        class="hero-orbit-arc-2"/>
+    </svg>
+  </div>
   <div class="hero-main">
     <p class="hero-tag fade-up">M&A integration advisory · pre-signing to Day 1</p>
     <h1 class="hero-hl fade-up delay-1">Many deals fail<br>after signing.<br><em>Yours doesn't have to.</em></h1>
