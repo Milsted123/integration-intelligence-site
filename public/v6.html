@@ -436,10 +436,10 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 /* ─── HERO VISUAL ────────────────────────────────────────── */
 .hero-visual {
   position: absolute;
-  left: 36%;
-  top: 100px;
-  transform: none;
-  width: min(72vw, 980px);
+  left: 28%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(88vw, 1150px);
   pointer-events: none;
   z-index: 0;
   opacity: 1;
@@ -473,17 +473,17 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   50%       { opacity: 0.075; }
 }
 @media (max-width: 900px) {
-  .hero-visual { width: min(88vw, 640px); left: 20%; }
+  .hero-visual { width: min(94vw, 700px); left: 10%; top: 50%; transform: translateY(-50%); }
 }
 @media (max-width: 768px) {
   .hero-visual {
-    right: auto; left: 50%; top: 50%; width: min(130vw, 680px);
+    right: auto; left: 50%; top: 50%; width: min(150vw, 820px);
     transform: translate(-50%, -50%);
-    opacity: 0.45;
+    opacity: 0.4;
   }
 }
 @media (max-width: 480px) {
-  .hero-visual { width: 130vw; opacity: 0.3; }
+  .hero-visual { width: 150vw; opacity: 0.3; }
 }
 /* ─── SCROLL HINT ────────────────────────────────────────── */
 .scroll-hint {
