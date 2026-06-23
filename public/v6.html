@@ -78,7 +78,8 @@ nav.visible { opacity: 1; }
 .fade-up.delay-4 { transition-delay: .4s; }
 
 /* ─── HERO ───────────────────────────────────────────────── */
-.hero { background: var(--navy); padding: 140px 52px 84px; }
+.hero { background: var(--navy); min-height: 100vh; display: flex; flex-direction: column; padding: 80px 52px 0; }
+.hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 .hero-tag {
   font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
   color: var(--amber); margin-bottom: 32px;
@@ -93,7 +94,7 @@ nav.visible { opacity: 1; }
   font-size: 15px; font-weight: 300; line-height: 1.75;
   color: var(--slate); max-width: 480px; margin-bottom: 48px;
 }
-.hero-actions { display: flex; align-items: center; gap: 24px; margin-bottom: 72px; }
+.hero-actions { display: flex; align-items: center; gap: 24px; margin-bottom: 0; margin-top: 44px; }
 .btn-primary {
   font-size: 11px; font-weight: 500; letter-spacing: .13em; text-transform: uppercase;
   color: var(--navy); background: var(--amber); padding: 13px 28px;
@@ -106,7 +107,7 @@ nav.visible { opacity: 1; }
 }
 .btn-ghost:hover { color: var(--cream); }
 
-.hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,.07); padding-top: 36px; }
+.hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,.07); padding-top: 32px; padding-bottom: 44px; margin-top: 44px; }
 .hstat { flex: 1; padding-right: 40px; border-right: 1px solid rgba(255,255,255,.06); margin-right: 40px; }
 .hstat:last-child { border-right: none; margin-right: 0; }
 .hstat-n { font-family: 'EB Garamond', Georgia, serif; font-size: 30px; font-weight: 400; color: var(--amber); line-height: 1; margin-bottom: 5px; }
@@ -370,7 +371,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   #animSvg { width: 160px; height: 120px; }
   .intro-wm-name { font-size: 44px; }
 
-  .hero { padding: 96px 24px 56px; }
+  .hero { padding: 80px 24px 0; }
+  .hero-stats { padding-bottom: 36px; }
   .hero-stats { flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.07); padding-top: 28px; gap: 0; }
   .hstat { flex: 1 1 45%; border-right: none; margin-right: 0; padding-right: 0; margin-bottom: 24px; }
 
@@ -409,12 +411,12 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 @media (max-width: 480px) {
   /* Hero — strip back to headline + actions only so the strap lands immediately */
-  .hero { padding: 72px 20px 36px; }
+  .hero { padding: 72px 20px 0; }
   .hero-tag { display: none; }
   .hero-hl { font-size: 38px; margin-bottom: 22px; }
   .hero-sub { font-size: 13.5px; margin-bottom: 28px; max-width: 100%; }
-  .hero-actions { margin-bottom: 0; }
   .hero-stats { display: none; }
+  .hero-main { justify-content: center; }
 
   .fail-grid { grid-template-columns: 1fr; }
   .matters-items { grid-template-columns: 1fr 1fr; }
@@ -432,6 +434,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 }
 .slide-pause-btn:hover { color: var(--amber); }
 .slide-pause-btn svg { flex-shrink: 0; }
+/* ─── SCROLL HINT ────────────────────────────────────────── */
+.scroll-hint {
+  text-align: center; padding-bottom: 24px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .6s ease;
+}
+.scroll-hint.visible { animation: scrollBounce 2.2s ease-in-out infinite; }
+.scroll-hint.hidden { opacity: 0 !important; }
+@keyframes scrollBounce {
+  0%, 100% { opacity: 0.3; transform: translateY(0); }
+  50%       { opacity: 0.65; transform: translateY(7px); }
+}
 .footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
 .footer-email { font-size: 11px; color: rgba(196,146,74,.55); text-decoration: none; }
 
@@ -486,18 +500,25 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 <!-- ── HERO ──────────────────────────────────────────────── -->
 <section class="hero">
-  <p class="hero-tag fade-up">M&A integration advisory · pre-signing to Day 1</p>
-  <h1 class="hero-hl fade-up delay-1">Many deals fail<br>after signing.<br><em>Yours doesn't have to.</em></h1>
-  <p class="hero-sub fade-up delay-2">Strategic integration thinking, applied at the moment it makes the most difference.</p>
-  <div class="hero-actions fade-up delay-3">
-    <a class="btn-primary" href="#contact">Register interest</a>
-    <a class="btn-ghost" href="#output">See example output ↓</a>
+  <div class="hero-main">
+    <p class="hero-tag fade-up">M&A integration advisory · pre-signing to Day 1</p>
+    <h1 class="hero-hl fade-up delay-1">Many deals fail<br>after signing.<br><em>Yours doesn't have to.</em></h1>
+    <p class="hero-sub fade-up delay-2">Strategic integration thinking, applied at the moment it makes the most difference.</p>
+    <div class="hero-actions fade-up delay-3">
+      <a class="btn-primary" href="#contact">Register interest</a>
+      <a class="btn-ghost" href="#output">See example output ↓</a>
+    </div>
   </div>
   <div class="hero-stats fade-up delay-4">
     <div class="hstat"><div class="hstat-n">200+</div><div class="hstat-l">Analytical signals evaluated per deal</div></div>
     <div class="hstat"><div class="hstat-n">20yrs</div><div class="hstat-l">Delivering integrations — not advising on them</div></div>
     <div class="hstat"><div class="hstat-n">£100m+</div><div class="hstat-l">Run-rate savings delivered in practice</div></div>
     <div class="hstat"><div class="hstat-n">A week</div><div class="hstat-l">Not months — documents to board-ready output</div></div>
+  </div>
+  <div class="scroll-hint" id="scrollHint">
+    <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 1l10 10L21 1" stroke="#C4924A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
   </div>
 </section>
 
@@ -976,7 +997,11 @@ function fadeOutIntro() {
       intro.classList.add('fade-out');
       page.classList.add('visible');
       nav.classList.add('visible');
-      setTimeout(() => intro.remove(), 950);
+      setTimeout(() => {
+        intro.remove();
+        const hint = document.getElementById('scrollHint');
+        if (hint) hint.classList.add('visible');
+      }, 950);
     }, 120);
   }, 820);
 }
@@ -1056,6 +1081,15 @@ const observer = new IntersectionObserver((entries) => {
 setTimeout(() => {
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 }, 3500);
+
+/* ── Hide scroll hint on scroll ─────────────────────────── */
+window.addEventListener('scroll', function hideHint() {
+  const hint = document.getElementById('scrollHint');
+  if (hint && window.scrollY > 60) {
+    hint.classList.add('hidden');
+    window.removeEventListener('scroll', hideHint);
+  }
+}, { passive: true });
 </script>
 </body>
 </html>
