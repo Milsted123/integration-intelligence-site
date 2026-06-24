@@ -105,9 +105,7 @@ nav {
 /* ── PHASES ── */
 .phases { max-width: 860px; margin-top: 56px; }
 .phase {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  gap: 32px;
+  display: block;
   padding-bottom: 48px;
   border-left: 1px solid rgba(28,35,49,.1);
   margin-left: 27px;
@@ -288,7 +286,7 @@ footer a { color: rgba(245,240,232,.3); text-decoration: none; }
   nav { padding: 0 20px; }
   .eng-hero, .sec { padding: 60px 20px; }
   .outputs-grid { grid-template-columns: 1fr; }
-  .phase { grid-template-columns: 1fr; }
+  .phase { padding-left: 24px; }
 }
 @media (max-width: 480px) {
   .eng-hero-hl { font-size: 32px; }
