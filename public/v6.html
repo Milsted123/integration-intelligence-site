@@ -509,6 +509,102 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 .footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
 .footer-email { font-size: 11px; color: rgba(196,146,74,.55); text-decoration: none; }
 
+
+/* ─── JON SECTION ───────────────────────────────────────── */
+.jon-sec { padding: 80px 52px; background: var(--cream); }
+.jon-grid {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 72px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.jon-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--navy);
+  position: relative;
+}
+.jon-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.jon-monogram {
+  display: flex;
+  display: none;
+  width: 100%; height: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 80px;
+  color: rgba(245,240,232,.25);
+  letter-spacing: .05em;
+  position: absolute;
+  top: 0; left: 0;
+}
+.jon-copy .sec-hl { margin-top: 10px; margin-bottom: 28px; }
+.jon-body p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--navy);
+  margin-bottom: 18px;
+  opacity: .85;
+}
+.jon-body p:last-child { margin-bottom: 0; }
+.jon-pull {
+  border-left: 3px solid var(--amber);
+  padding-left: 20px;
+  margin: 32px 0;
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--navy);
+  font-style: italic;
+}
+.jon-creds {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(28,35,49,.12);
+  padding-top: 28px;
+  margin-top: 36px;
+}
+.jon-cred {
+  flex: 1;
+  padding-right: 28px;
+  border-right: 1px solid rgba(28,35,49,.1);
+  margin-right: 28px;
+}
+.jon-cred:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+.jon-cred-n {
+  display: block;
+  font-family: var(--serif);
+  font-size: 30px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.jon-cred-l {
+  display: block;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: rgba(28,35,49,.5);
+  line-height: 1.4;
+}
+@media (max-width: 900px) {
+  .jon-grid { grid-template-columns: 200px 1fr; gap: 48px; }
+}
+@media (max-width: 768px) {
+  .jon-sec { padding: 60px 24px; }
+  .jon-grid { grid-template-columns: 1fr; gap: 36px; }
+  .jon-photo { max-width: 180px; }
+  .jon-creds { flex-wrap: wrap; gap: 20px; }
+  .jon-cred { flex: 0 0 calc(50% - 10px); border-right: none; margin-right: 0; padding-right: 0; }
+}
 </style>
 </head>
 <body>
@@ -553,7 +649,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <span class="nav-wm-sub">Intelligence</span>
     </div>
   </a>
-  <a class="nav-cta" href="#contact">Register interest</a>
+  <a class="nav-cta" href="#contact">Get in touch</a>
 </nav>
 
 <div id="page">
@@ -606,7 +702,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <h1 class="hero-hl fade-up delay-1">Many deals fail<br>after signing.<br><em>Yours doesn't have to.</em></h1>
     <p class="hero-sub fade-up delay-2">Strategic integration thinking, applied at the moment it makes the most difference.</p>
     <div class="hero-actions fade-up delay-3">
-      <a class="btn-primary" href="#contact">Register interest</a>
+      <a class="btn-primary" href="#contact">Get in touch</a>
       <a class="btn-ghost" href="#output">See example output ↓</a>
     </div>
   </div>
@@ -650,6 +746,42 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     </div>
   </div>
 </div>
+
+
+<!-- ── ABOUT JON ─────────────────────────────────────────── -->
+<section class="jon-sec">
+  <div class="jon-grid">
+    <div class="jon-photo fade-up">
+      <!-- Photo: save Jon_Milsted_Photo_2026.jpg alongside this file to activate -->
+      <img class="jon-img" src="Jon_Milsted_Photo_2026.jpg" alt="Jon Milsted"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="jon-monogram">JM</div>
+    </div>
+    <div class="fade-up delay-1">
+      <p class="sec-eyebrow">The person behind the engine</p>
+      <h2 class="sec-hl">Jon Milsted</h2>
+      <div class="jon-body">
+        <p>I've spent 20 years doing this work — not advising on it, doing it. The integration of SSE Energy Services into OVO Energy. Vocalink into Mastercard. Two acquisitions at GoCardless. Programmes where the stakes were real and getting it wrong wasn't an option.</p>
+        <div class="jon-pull">"Most integration advisers tell you what should happen. I tell you what actually does — and it's a completely different conversation."</div>
+        <p>Integration Intelligence encodes that experience. The questions it asks, the risks it flags, the structure it builds — all of it comes from 20 years of being in the room when deals succeed and when they don't. You're not getting a framework. You're getting the judgement behind it.</p>
+      </div>
+      <div class="jon-creds">
+        <div class="jon-cred">
+          <span class="jon-cred-n">£100m+</span>
+          <span class="jon-cred-l">Run-rate savings delivered</span>
+        </div>
+        <div class="jon-cred">
+          <span class="jon-cred-n">8,000+</span>
+          <span class="jon-cred-l">FTE integrations led</span>
+        </div>
+        <div class="jon-cred">
+          <span class="jon-cred-n">20 yrs</span>
+          <span class="jon-cred-l">Delivery, not advisory</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── WHO IT'S FOR ───────────────────────────────────────── -->
 <div class="for-who">
@@ -986,8 +1118,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <p class="sec-eyebrow fade-up">About</p>
       <h2 class="sec-hl fade-up delay-1">Being ready before signing changes everything that follows.</h2>
       <div class="about-body fade-up delay-2">
-        <p>Jon Milsted has spent 20+ years personally delivering integrations — at GoCardless, OVO Energy, Mastercard, and Deloitte. Not advising on them from the side. Delivering them. Getting the foundations right upfront — the strategy, the people, the structure — saves an enormous amount of pain later. That's where he operates.</p>
-        <p>Integration Intelligence makes that experience available at the moment it matters most — before the decisions that determine returns get made without a plan.</p>
+        <p>The decisions that determine whether a deal creates or destroys value are almost always made before integration planning properly starts. The team that wins the deal rarely has integration expertise in the room. The advisers who do rarely have delivery experience behind them.</p>
+        <p>Integration Intelligence was built to close that gap — bringing genuine integration judgement to the pre-close and diligence phases of a deal, before the clock starts and the pressure is on.</p>
       </div>
     </div>
     <div class="about-creds fade-up delay-2">
