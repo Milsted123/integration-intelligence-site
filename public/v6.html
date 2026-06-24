@@ -18,7 +18,7 @@
   --cream:   #F5F0E8;
   --cream-d: #EDE7DB;
   --slate:   #8C9BAF;
-  --mid:     #5A6473;
+  --mid:     #O16473;
 }
 
 html { scroll-behavior: smooth; }
@@ -58,6 +58,17 @@ nav.visible { opacity: 1; }
 .nav-wm { display: flex; flex-direction: column; gap: 2px; }
 .nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 19px; line-height: 1; color: var(--cream); }
 .nav-wm-sub { font-size: 7px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }
+.nav-eng {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .06em;
+  color: rgba(245,240,232,.65);
+  text-decoration: none;
+  padding: 8px 0;
+  transition: color .2s;
+}
+.nav-eng:hover { color: var(--cream); }
+nav { gap: 28px; }
 .nav-cta {
   font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
   color: var(--navy); background: var(--amber); padding: 8px 18px;
@@ -210,6 +221,14 @@ nav.visible { opacity: 1; }
   font-family: 'EB Garamond', Georgia, serif;
   font-size: clamp(24px, 2.2vw, 32px); font-weight: 400;
   color: var(--cream); line-height: 1.2; margin-bottom: 14px;
+}
+.aurora-ctx-note {
+  font-size: 11.5px;
+  color: rgba(245,240,232,.3);
+  line-height: 1.6;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(245,240,232,.07);
 }
 .aurora-ctx-sub {
   font-size: 13px; font-weight: 300; line-height: 1.8; color: var(--slate); margin-bottom: 36px;
@@ -605,6 +624,11 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .jon-creds { flex-wrap: wrap; gap: 20px; }
   .jon-cred { flex: 0 0 calc(50% - 10px); border-right: none; margin-right: 0; padding-right: 0; }
 }
+
+@media (max-width: 768px) {
+  .pricing-sec { padding: 60px 24px; }
+  .pricing-cards { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -705,6 +729,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <a class="btn-primary" href="#contact">Get in touch</a>
       <a class="btn-ghost" href="#output">See example output ↓</a>
     </div>
+    <p class="hero-eng-link fade-up delay-4"><a href="engagement.html">How an engagement works →</a></p>
   </div>
   <div class="hero-stats fade-up delay-4">
     <div class="hstat"><div class="hstat-n">200+</div><div class="hstat-l">Analytical signals evaluated per deal</div></div>
@@ -858,6 +883,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   </div>
 </div>
 
+
 <!-- ── OUTPUT TASTER ──────────────────────────────────────── -->
 <div class="aurora-wrap" id="output">
   <div class="aurora-showcase fade-up">
@@ -865,7 +891,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <div class="aurora-context">
       <p class="sec-eyebrow">Output taster · Project Aurora</p>
       <h2 class="aurora-ctx-hl">A taster of<br>what's inside.</h2>
-      <p class="aurora-ctx-sub">The real output goes much further. This gives a sense of the depth, structure, and clarity of what lands with your board.</p>
+      <p class="aurora-ctx-sub">This gives a sense of the depth, structure, and clarity of what lands with your board.</p>
+      <p class="aurora-ctx-note">Project Aurora is a fictional deal created for illustration only. No real transaction or client is referenced.</p>
       <div class="aurora-badge">
         <div class="ab-name">Project Aurora</div>
         <div class="ab-meta">£355m · 11.6× EBITDA · Geographic expansion</div>
