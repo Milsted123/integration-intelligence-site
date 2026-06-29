@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How we handle your data — Integration Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy:  #1C2331;
+    --amber: #C4924A;
+    --cream: #F5F0E8;
+    --slate: #8C9BAF;
+  }
+  body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--navy); }
+
+  /* ── Nav ── */
+  nav {
+    background: var(--navy); padding: 0 52px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-wm { display: flex; flex-direction: column; gap: 1px; }
+  .nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; font-weight: 400; color: var(--cream); line-height: 1; }
+  .nav-wm-sub { font-size: 7px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }
+  .nav-back { font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.45); text-decoration: none; }
+  .nav-back:hover { color: var(--cream); }
+
+  /* ── Hero ── */
+  .page-hero {
+    background: var(--navy); padding: 64px 52px 56px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .hero-eyebrow { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; }
+  .hero-hl { font-family: 'EB Garamond', Georgia, serif; font-size: 42px; font-weight: 400; color: var(--cream); line-height: 1.15; max-width: 560px; }
+  .hero-sub { font-size: 14px; font-weight: 300; color: rgba(245,240,232,.5); margin-top: 18px; max-width: 520px; line-height: 1.7; }
+
+  /* ── Content ── */
+  .content { max-width: 760px; margin: 0 auto; padding: 64px 52px 80px; }
+
+  .intro { font-size: 15px; font-weight: 300; color: rgba(28,35,49,.7); line-height: 1.75; margin-bottom: 52px; border-left: 2px solid var(--amber); padding-left: 20px; }
+
+  .section { margin-bottom: 44px; padding-bottom: 44px; border-bottom: 1px solid rgba(28,35,49,.08); }
+  .section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .section-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+  .section-title { font-family: 'EB Garamond', Georgia, serif; font-size: 24px; font-weight: 400; color: var(--navy); margin-bottom: 14px; line-height: 1.2; }
+  .section-body { font-size: 14px; font-weight: 300; color: rgba(28,35,49,.7); line-height: 1.75; }
+  .section-body p { margin-bottom: 10px; }
+  .section-body p:last-child { margin-bottom: 0; }
+
+  .callout { background: rgba(196,146,74,.08); border-left: 2px solid var(--amber); padding: 16px 20px; margin-top: 16px; font-size: 13px; font-weight: 400; color: rgba(28,35,49,.65); line-height: 1.6; }
+
+  /* ── Footer ── */
+  footer { background: var(--navy); padding: 28px 52px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
+  .footer-back { font-size: 11px; color: rgba(196,146,74,.55); text-decoration: none; }
+  .footer-back:hover { color: var(--amber); }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .page-hero { padding: 48px 24px 40px; }
+    .hero-hl { font-size: 32px; }
+    .content { padding: 48px 24px 64px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 10px; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <svg viewBox="0 0 120 120" width="26" height="26">
+      <line x1="46" y1="40" x2="46" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="square"/>
+      <line x1="32" y1="40" x2="60" y2="40" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+      <line x1="32" y1="80" x2="60" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+      <line x1="74" y1="40" x2="74" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="square"/>
+      <line x1="88" y1="40" x2="60" y2="40" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+      <line x1="88" y1="80" x2="60" y2="80" stroke="#F5F0E8" stroke-width="5.5" stroke-linecap="butt"/>
+      <circle cx="60" cy="60" r="35" fill="none" stroke="#C4924A" stroke-width="3.5"/>
+    </svg>
+    <div class="nav-wm">
+      <span class="nav-wm-top">Integration</span>
+      <span class="nav-wm-sub">Intelligence</span>
+    </div>
+  </a>
+  <a class="nav-back" href="/">← Back</a>
+</nav>
+
+<div class="page-hero">
+  <p class="hero-eyebrow">Confidentiality &amp; Data</p>
+  <h1 class="hero-hl">How we handle your documents</h1>
+  <p class="hero-sub">Deal documents are sensitive. This page sets out clearly how your materials are handled — who can access them, how AI processing works, and what happens to them after the engagement.</p>
+</div>
+
+<div class="content">
+
+  <p class="intro">Integration Intelligence operates as a single-operator practice. There is no team, no shared platform, and no automated pipeline processing your documents without review. What follows describes the full picture.</p>
+
+  <div class="section">
+    <p class="section-num">01</p>
+    <h2 class="section-title">Documents stay with the engagement lead</h2>
+    <div class="section-body">
+      <p>Deal materials you share are received and held by the named engagement lead — not uploaded to a shared platform, a central database, or any third-party service beyond what is disclosed below.</p>
+      <p>Each engagement is treated as a discrete, independent unit. No content, signals, or findings from one deal are carried into another.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-num">02</p>
+    <h2 class="section-title">Named lead access only</h2>
+    <div class="section-body">
+      <p>Your documents are accessible only to the named engagement lead identified in your NDA. There is no wider team access, no offshore processing resource, and no automated pipeline with unreviewed access to your materials.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-num">03</p>
+    <h2 class="section-title">AI processing — Anthropic Claude API</h2>
+    <div class="section-body">
+      <p>All AI processing uses the Anthropic Claude API — not the Claude.ai consumer interface. This distinction matters: API access is configured with zero data retention, meaning prompts and completions are not stored on Anthropic's infrastructure after each processing call completes.</p>
+      <p>Anthropic does not train on API inputs under zero-retention configuration. Your deal content is processed and then gone — it does not persist on Anthropic's servers.</p>
+      <div class="callout">The Anthropic API is the only point at which document content leaves the engagement lead's direct control. It is the sole sub-processor involved in the service.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-num">04</p>
+    <h2 class="section-title">Report delivery</h2>
+    <div class="section-body">
+      <p>Analysis reports are delivered directly to the named client contact via a secure link. They are not shared with any other party.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-num">05</p>
+    <h2 class="section-title">Documentation available on request</h2>
+    <div class="section-body">
+      <p>Sub-processor documentation — including Anthropic's Data Processing Addendum available at the API tier — can be provided on request as part of your organisation's vendor review process.</p>
+      <p>For any questions about data handling, contact <a href="mailto:jon@integration-intelligence.com" style="color:var(--amber);">jon@integration-intelligence.com</a>.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-note">Integration Intelligence Ltd · Company no. 17289473 · 2026</span>
+  <a class="footer-back" href="/">← Back to main site</a>
+</footer>
+
+</body>
+</html>
