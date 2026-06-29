@@ -635,6 +635,35 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .hero-eng-link a { color: var(--cream) !important; opacity: .55; text-decoration: none; letter-spacing: .04em; font-weight: 300; }
   .hero-eng-link a:hover { opacity: .85; }
 
+
+/* ─── Contact form ───────────────────────────────────────── */
+.cta-sec { background: var(--navy) !important; border-top: 1px solid rgba(255,255,255,.07); align-items: flex-start; }
+.cta-hl { color: var(--cream); }
+.contact-note { font-size: 13px; color: rgba(245,240,232,.4); margin-top: 14px; font-weight: 300; }
+.contact-col-left { max-width: 400px; }
+.contact-col-right { flex: 0 0 400px; }
+.form-row { margin-bottom: 18px; }
+.form-label { display: block; font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(245,240,232,.4); margin-bottom: 7px; }
+.form-label-opt { font-weight: 300; text-transform: none; letter-spacing: .02em; opacity: .7; }
+.form-input, .form-textarea {
+  width: 100%; box-sizing: border-box;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+  color: var(--cream); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 300;
+  padding: 11px 14px; outline: none; transition: border-color .2s ease; -webkit-appearance: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--amber); background: rgba(255,255,255,.06); }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(245,240,232,.2); }
+.form-textarea { resize: vertical; min-height: 80px; }
+[data-fs-error]:not(:empty) { display: block; font-size: 11px; color: #e07878; margin-top: 5px; }
+[data-fs-success] { display: none; }
+.fs-success-shown { display: block !important; padding: 28px; background: rgba(196,146,74,.08); border: 1px solid rgba(196,146,74,.25); }
+.fs-success-shown p { color: var(--cream); font-family: 'EB Garamond', Georgia, serif; font-size: 22px; font-weight: 400; margin: 0 0 6px; }
+.fs-success-shown span { font-size: 12px; color: rgba(245,240,232,.4); font-weight: 300; }
+.btn-submit { font-size: 11px; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--navy); background: var(--amber); padding: 13px 28px; border: none; cursor: pointer; margin-top: 4px; transition: opacity .2s; }
+.btn-submit:hover { opacity: .85; }
+.btn-submit:disabled { opacity: .4; cursor: not-allowed; }
+@media (max-width: 768px) { .contact-col-right { flex: none; width: 100%; } }
+
 </style>
 </head>
 <body>
@@ -1181,8 +1210,35 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 <!-- ── CTA ────────────────────────────────────────────────── -->
 <div class="cta-sec" id="contact">
-  <h2 class="cta-hl fade-up">Have a live deal — or want to understand what's possible first?</h2>
-  <a class="btn-navy fade-up delay-1" href="mailto:jon@integration-intelligence.com">Get in touch</a>
+  <div class="contact-col-left fade-up">
+    <p class="sec-eyebrow">Get in touch</p>
+    <h2 class="cta-hl">Have a live deal — or want to understand what's possible first?</h2>
+    <p class="contact-note">We typically respond within one working day.</p>
+  </div>
+  <div class="contact-col-right fade-up delay-1">
+    <div data-fs-success>
+      <p>Thanks — we'll be in touch.</p>
+      <span>We typically respond within one working day.</span>
+    </div>
+    <form id="contact-form" action="https://formspree.io/f/xrewleal" method="POST">
+      <div class="form-row">
+        <label class="form-label" for="cf-name">Name</label>
+        <input class="form-input" type="text" id="cf-name" name="name" placeholder="Your name" required data-fs-field />
+        <span data-fs-error="name"></span>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="cf-email">Email</label>
+        <input class="form-input" type="email" id="cf-email" name="email" placeholder="Your email address" required data-fs-field />
+        <span data-fs-error="email"></span>
+      </div>
+      <div class="form-row">
+        <label class="form-label" for="cf-msg">Message <span class="form-label-opt">(optional)</span></label>
+        <textarea class="form-textarea" id="cf-msg" name="message" placeholder="Anything you'd like to add" rows="3" data-fs-field></textarea>
+      </div>
+      <div data-fs-error class="fs-form-error"></div>
+      <button class="btn-submit" type="submit" data-fs-submit-btn>Send →</button>
+    </form>
+  </div>
 </div>
 
 <!-- ── FOOTER ─────────────────────────────────────────────── -->
@@ -1357,5 +1413,10 @@ window.addEventListener('scroll', function hideHint() {
   }
 }, { passive: true });
 </script>
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'xrewleal' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
