@@ -27,35 +27,34 @@ a { color: inherit; }
 
 /* ── NAV ── */
 nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: var(--navy);
-  height: 72px;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.05);
+  padding: 0 52px; height: 60px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 52px;
-  gap: 28px;
 }
-.nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
 .nav-wm { display: flex; flex-direction: column; gap: 2px; }
-.nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 19px; line-height: 1; color: var(--cream); }
+.nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; font-weight: 400; color: var(--cream); line-height: 1; }
 .nav-wm-sub { font-size: 7px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }
-.nav-links { display: flex; align-items: center; gap: 28px; }
-.nav-link {
-  font-size: 13px; font-weight: 400; letter-spacing: .06em;
-  color: rgba(245,240,232,.55); text-decoration: none; padding: 8px 0;
-  transition: color .2s;
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-eng {
+  font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(245,240,232,.5); text-decoration: none; transition: color .2s;
 }
-.nav-link:hover { color: var(--cream); }
-.nav-link-active { color: var(--amber) !important; }
+.nav-eng:hover { color: var(--cream); }
 .nav-cta {
-  background: var(--amber); color: var(--navy); font-size: 12px; font-weight: 500;
-  letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
-  padding: 10px 22px; border-radius: 2px; transition: background .2s;
-  white-space: nowrap;
+  font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--navy); background: var(--amber); text-decoration: none;
+  padding: 9px 20px; transition: background .2s; white-space: nowrap;
 }
 .nav-cta:hover { background: var(--amber-l); }
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+}
 
 /* ── PAGE ── */
-#page { padding-top: 72px; }
+#page { padding-top: 60px; }
 
 /* ── HERO ── */
 .eng-hero {
@@ -355,10 +354,12 @@ footer a { color: rgba(245,240,232,.3); text-decoration: none; }
     </div>
   </a>
   <div class="nav-links">
-    <a class="nav-link" href="/">Home</a>
-    <a class="nav-link nav-link-active" href="/engagement.html">Engagement</a>
+    <a class="nav-eng" href="/">Home</a>
+    <a class="nav-eng" href="/engagement.html">How it works</a>
+    <a class="nav-eng" href="/#output">Example output</a>
+    <a class="nav-eng" href="/security.html">Security</a>
   </div>
-  <a class="nav-cta" href="mailto:jon@integration-intelligence.com">Get in touch</a>
+  <a class="nav-cta" href="/#contact">Get in touch</a>
 </nav>
 
 <div id="page">

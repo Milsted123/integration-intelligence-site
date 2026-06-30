@@ -767,11 +767,12 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     </div>
   </a>
   <div class="nav-links">
-    <a class="nav-eng" href="engagement.html">How it works</a>
-    <a class="nav-eng" href="#output">Example output</a>
-    <a class="nav-eng" href="security.html">Security</a>
+    <a class="nav-eng" href="/">Home</a>
+    <a class="nav-eng" href="/engagement.html">How it works</a>
+    <a class="nav-eng" href="/#output">Example output</a>
+    <a class="nav-eng" href="/security.html">Security</a>
   </div>
-  <a class="nav-cta" href="#contact">Get in touch</a>
+  <a class="nav-cta" href="/#contact">Get in touch</a>
 </nav>
 
 <div id="page">
@@ -1314,6 +1315,14 @@ function circlePhase(onDone) {
     { duration: 1050, fill: 'forwards', easing: 'ease-in-out' });
   setTimeout(onDone, 1100);
 }
+// On mobile, show nav immediately — don't wait for animation sequence
+if (window.matchMedia('(max-width: 768px)').matches) {
+  document.addEventListener('DOMContentLoaded', function() {
+    var nav = document.getElementById('mainNav');
+    if (nav) nav.classList.add('visible');
+  });
+}
+
 function fadeOutIntro() {
   const intro        = document.getElementById('intro');
   const introContent = document.getElementById('intro-content');

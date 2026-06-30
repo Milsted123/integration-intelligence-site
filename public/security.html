@@ -19,15 +19,23 @@
 
   /* ── Nav ── */
   nav {
-    background: var(--navy); padding: 0 52px; height: 56px;
+    background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.05);
+    padding: 0 52px; height: 60px;
     display: flex; align-items: center; justify-content: space-between;
   }
-  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .nav-wm { display: flex; flex-direction: column; gap: 1px; }
+  .nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .nav-wm { display: flex; flex-direction: column; gap: 2px; }
   .nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; font-weight: 400; color: var(--cream); line-height: 1; }
   .nav-wm-sub { font-size: 7px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }
-  .nav-back { font-size: 10.5px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: rgba(245,240,232,.45); text-decoration: none; }
-  .nav-back:hover { color: var(--cream); }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-eng { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(245,240,232,.5); text-decoration: none; transition: color .2s; }
+  .nav-eng:hover { color: var(--cream); }
+  .nav-cta { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); background: var(--amber); text-decoration: none; padding: 9px 20px; transition: background .2s; white-space: nowrap; }
+  .nav-cta:hover { background: #D4A96A; }
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+  }
 
   /* ── Hero ── */
   .page-hero {
@@ -61,7 +69,6 @@
   .footer-back:hover { color: var(--amber); }
 
   @media (max-width: 768px) {
-    nav { padding: 0 24px; }
     .page-hero { padding: 48px 24px 40px; }
     .hero-hl { font-size: 32px; }
     .content { padding: 48px 24px 64px; }
@@ -87,7 +94,13 @@
       <span class="nav-wm-sub">Intelligence</span>
     </div>
   </a>
-  <a class="nav-back" href="/">← Back</a>
+  <div class="nav-links">
+    <a class="nav-eng" href="/">Home</a>
+    <a class="nav-eng" href="/engagement.html">How it works</a>
+    <a class="nav-eng" href="/#output">Example output</a>
+    <a class="nav-eng" href="/security.html">Security</a>
+  </div>
+  <a class="nav-cta" href="/#contact">Get in touch</a>
 </nav>
 
 <div class="page-hero">
