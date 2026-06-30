@@ -435,9 +435,43 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .pstep:nth-child(4) { border-right: none; }
 }
 
+/* ── Hamburger ── */
+.nav-burger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px; cursor: pointer; padding: 4px; background: none; border: none;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 2px; background: rgba(245,240,232,.7);
+  transition: transform .25s, opacity .25s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav-mobile-menu {
+  display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 199;
+  background: var(--navy); border-top: 1px solid rgba(255,255,255,.07);
+  padding: 24px;
+  flex-direction: column; gap: 0;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-link {
+  font-size: 13px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase;
+  color: rgba(245,240,232,.6); text-decoration: none;
+  padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-mobile-link:last-child { border-bottom: none; }
+.nav-mobile-cta {
+  margin-top: 20px; display: block; text-align: center;
+  font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--navy); background: var(--amber); text-decoration: none; padding: 14px;
+}
+
 @media (max-width: 768px) {
   nav { padding: 0 24px; opacity: 1 !important; }
   .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-burger { display: flex; }
   .nav-wm-sub { letter-spacing: .18em; }
 
   #intro-content { gap: 24px; flex-direction: column; }
@@ -773,7 +807,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <a class="nav-eng" href="/security.html">Security</a>
   </div>
   <a class="nav-cta" href="/#contact">Get in touch</a>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a class="nav-mobile-link" href="/">Home</a>
+  <a class="nav-mobile-link" href="/engagement.html">How it works</a>
+  <a class="nav-mobile-link" href="/#output">Example output</a>
+  <a class="nav-mobile-link" href="/security.html">Security</a>
+  <a class="nav-mobile-cta" href="/#contact">Get in touch</a>
+</div>
 
 <div id="page">
 
@@ -1315,11 +1360,26 @@ function circlePhase(onDone) {
     { duration: 1050, fill: 'forwards', easing: 'ease-in-out' });
   setTimeout(onDone, 1100);
 }
-// On mobile, show nav immediately — don't wait for animation sequence
+// On mobile, show nav immediately and wire up hamburger
 if (window.matchMedia('(max-width: 768px)').matches) {
   document.addEventListener('DOMContentLoaded', function() {
     var nav = document.getElementById('mainNav');
     if (nav) nav.classList.add('visible');
+    var burger = document.getElementById('navBurger');
+    var menu   = document.getElementById('navMobileMenu');
+    if (burger && menu) {
+      burger.addEventListener('click', function() {
+        burger.classList.toggle('open');
+        menu.classList.toggle('open');
+      });
+      // Close menu when a link is tapped
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          burger.classList.remove('open');
+          menu.classList.remove('open');
+        });
+      });
+    }
   });
 }
 
