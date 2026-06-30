@@ -126,7 +126,9 @@ nav { gap: 28px; }
 .hstat-l { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.7); line-height: 1.5; }
 
 /* ─── WHY INTEGRATIONS FAIL ─────────────────────────────── */
-.fail-section { background: var(--cream-d); padding: 72px 52px; border-bottom: 1px solid rgba(28,35,49,.06); }
+.fail-section { background: var(--navy); padding: 72px 52px; }
+.fail-section .sec-hl { color: var(--cream); }
+.fail-section .sec-lede { color: var(--slate); }
 .fail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 40px; }
 .fail-card {
   background: #fff;
@@ -216,7 +218,12 @@ nav { gap: 28px; }
 .offer-outcome-body { font-size: 12.5px; font-weight: 300; color: var(--mid); line-height: 1.65; }
 
 /* ─── EXAMPLE OUTPUT — ANIMATED SHOWCASE ────────────────── */
-.aurora-wrap { background: var(--navy); overflow: hidden; }
+.aurora-wrap { background: var(--cream); overflow: hidden; }
+.aurora-slides-wrap { background: var(--navy); }
+.aurora-ctx-hl { color: var(--navy) !important; }
+.aurora-ctx-sub { color: var(--mid) !important; }
+.aurora-ctx-note { color: rgba(28,35,49,.55) !important; border-top-color: rgba(28,35,49,.1) !important; }
+.aurora-context { border-right-color: rgba(28,35,49,.08) !important; }
 .aurora-showcase { display: grid; grid-template-columns: 360px 1fr; min-height: 520px; }
 
 .aurora-context {
@@ -338,7 +345,13 @@ nav { gap: 28px; }
 .m-sub   { font-size: 12px; font-weight: 300; color: var(--mid); line-height: 1.6; }
 
 /* ─── PROCESS ────────────────────────────────────────────── */
-.process-block { background: var(--navy-c); }
+.process-block { background: var(--cream-d); }
+.process-block-header .sec-hl { color: var(--navy) !important; }
+.process-block-header .sec-lede { color: var(--mid) !important; }
+.pstep-title { color: var(--navy) !important; }
+.pstep-body { color: var(--mid) !important; }
+.pstep { border-right-color: rgba(28,35,49,.07) !important; }
+.process-block-header { border-bottom-color: rgba(28,35,49,.07) !important; }
 .process-block-header { padding: 60px 52px 48px; border-bottom: 1px solid rgba(255,255,255,.05); }
 .process-block-header .sec-eyebrow { color: var(--amber); }
 .process-block-header .sec-hl { color: var(--cream); margin-bottom: 14px; }
@@ -411,7 +424,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .offer-section { padding: 60px 24px; }
 
   .aurora-showcase { grid-template-columns: 1fr; min-height: auto; }
-  .aurora-context { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); padding: 40px 28px; }
+  .aurora-context { border-right: none; border-bottom: 1px solid rgba(28,35,49,.08); padding: 40px 28px; }
   .aurora-slides-wrap { min-height: 460px; }
   .aslide { padding: 36px 28px; }
 
@@ -420,7 +433,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
   .process-block-header { padding: 48px 24px 36px; }
   .process-grid { grid-template-columns: 1fr; }
-  .pstep { border-right: none; border-bottom: 1px solid rgba(255,255,255,.05); padding: 28px 24px; }
+  .pstep { border-right: none; border-bottom: 1px solid rgba(28,35,49,.07); padding: 28px 24px; }
   .pstep:last-child { border-bottom: none; }
   .pstep:nth-child(3) { border-right: none; }
 
@@ -847,7 +860,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <div>
       <p class="sec-eyebrow">The offer</p>
       <h2 class="offer-hl">Integration clarity<br>in a week.</h2>
-      <p class="offer-body">The deal is analysed in depth — risks, opportunities, and the decisions that will define the integration. What lands with your leadership is a clear framework, ready to execute. Not a months-long engagement.</p>
+      <p class="offer-body">The deal is analysed in depth — risks, opportunities, and the decisions that will define the integration. What lands with your leadership is a clear framework, ready to execute. Pre-close or at signing — <strong>fast enough and early enough to change outcomes</strong>.</p>
     </div>
     <div class="offer-outcomes fade-up delay-1">
       <div class="offer-outcome">
@@ -957,7 +970,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <!-- Slide 0: Risk Register -->
       <div class="aslide active" data-label="Risk Register">
         <div class="aslide-type">Risk Register</div>
-        <div class="aslide-title">Principal risks, ranked by severity</div>
+        <div class="aslide-title">Highlighted risks, ranked by severity</div>
         <div class="risk-rows">
           <div class="risk-row crit-row">
             <span class="risk-badge badge-crit">Critical</span>
@@ -1126,8 +1139,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     </div>
     <div class="m-item fade-up delay-4">
       <div class="m-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 2l1.5 3 3.5.5-2.5 2.5.5 3.5L7 10l-3 1.5.5-3.5L2 5.5l3.5-.5z" stroke="#C4924A" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
-      <div class="m-label">Pre-close or at signing</div>
-      <div class="m-sub">Fast enough and early enough to change outcomes.</div>
+      <div class="m-label">In a week</div>
+      <div class="m-sub">Typically 5 working days from documents to board-ready output.</div>
     </div>
     <div class="m-item fade-up delay-4">
       <div class="m-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><rect x="2" y="4" width="10" height="7" rx="1" stroke="#C4924A" stroke-width="1.2"/><path d="M5 4V3a2 2 0 0 1 4 0v1" stroke="#C4924A" stroke-width="1.2" stroke-linecap="round"/></svg></div>
