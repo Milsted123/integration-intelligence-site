@@ -92,8 +92,8 @@ nav { gap: 28px; }
 .hero { background: var(--navy); height: 100vh; height: 100dvh; display: flex; flex-direction: column; padding: 80px 52px 0; position: relative; overflow: hidden; }
 .hero-main { flex: 1; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 1; }
 .hero-tag {
-  font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 32px;
+  font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 32px; opacity: 1;
 }
 .hero-hl {
   font-family: 'EB Garamond', Georgia, serif; font-weight: 400;
@@ -224,11 +224,11 @@ nav { gap: 28px; }
 }
 .aurora-ctx-note {
   font-size: 11.5px;
-  color: rgba(245,240,232,.3);
+  color: rgba(245,240,232,.55);
   line-height: 1.6;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid rgba(245,240,232,.07);
+  border-top: 1px solid rgba(245,240,232,.1);
 }
 .aurora-ctx-sub {
   font-size: 13px; font-weight: 300; line-height: 1.8; color: var(--slate); margin-bottom: 36px;
@@ -663,6 +663,9 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 .btn-submit { font-size: 11px; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--cream); background: var(--navy); padding: 13px 28px; border: none; cursor: pointer; margin-top: 4px; transition: opacity .2s; }
 .btn-submit:hover { opacity: .8; }
 .btn-submit:disabled { opacity: .35; cursor: not-allowed; }
+.contact-alt { font-size: 12px; font-weight: 300; color: rgba(28,35,49,.5); margin-top: 14px; }
+.contact-alt a { color: var(--navy); text-decoration: none; border-bottom: 1px solid rgba(28,35,49,.2); }
+.contact-alt a:hover { border-bottom-color: var(--navy); }
 @media (max-width: 768px) { .contact-col-right { flex: none; width: 100%; } }
 
 </style>
@@ -762,16 +765,15 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <h1 class="hero-hl fade-up delay-1">Many deals fail<br>after signing.<br><em>Yours doesn't have to.</em></h1>
     <p class="hero-sub fade-up delay-2">Strategic integration thinking, applied at the moment it makes the most difference.</p>
     <div class="hero-actions fade-up delay-3">
-      <a class="btn-primary" href="#contact">Get in touch</a>
-      <a class="btn-ghost" href="#output">See example output ↓</a>
+      <a class="btn-ghost" href="#output">See example output →</a>
+      <a class="btn-ghost" href="engagement.html">How an engagement works →</a>
     </div>
-    <p class="hero-eng-link fade-up delay-4"><a href="engagement.html">How an engagement works →</a></p>
   </div>
   <div class="hero-stats fade-up delay-4">
     <div class="hstat"><div class="hstat-n">200+</div><div class="hstat-l">Analytical signals evaluated per deal</div></div>
     <div class="hstat"><div class="hstat-n">20yrs</div><div class="hstat-l">20 years in the room, doing the work</div></div>
     <div class="hstat"><div class="hstat-n">£100m+</div><div class="hstat-l">Run-rate savings delivered in practice</div></div>
-    <div class="hstat"><div class="hstat-n">A week</div><div class="hstat-l">Not months — documents to board-ready output</div></div>
+    <div class="hstat"><div class="hstat-n">A week</div><div class="hstat-l">From first document to board-ready output</div></div>
   </div>
   <div class="scroll-hint" id="scrollHint">
     <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -782,18 +784,18 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 <!-- ── WHY INTEGRATIONS FAIL ─────────────────────────────── -->
 <div class="fail-section">
-  <p class="sec-eyebrow fade-up">Why integrations fail</p>
+  <p class="sec-eyebrow fade-up">Avoid integration failure</p>
   <h2 class="sec-hl fade-up delay-1">Four priorities. In every successful integration.</h2>
   <div class="fail-grid">
     <div class="fail-card fade-up delay-1">
       <div class="fail-n">01</div>
-      <div class="fail-title">Tie strategy to execution</div>
+      <div class="fail-title">Tie integration execution to strategy</div>
       <p class="fail-body">The deal thesis is clear. How to execute against it usually isn't. Align the integration to the outcomes — every workstream must earn its place.</p>
     </div>
     <div class="fail-card fade-up delay-2">
       <div class="fail-n">02</div>
       <div class="fail-title">Maintain momentum</div>
-      <p class="fail-body">Lose it and you lose everything. Without structure and accountability from day one, integrations stall — and rarely recover.</p>
+      <p class="fail-body">Lose it and you lose everything. Without structure and accountability from day one, integrations stall and rarely recover.</p>
     </div>
     <div class="fail-card fade-up delay-3">
       <div class="fail-n">03</div>
@@ -803,7 +805,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <div class="fail-card fade-up delay-4">
       <div class="fail-n">04</div>
       <div class="fail-title">Govern from the start</div>
-      <p class="fail-body">Decision rights, governance, synergy tracking — unglamorous but essential. Uncertainty destroys value. Build the structure before you need it.</p>
+      <p class="fail-body">Decision rights, governance, synergy tracking — unglamorous yet essential. Uncertainty destroys value. Build the structure before you need it.</p>
     </div>
   </div>
 </div>
@@ -822,23 +824,9 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <p class="sec-eyebrow">Founder</p>
       <h2 class="sec-hl">Jon Milsted</h2>
       <div class="jon-body">
-        <p>I've spent 20 years in the room doing this work — leading integrations, making the decisions, and living with the outcomes. The integration of SSE Energy Services into OVO Energy. Vocalink into Mastercard. Two acquisitions at GoCardless. Programmes where the stakes were real and getting it wrong wasn't an option.</p>
-        <div class="jon-pull">"Most integration advisers tell you what should happen. I tell you what actually does — and it's a completely different conversation."</div>
-        <p>Integration Intelligence encodes that experience. The questions it asks, the risks it flags, the structure it builds — all of it comes from 20 years of being in the room when deals succeed and when they don't. You're getting the judgement behind it — built from real integrations, not derived from a framework.</p>
-      </div>
-      <div class="jon-creds">
-        <div class="jon-cred">
-          <span class="jon-cred-n">£100m+</span>
-          <span class="jon-cred-l">Run-rate savings delivered</span>
-        </div>
-        <div class="jon-cred">
-          <span class="jon-cred-n">8,000+</span>
-          <span class="jon-cred-l">FTE integrations led</span>
-        </div>
-        <div class="jon-cred">
-          <span class="jon-cred-n">20 yrs</span>
-          <span class="jon-cred-l">In the room, doing the work</span>
-        </div>
+        <p>I've spent 20 years in the room doing this work — leading integrations, making the decisions, and delivering the outcomes: the integration of SSE Energy Services into OVO Energy, Vocalink into Mastercard, and two acquisitions at GoCardless. Programmes where the stakes were real and getting it wrong wasn't an option.</p>
+        <div class="jon-pull">"Most integration advisers tell you what should happen. I tell you what actually happens. And that's a completely different conversation."</div>
+        <p>Integration Intelligence codifies that experience. The questions it asks, the risks it flags, the structure it builds — all of it comes from being in the room when deals succeed and when they don't. You're getting the judgement behind it — built from real integrations, not derived from a framework.</p>
       </div>
     </div>
   </div>
@@ -846,7 +834,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 <!-- ── WHO IT'S FOR ───────────────────────────────────────── -->
 <div class="for-who">
-  <p class="sec-eyebrow fade-up">Who it's for</p>
+  <p class="sec-eyebrow fade-up">Who is Integration Intelligence for</p>
   <h2 class="sec-hl fade-up delay-1">Built for the people closest to the deal.</h2>
   <div class="for-who-cards">
     <div class="fw-card fade-up delay-1">
@@ -872,10 +860,10 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <div class="fw-card fade-up delay-3">
       <div class="fw-tag">Integration Leaders</div>
       <div class="fw-title">With structure from day one</div>
-      <p class="fw-body">You've been handed integration leadership. You need a credible framework, fast — without six months of consultancy overhead.</p>
+      <p class="fw-body">You've been handed integration leadership. You need a credible framework, fast. Without six months of consultancy overhead.</p>
       <div class="fw-uses">
         <div class="fw-use">Rapid integration framework</div>
-        <div class="fw-use">Expert advisory on what to do</div>
+        <div class="fw-use">Expert advisory on what to do and when</div>
         <div class="fw-use">Confidence to lead from day one</div>
       </div>
     </div>
@@ -887,11 +875,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   <div class="offer-grid fade-up">
     <div>
       <p class="sec-eyebrow">The offer</p>
-      <h2 class="offer-hl">Integration clarity<br><span>in a week.</span></h2>
+      <h2 class="offer-hl">Integration clarity<br>in a week.</h2>
       <p class="offer-body">The deal is analysed in depth — risks, opportunities, and the decisions that will define the integration. What lands with your leadership is a clear framework, ready to execute. Not a months-long engagement.</p>
-      <div class="offer-timing">
-        Pre-close or at signing — early enough to change outcomes
-      </div>
     </div>
     <div class="offer-outcomes fade-up delay-1">
       <div class="offer-outcome">
@@ -911,9 +896,12 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <div class="offer-outcome">
         <div class="offer-outcome-n">3</div>
         <div>
-          <div class="offer-outcome-title">The integration begins with structure, not chaos</div>
+          <div class="offer-outcome-title">The integration begins with structure</div>
           <div class="offer-outcome-body">A prioritised plan, with named owners and timelines — built to act on from day one.</div>
         </div>
+      </div>
+      <div class="offer-timing" style="margin-top:24px;">
+        Pre-close or at signing — early enough to change outcomes
       </div>
     </div>
   </div>
@@ -933,9 +921,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
         <div class="ab-name">Project Aurora</div>
         <div class="ab-meta">£355m · 11.6× EBITDA · Geographic expansion</div>
         <div class="ab-verdict">
-          <span class="ab-conf-label">Confidence</span>
-          <span class="ab-conf-value">Cautious</span>
-          <span class="ab-tier">Intensive</span>
+          <span class="ab-conf-label">Integration Difficulty</span>
+          <span class="ab-conf-value">Intensive</span>
         </div>
       </div>
       <div class="slide-indicators" id="slideIndicators">
@@ -1037,8 +1024,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
           </thead>
           <tbody>
             <tr><td><span class="syn-label">Procurement leverage</span></td><td><span class="syn-amount">3.0</span></td><td><span class="conf-pip conf-h">High</span></td><td>Year 1</td></tr>
-            <tr><td><span class="syn-label">Overhead rationalisation</span></td><td><span class="syn-amount">5.0</span></td><td><span class="conf-pip conf-m">Medium</span></td><td>Year 1–2</td></tr>
-            <tr><td><span class="syn-label">Technology / ERP</span></td><td><span class="syn-amount">4.0</span></td><td><span class="conf-pip conf-l">Low</span></td><td>Year 2–3 ⚠</td></tr>
+            <tr><td><span class="syn-label">Overhead rationalisation</span></td><td><span class="syn-amount">7.0</span></td><td><span class="conf-pip conf-m">Medium</span></td><td>Year 1–2</td></tr>
+            <tr><td><span class="syn-label">Technology / ERP</span></td><td><span class="syn-amount">4.0</span></td><td><span class="conf-pip conf-l">Low</span></td><td>Year 2–3</td></tr>
             <tr><td><span class="syn-label">Revenue — cross-sell</span></td><td><span class="syn-amount">7.0</span></td><td><span class="conf-pip conf-m">Medium</span></td><td>Year 2+</td></tr>
             <tr><td><span class="syn-label">Revenue — events</span></td><td><span class="syn-amount">3.0</span></td><td><span class="conf-pip conf-l">Low</span></td><td>Year 3+</td></tr>
           </tbody>
@@ -1148,7 +1135,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   <div class="process-block-header fade-up">
     <p class="sec-eyebrow">How it works</p>
     <h2 class="sec-hl">From documents to clarity in a week.</h2>
-    <p class="sec-lede">Structured analysis, practitioner review, board-ready output. Every finding traceable. Every recommendation with a named owner and timeline.</p>
+    <p class="sec-lede">Structured analysis, advisor review, board-ready output. Every finding traceable. Every recommendation with a named owner and timeline.</p>
   </div>
   <div class="process-grid">
     <div class="pstep fade-up delay-1">
@@ -1199,12 +1186,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   <h2 class="sec-hl fade-up delay-1" style="color: var(--cream);">Trusted by people who know what good looks like.</h2>
   <div class="testi-grid">
     <div class="testi fade-up delay-2">
-      <p class="testi-q">Jon brings a level of execution depth that is genuinely rare. He has been in the room when deals go wrong and built that into how he thinks about every transaction.</p>
+      <p class="testi-q">Jon brings a level of execution depth that is genuinely rare. He has seen first-hand where things go wrong — and built that into how he thinks about every transaction.</p>
       <span class="testi-attr">— Partner, Private Equity firm · placeholder</span>
-    </div>
-    <div class="testi fade-up delay-3">
-      <p class="testi-q">Most integration advisors tell you what should happen. Jon tells you what actually does — and it's a completely different conversation.</p>
-      <span class="testi-attr">— Head of M&amp;A Integration, FTSE 100 · placeholder</span>
     </div>
   </div>
 </div>
@@ -1239,6 +1222,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <div data-fs-error class="fs-form-error"></div>
       <button class="btn-submit" type="submit" data-fs-submit-btn>Send →</button>
     </form>
+    <p class="contact-alt">Or email directly: <a href="mailto:jon@integration-intelligence.com">jon@integration-intelligence.com</a></p>
   </div>
 </div>
 
@@ -1260,6 +1244,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     </div>
   </div>
   <span class="footer-note">Integration Intelligence Ltd · 2026</span>
+  <a class="footer-email" href="security.html">Privacy &amp; data</a>
   <a class="footer-email" href="mailto:jon@integration-intelligence.com">jon@integration-intelligence.com</a>
 </footer>
 
