@@ -147,8 +147,7 @@ nav { gap: 28px; }
 .fail-body { font-size: 12.5px; font-weight: 300; line-height: 1.7; color: var(--mid); }
 
 /* ─── WHO IT'S FOR ───────────────────────────────────────── */
-.for-who { background: var(--navy-b); padding: 72px 52px; }
-.for-who .sec-hl { color: var(--cream); }
+.for-who { background: var(--cream-d); padding: 72px 52px; border-bottom: 1px solid rgba(28,35,49,.07); }
 .for-who-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
 .fw-card {
   background: #fff; border: 1px solid rgba(28,35,49,.08);
@@ -180,7 +179,13 @@ nav { gap: 28px; }
 .sec-navy .sec-lede, .sec-navyb .sec-lede { color: var(--slate); }
 
 /* ─── THE OFFER ──────────────────────────────────────────── */
-.offer-section { background: var(--cream-d); padding: 80px 52px; border-top: 1px solid rgba(28,35,49,.06); border-bottom: 1px solid rgba(28,35,49,.06); }
+.offer-section { background: var(--navy-b); padding: 80px 52px; }
+.offer-hl { color: var(--cream) !important; }
+.offer-body { color: var(--slate) !important; }
+.offer-outcome { border-bottom: 1px solid rgba(255,255,255,.07) !important; }
+.offer-outcome-n { color: rgba(196,146,74,.6) !important; }
+.offer-outcome-title { color: var(--cream) !important; }
+.offer-outcome-body { color: var(--slate) !important; }
 .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
 .offer-hl {
   font-family: 'EB Garamond', Georgia, serif; font-weight: 400;
@@ -324,7 +329,7 @@ nav { gap: 28px; }
 .adv-timing { display: inline-block; margin-top: 7px; font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); opacity: .7; }
 
 /* ─── WHY IT MATTERS ─────────────────────────────────────── */
-.matters-strip { background: var(--cream-d); padding: 52px 52px; border-top: 1px solid rgba(28,35,49,.07); border-bottom: 1px solid rgba(28,35,49,.07); }
+.matters-strip { background: var(--cream); padding: 52px 52px; border-top: 1px solid rgba(28,35,49,.07); border-bottom: 1px solid rgba(28,35,49,.07); }
 .matters-items { display: grid; grid-template-columns: repeat(5, 1fr); gap: 32px; margin-top: 36px; }
 .m-item { display: flex; flex-direction: column; gap: 10px; }
 .m-icon { width: 28px; height: 28px; border: 1.5px solid var(--amber); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -836,6 +841,41 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   </div>
 </section>
 
+<!-- ── THE OFFER ──────────────────────────────────────────── -->
+<div class="offer-section">
+  <div class="offer-grid fade-up">
+    <div>
+      <p class="sec-eyebrow">The offer</p>
+      <h2 class="offer-hl">Integration clarity<br>in a week.</h2>
+      <p class="offer-body">The deal is analysed in depth — risks, opportunities, and the decisions that will define the integration. What lands with your leadership is a clear framework, ready to execute. Not a months-long engagement.</p>
+    </div>
+    <div class="offer-outcomes fade-up delay-1">
+      <div class="offer-outcome">
+        <div class="offer-outcome-n">1</div>
+        <div>
+          <div class="offer-outcome-title">Board and leadership leave with direction</div>
+          <div class="offer-outcome-body">A clear-eyed assessment of the integration before the decisions that determine returns get locked in.</div>
+        </div>
+      </div>
+      <div class="offer-outcome">
+        <div class="offer-outcome-n">2</div>
+        <div>
+          <div class="offer-outcome-title">Risks and windows identified while they can be acted on</div>
+          <div class="offer-outcome-body">Retention, architecture, governance — all flagged at the point where you can still do something about them.</div>
+        </div>
+      </div>
+      <div class="offer-outcome">
+        <div class="offer-outcome-n">3</div>
+        <div>
+          <div class="offer-outcome-title">The integration begins with structure</div>
+          <div class="offer-outcome-body">A prioritised plan, with named owners and timelines — built to act on from day one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- ── WHO IT'S FOR ───────────────────────────────────────── -->
 <div class="for-who">
   <p class="sec-eyebrow fade-up">Who is Integration Intelligence for</p>
@@ -869,40 +909,6 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
         <div class="fw-use">Rapid integration framework</div>
         <div class="fw-use">Expert advisory on what to do and when</div>
         <div class="fw-use">Confidence to lead from day one</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── THE OFFER ──────────────────────────────────────────── -->
-<div class="offer-section">
-  <div class="offer-grid fade-up">
-    <div>
-      <p class="sec-eyebrow">The offer</p>
-      <h2 class="offer-hl">Integration clarity<br>in a week.</h2>
-      <p class="offer-body">The deal is analysed in depth — risks, opportunities, and the decisions that will define the integration. What lands with your leadership is a clear framework, ready to execute. Not a months-long engagement.</p>
-    </div>
-    <div class="offer-outcomes fade-up delay-1">
-      <div class="offer-outcome">
-        <div class="offer-outcome-n">1</div>
-        <div>
-          <div class="offer-outcome-title">Board and leadership leave with direction</div>
-          <div class="offer-outcome-body">A clear-eyed assessment of the integration before the decisions that determine returns get locked in.</div>
-        </div>
-      </div>
-      <div class="offer-outcome">
-        <div class="offer-outcome-n">2</div>
-        <div>
-          <div class="offer-outcome-title">Risks and windows identified while they can be acted on</div>
-          <div class="offer-outcome-body">Retention, architecture, governance — all flagged at the point where you can still do something about them.</div>
-        </div>
-      </div>
-      <div class="offer-outcome">
-        <div class="offer-outcome-n">3</div>
-        <div>
-          <div class="offer-outcome-title">The integration begins with structure</div>
-          <div class="offer-outcome-body">A prioritised plan, with named owners and timelines — built to act on from day one.</div>
-        </div>
       </div>
     </div>
   </div>
