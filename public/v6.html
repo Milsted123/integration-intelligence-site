@@ -285,12 +285,12 @@ nav { gap: 28px; }
   font-size: 13px; font-weight: 300; line-height: 1.8; color: var(--slate); margin-bottom: 36px;
 }
 .aurora-badge {
-  background: var(--navy-c); border-left: 2px solid var(--amber);
+  background: rgba(28,35,49,.07); border-left: 2px solid var(--amber);
   padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 32px;
 }
 .ab-name { font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--amber); }
 .ab-meta { font-size: 11.5px; font-weight: 300; color: var(--slate); }
-.ab-verdict { display: flex; align-items: center; gap: 10px; padding-top: 8px; margin-top: 2px; border-top: 1px solid rgba(255,255,255,.06); }
+.ab-verdict { display: flex; align-items: center; gap: 10px; padding-top: 8px; margin-top: 2px; border-top: 1px solid rgba(28,35,49,.1); }
 .ab-conf-label { font-size: 9px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--slate); }
 .ab-conf-value { font-family: 'EB Garamond', Georgia, serif; font-size: 17px; color: var(--amber); }
 .ab-tier { font-size: 8.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); background: var(--amber); padding: 3px 9px; }
@@ -336,7 +336,7 @@ nav { gap: 28px; }
 .pattern-rows { display: flex; flex-direction: column; gap: 0; }
 .pattern-row { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,.05); }
 .pattern-row:last-child { border-bottom: none; }
-.pattern-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--amber); flex-shrink: 0; margin-top: 5px; }
+.pattern-dot { font-family: 'EB Garamond', Georgia, serif; font-size: 22px; font-weight: 400; color: var(--amber); flex-shrink: 0; line-height: 1; min-width: 20px; }
 .pattern-name { font-size: 13.5px; font-weight: 400; color: var(--cream); margin-bottom: 5px; }
 .pattern-body { font-size: 12px; font-weight: 300; color: var(--slate); line-height: 1.65; }
 
@@ -443,7 +443,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 }
 
 @media (max-width: 768px) {
-  nav { padding: 0 24px; }
+  nav { padding: 0 24px; opacity: 1 !important; }
   .nav-links { display: none; }
   .nav-wm-sub { letter-spacing: .18em; }
 
@@ -904,21 +904,21 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     </div>
     <div class="offer-outcomes fade-up delay-1">
       <div class="offer-outcome">
-        <div class="offer-outcome-n">1</div>
+        <div class="offer-outcome-n">01</div>
         <div>
           <div class="offer-outcome-title">Board and leadership leave with direction</div>
           <div class="offer-outcome-body">A clear-eyed assessment of the integration before the decisions that determine returns get locked in.</div>
         </div>
       </div>
       <div class="offer-outcome">
-        <div class="offer-outcome-n">2</div>
+        <div class="offer-outcome-n">02</div>
         <div>
           <div class="offer-outcome-title">Risks and windows identified while they can be acted on</div>
           <div class="offer-outcome-body">Retention, architecture, governance — all flagged at the point where you can still do something about them.</div>
         </div>
       </div>
       <div class="offer-outcome">
-        <div class="offer-outcome-n">3</div>
+        <div class="offer-outcome-n">03</div>
         <div>
           <div class="offer-outcome-title">The integration begins with structure</div>
           <div class="offer-outcome-body">A prioritised plan, with named owners and timelines — built to act on from day one.</div>
@@ -1049,21 +1049,21 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
         <div class="aslide-title">Known patterns identified in this deal</div>
         <div class="pattern-rows">
           <div class="pattern-row">
-            <div class="pattern-dot"></div>
+            <div class="pattern-dot">01</div>
             <div>
               <div class="pattern-name">Momentum Collapse</div>
               <div class="pattern-body">Programme approved before governance structure is operational. No Integration Sponsor, no IMO embedded at close. The first 45 days define the integration — this window is already narrowing.</div>
             </div>
           </div>
           <div class="pattern-row">
-            <div class="pattern-dot"></div>
+            <div class="pattern-dot">02</div>
             <div>
               <div class="pattern-name">Retention Window Missed</div>
               <div class="pattern-body">Retention packages not signed before announcement. The pre-announcement period is the highest-risk departure window — cost of retention increases materially once the deal is public.</div>
             </div>
           </div>
           <div class="pattern-row">
-            <div class="pattern-dot"></div>
+            <div class="pattern-dot">03</div>
             <div>
               <div class="pattern-name">Architecture Deferred</div>
               <div class="pattern-body">ERP target architecture not committed before close. Each 30-day slip in the architecture decision moves the £4m technology synergy one quarter further out.</div>
@@ -1131,23 +1131,23 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
         <div class="aslide-title">Specific decisions — named owners, binding timelines</div>
         <div class="adv-rows">
           <div class="adv-row">
-            <div class="adv-num">1</div>
+            <div class="adv-num">01</div>
             <div class="adv-body">
-              <strong>Appoint a dedicated Integration Sponsor</strong> before the programme is approved — not the CEO, not the CFO. Full-time mandate, board-level authority to make integration decisions independently.
+              <strong>Appoint a dedicated Integration Sponsor</strong> before the programme is approved. Full-time mandate, board-level authority to make integration decisions independently.
               <span class="adv-timing">Before close</span>
             </div>
           </div>
           <div class="adv-row">
-            <div class="adv-num">2</div>
+            <div class="adv-num">02</div>
             <div class="adv-body">
-              <strong>Retention packages for the two critical individuals signed before public announcement</strong> — not at close. The pre-announcement period is the departure window, and it closes the moment the deal is public.
+              <strong>Retention packages for the two critical individuals signed before public announcement.</strong> The pre-announcement period is the departure window, and it closes the moment the deal is public.
               <span class="adv-timing">Before announcement</span>
             </div>
           </div>
           <div class="adv-row">
-            <div class="adv-num">3</div>
+            <div class="adv-num">03</div>
             <div class="adv-body">
-              <strong>ERP architecture decision in formal resolution</strong> with a named owner and binding timeline before close — not advisory, not deferred. Wavestone scoping begins by Day 30.
+              <strong>ERP architecture decision in formal resolution</strong> with a named owner and binding timeline before close. Wavestone scoping begins by Day 30.
               <span class="adv-timing">Before close · Day 30 milestone</span>
             </div>
           </div>
