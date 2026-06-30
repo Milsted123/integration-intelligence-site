@@ -245,6 +245,22 @@ nav { gap: 28px; }
 .board-item { border-left-color: var(--amber) !important; background: rgba(28,35,49,.04) !important; }
 .board-item strong { color: var(--navy) !important; }
 .board-item p { color: var(--mid) !important; }
+/* Synergy table — cream fixes */
+.syn-label { color: var(--navy) !important; }
+.syn-amount { color: var(--navy) !important; font-weight: 500; }
+.syn-table td { border-top-color: rgba(28,35,49,.07) !important; }
+.syn-note { background: rgba(28,35,49,.05) !important; color: var(--mid) !important; }
+/* Opportunity rows — cream fixes */
+.opp-name { color: var(--navy) !important; }
+.opp-row { border-bottom-color: rgba(28,35,49,.08) !important; }
+/* Pattern rows — cream fixes */
+.pattern-row { border-bottom-color: rgba(28,35,49,.08) !important; }
+.pattern-dot { background: var(--amber) !important; border: none !important; }
+/* Board advisory — cream fixes */
+.adv-body { color: var(--mid) !important; }
+.adv-body strong { color: var(--navy) !important; font-weight: 500; }
+.adv-row { border-bottom-color: rgba(28,35,49,.08) !important; }
+.adv-num { color: rgba(196,146,74,.55) !important; }
 .aurora-showcase { display: grid; grid-template-columns: 360px 1fr; min-height: 520px; }
 
 .aurora-context {
@@ -1099,11 +1115,11 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
             </div>
           </div>
           <div class="opp-row">
-            <div class="opp-arrow">↑</div>
+            <div class="opp-arrow" style="color:rgba(196,146,74,.5);">≈</div>
             <div>
               <div class="opp-name">Events Portfolio Bundling</div>
-              <div class="opp-body">Underestimated in base case: £3–5m achievable vs £6m management assumption. Upside to IC underwriting once cross-sell infrastructure is in place.</div>
-              <span class="opp-tag">Year 3 · Infrastructure dependent</span>
+              <div class="opp-body">Management assumes £6m; achievable range £3–5m. IC underwriting should reflect the lower figure until cross-sell infrastructure is confirmed.</div>
+              <span class="opp-tag">Year 3 · Management case overstated</span>
             </div>
           </div>
         </div>
