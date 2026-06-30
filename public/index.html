@@ -802,8 +802,8 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   </a>
   <div class="nav-links">
     <a class="nav-eng" href="/">Home</a>
-    <a class="nav-eng" href="/engagement.html">How it works</a>
-    <a class="nav-eng" href="/#output">Example output</a>
+    <a class="nav-eng" href="/how-it-works.html">How it works</a>
+
     <a class="nav-eng" href="/security.html">Security</a>
   </div>
   <a class="nav-cta" href="/#contact">Get in touch</a>
@@ -814,8 +814,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 <div class="nav-mobile-menu" id="navMobileMenu">
   <a class="nav-mobile-link" href="/">Home</a>
-  <a class="nav-mobile-link" href="/engagement.html">How it works</a>
-  <a class="nav-mobile-link" href="/#output">Example output</a>
+  <a class="nav-mobile-link" href="/how-it-works.html">How it works</a>
   <a class="nav-mobile-link" href="/security.html">Security</a>
   <a class="nav-mobile-cta" href="/#contact">Get in touch</a>
 </div>
@@ -1398,6 +1397,7 @@ function fadeOutIntro() {
       nav.classList.add('visible');
       setTimeout(() => {
         intro.remove();
+        sessionStorage.setItem('ii-intro-seen', '1');
         const hint = document.getElementById('scrollHint');
         if (hint) hint.classList.add('visible');
       }, 950);
@@ -1405,6 +1405,17 @@ function fadeOutIntro() {
   }, 820);
 }
 window.addEventListener('load', () => {
+  if (sessionStorage.getItem('ii-intro-seen')) {
+    const intro = document.getElementById('intro');
+    if (intro) intro.remove();
+    const page = document.getElementById('page');
+    const nav  = document.getElementById('mainNav');
+    if (page) page.classList.add('visible');
+    if (nav)  nav.classList.add('visible');
+    const hint = document.getElementById('scrollHint');
+    if (hint) hint.classList.add('visible');
+    return;
+  }
   setTimeout(() => {
     drawPhase();
     setTimeout(() => {
