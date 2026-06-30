@@ -75,6 +75,7 @@ nav { gap: 28px; }
   text-decoration: none; transition: background .12s;
 }
 .nav-cta:hover { background: var(--amber-l); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
 
 /* ─── PAGE ───────────────────────────────────────────────── */
 #page { opacity: 0; transition: opacity .65s ease .1s; }
@@ -102,8 +103,8 @@ nav { gap: 28px; }
 }
 .hero-hl em { font-style: normal; color: var(--amber-l); }
 .hero-sub {
-  font-size: 15px; font-weight: 300; line-height: 1.75;
-  color: var(--slate); max-width: 480px; margin-bottom: 48px;
+  font-size: 18px; font-weight: 300; line-height: 1.75;
+  color: var(--slate); max-width: 540px; margin-bottom: 0;
 }
 .hero-actions { display: flex; align-items: center; gap: 24px; margin-bottom: 0; margin-top: 44px; }
 .btn-primary {
@@ -432,7 +433,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .hero { padding: 72px 20px 0; }
   .hero-tag { display: none; }
   .hero-hl { font-size: 38px; margin-bottom: 22px; }
-  .hero-sub { font-size: 13.5px; margin-bottom: 28px; max-width: 100%; }
+  .hero-sub { font-size: 15px; margin-bottom: 0; max-width: 100%; }
   .hero-stats { display: none; }
   .hero-main { justify-content: center; }
 
@@ -712,6 +713,11 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <span class="nav-wm-sub">Intelligence</span>
     </div>
   </a>
+  <div class="nav-links">
+    <a class="nav-eng" href="engagement.html">How it works</a>
+    <a class="nav-eng" href="#output">Example output</a>
+    <a class="nav-eng" href="security.html">Security</a>
+  </div>
   <a class="nav-cta" href="#contact">Get in touch</a>
 </nav>
 
@@ -764,10 +770,6 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <p class="hero-tag fade-up">M&A integration advisory · pre-signing to Day 1</p>
     <h1 class="hero-hl fade-up delay-1">Many deals fail<br>after signing.<br><em>Yours doesn't have to.</em></h1>
     <p class="hero-sub fade-up delay-2">Strategic integration thinking, applied at the moment it makes the most difference.</p>
-    <div class="hero-actions fade-up delay-3">
-      <a class="btn-ghost" href="#output">See example output →</a>
-      <a class="btn-ghost" href="engagement.html">How an engagement works →</a>
-    </div>
   </div>
   <div class="hero-stats fade-up delay-4">
     <div class="hstat"><div class="hstat-n">200+</div><div class="hstat-l">Analytical signals evaluated per deal</div></div>
