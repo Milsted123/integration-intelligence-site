@@ -1414,6 +1414,7 @@ window.addEventListener('load', () => {
     if (nav)  nav.classList.add('visible');
     const hint = document.getElementById('scrollHint');
     if (hint) hint.classList.add('visible');
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
     return;
   }
   setTimeout(() => {
