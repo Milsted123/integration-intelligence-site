@@ -147,7 +147,8 @@ nav { gap: 28px; }
 .fail-body { font-size: 12.5px; font-weight: 300; line-height: 1.7; color: var(--mid); }
 
 /* ─── WHO IT'S FOR ───────────────────────────────────────── */
-.for-who { background: var(--cream-d); padding: 72px 52px; border-bottom: 1px solid rgba(28,35,49,.07); }
+.for-who { background: var(--navy-b); padding: 72px 52px; }
+.for-who .sec-hl { color: var(--cream); }
 .for-who-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 40px; }
 .fw-card {
   background: #fff; border: 1px solid rgba(28,35,49,.08);
@@ -385,6 +386,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
 
 @media (max-width: 768px) {
   nav { padding: 0 24px; }
+  .nav-links { display: none; }
   .nav-wm-sub { letter-spacing: .18em; }
 
   #intro-content { gap: 24px; flex-direction: column; }
