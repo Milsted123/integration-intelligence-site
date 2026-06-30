@@ -412,17 +412,10 @@ nav { gap: 28px; }
 .cred-n { font-family: 'EB Garamond', Georgia, serif; font-size: 32px; font-weight: 400; color: var(--amber); line-height: 1; }
 .cred-l { font-size: 11.5px; font-weight: 300; color: var(--slate); }
 
-/* ─── TESTIMONIALS ───────────────────────────────────────── */
-.testimonials { background: var(--navy); padding: 72px 52px; }
-.testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
-.testi { background: var(--navy-b); padding: 36px 36px 32px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
-.testi-q { font-family: 'EB Garamond', Georgia, serif; font-size: 19px; font-weight: 400; color: var(--cream); line-height: 1.6; }
-.testi-q::before { content: '\201C'; color: var(--amber); }
-.testi-q::after  { content: '\201D'; color: var(--amber); }
-.testi-attr { font-size: 11px; font-weight: 400; color: var(--slate); letter-spacing: .04em; }
+/* ─── TESTIMONIALS — removed pending real quotes, see testimonials_stash.html ── */
 
 /* ─── CTA ────────────────────────────────────────────────── */
-.cta-sec { background: var(--amber); padding: 56px 52px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.cta-sec { background: var(--amber); padding: 56px 52px; display: flex; align-items: flex-start; justify-content: flex-start; gap: 80px; max-width: 100%; }
 .cta-hl { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 32px; color: var(--navy); line-height: 1.2; max-width: 520px; }
 .btn-navy { font-size: 11px; font-weight: 500; letter-spacing: .13em; text-transform: uppercase; color: var(--cream); background: var(--navy); padding: 13px 28px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
 
@@ -434,7 +427,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .fail-grid { grid-template-columns: repeat(2, 1fr); }
   .offer-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
-  .testi-grid { grid-template-columns: 1fr; }
+  /* .testi-grid — stashed */
   .matters-items { grid-template-columns: repeat(3, 1fr); }
   .process-grid { grid-template-columns: repeat(2, 1fr); }
   .pstep:nth-child(2) { border-right: none; }
@@ -481,7 +474,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
   .about-creds { flex-direction: row; flex-wrap: wrap; gap: 2px; }
   .cred { flex: 1 1 45%; }
 
-  .testimonials { padding: 52px 24px; }
+  /* .testimonials — stashed */
 
   .cta-sec { flex-direction: column; align-items: flex-start; padding: 48px 24px; gap: 28px; }
 
@@ -957,7 +950,7 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
     <div class="fw-card fade-up delay-3">
       <div class="fw-tag">Integration Leaders</div>
       <div class="fw-title">With structure from day one</div>
-      <p class="fw-body">You've been handed integration leadership. You need a credible framework, fast. Without six months of consultancy overhead.</p>
+      <p class="fw-body">You've been handed integration leadership. You need a credible framework, fast.</p>
       <div class="fw-uses">
         <div class="fw-use">Rapid integration framework</div>
         <div class="fw-use">Expert advisory on what to do and when</div>
@@ -1217,18 +1210,6 @@ footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.05); p
       <div class="pstep-n">04</div>
       <div class="pstep-title">Practitioner review &amp; delivery</div>
       <p class="pstep-body">Every finding is pressure-tested against 20 years of integration experience before delivery. Board assessment, integration blueprint, direct advisory where needed.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ── TESTIMONIALS ───────────────────────────────────────── -->
-<div class="testimonials">
-  <p class="sec-eyebrow fade-up">What people say</p>
-  <h2 class="sec-hl fade-up delay-1" style="color: var(--cream);">Trusted by people who know what good looks like.</h2>
-  <div class="testi-grid">
-    <div class="testi fade-up delay-2">
-      <p class="testi-q">Jon brings a level of execution depth that is genuinely rare. He has seen first-hand where things go wrong — and built that into how he thinks about every transaction.</p>
-      <span class="testi-attr">— Partner, Private Equity firm · placeholder</span>
     </div>
   </div>
 </div>
