@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perspectives · Integration Intelligence</title>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -20,7 +20,7 @@
 html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--cream); }
 
-/* ── NAV ─────────────────────────────────────────────────── */
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.05);
@@ -38,169 +38,116 @@ nav {
 .nav-cta:hover { border-color: var(--amber); }
 .nav-burger { display: none; }
 
-/* ── PAGE ─────────────────────────────────────────────────── */
+/* PAGE */
 .page { padding-top: 60px; }
 
-/* ── PAGE HEADER ──────────────────────────────────────────── */
+/* PAGE HEADER */
 .t-header {
-  padding: 72px 52px 64px;
+  padding: 56px 52px 48px;
   border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;
 }
+.t-header-left { }
 .t-eyebrow {
   font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--amber); margin-bottom: 16px;
+  color: var(--amber); margin-bottom: 12px;
 }
 .t-headline {
   font-family: 'EB Garamond', Georgia, serif; font-weight: 400;
-  font-size: clamp(36px, 5vw, 58px); line-height: 1.08; color: var(--cream);
-  max-width: 600px;
+  font-size: clamp(30px, 3.5vw, 44px); line-height: 1.1; color: var(--cream);
+}
+.t-header-tag {
+  font-size: 11px; font-weight: 400; color: var(--slate);
+  text-align: right; flex-shrink: 0; line-height: 1.6;
 }
 
-/* ── FEATURED QUOTE ───────────────────────────────────────── */
-.q-featured {
-  padding: 80px 52px 88px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-  position: relative; overflow: hidden;
-}
-/* Amber arc accent — top right decorative */
-.q-featured-arc {
-  position: absolute; right: -40px; top: -40px;
-  width: 360px; height: 360px; opacity: .07;
-  border-radius: 50%;
-  border: 60px solid var(--amber);
-  pointer-events: none;
-}
-.q-featured-inner { max-width: 780px; position: relative; z-index: 1; }
-
-/* Ghost quote mark behind */
-.q-featured-ghost {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 320px; line-height: 0.72;
-  color: var(--amber); opacity: .07;
-  position: absolute; top: -32px; left: -12px;
-  pointer-events: none; user-select: none;
-  font-weight: 400; font-style: normal;
-}
-/* Visible leading quote mark */
-.q-featured-open {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 80px; line-height: 0.7;
-  color: var(--amber); display: block;
-  margin-bottom: 24px; font-style: normal; font-weight: 400;
-  position: relative; z-index: 1;
-}
-.q-featured-text {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic; font-weight: 400;
-  font-size: clamp(24px, 2.8vw, 34px);
-  line-height: 1.58; color: var(--cream);
-  margin-bottom: 44px;
-  position: relative; z-index: 1;
-}
-.q-featured-text p { margin-bottom: .85em; }
-.q-featured-text p:last-child { margin-bottom: 0; }
-.q-attr {
-  display: flex; align-items: center; gap: 14px;
-  position: relative; z-index: 1;
-}
-.q-attr-line { width: 28px; height: 1px; background: var(--amber); flex-shrink: 0; }
-.q-attr-text {
-  font-size: 11px; font-weight: 500; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--slate);
+/* TILES SECTION */
+.tiles-section {
+  padding: 52px 52px 72px;
 }
 
-/* ── CARD GRID ────────────────────────────────────────────── */
-.q-grid-section {
-  padding: 64px 52px 80px;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.q-grid-label {
-  font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
-  color: rgba(140,155,175,.45); margin-bottom: 36px;
-}
-.q-grid {
+.tiles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
 }
 
-/* ── INDIVIDUAL CARD ──────────────────────────────────────── */
-.q-card {
+/* TILE */
+.tile {
   background: var(--cream);
+  border-radius: 3px;
   border-top: 3px solid var(--amber);
-  padding: 44px 40px 38px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.28);
+  padding: 36px 32px 28px;
   display: flex; flex-direction: column;
+  box-shadow:
+    0 24px 64px rgba(0,0,0,.45),
+    0 8px 24px rgba(0,0,0,.28),
+    0 2px 6px rgba(0,0,0,.18);
+  transition: transform .22s ease, box-shadow .22s ease;
   position: relative; overflow: hidden;
 }
-/* Faint ghost quote mark on card */
-.q-card-ghost {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 160px; line-height: 0.72;
-  color: var(--amber); opacity: .09;
-  position: absolute; top: 10px; left: 20px;
-  pointer-events: none; user-select: none;
-  font-weight: 400; font-style: normal;
+.tile:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 32px 80px rgba(0,0,0,.5),
+    0 12px 32px rgba(0,0,0,.32),
+    0 3px 8px rgba(0,0,0,.18);
 }
-.q-card-open {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 56px; line-height: 0.75;
-  color: var(--amber); display: block;
-  margin-bottom: 18px; font-style: normal; font-weight: 400;
-  position: relative; z-index: 1;
+
+/* Amber corner accent */
+.tile::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 60px;
+  background: var(--amber);
 }
-.q-card-text {
+
+/* Large open-quote */
+.tile-q {
   font-family: 'EB Garamond', Georgia, serif;
-  font-style: italic; font-weight: 400;
-  font-size: clamp(18px, 1.7vw, 22px);
-  line-height: 1.65; color: var(--navy);
-  margin-bottom: 32px; flex: 1;
-  position: relative; z-index: 1;
+  font-size: 72px; line-height: 0.7;
+  color: var(--amber); font-style: normal; font-weight: 400;
+  display: block; margin-bottom: 20px;
+  user-select: none; flex-shrink: 0;
 }
-.q-card-text p { margin-bottom: .8em; }
-.q-card-text p:last-child { margin-bottom: 0; }
-.q-card-attr {
+
+/* Quote text — Inter, not italic */
+.tile-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px; font-weight: 400; font-style: normal;
+  line-height: 1.75; color: #2A3345;
+  flex: 1; margin-bottom: 24px;
+}
+.tile-text p { margin-bottom: .75em; }
+.tile-text p:last-child { margin-bottom: 0; }
+
+/* Attribution */
+.tile-attr {
   display: flex; align-items: center; gap: 12px;
-  position: relative; z-index: 1;
-  border-top: 1px solid rgba(28,35,49,.1);
-  padding-top: 20px; margin-top: auto;
+  border-top: 1px solid rgba(28,35,49,.12);
+  padding-top: 18px; margin-top: auto;
+  flex-shrink: 0;
 }
-.q-card-attr-line { width: 20px; height: 1px; background: var(--amber); flex-shrink: 0; }
-.q-card-attr-text {
-  font-size: 10px; font-weight: 500; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--mid);
+.tile-attr-bar {
+  width: 18px; height: 2px;
+  background: var(--amber); flex-shrink: 0; border-radius: 1px;
 }
-
-/* Placeholder / pending card */
-.q-card.pending {
-  background: var(--navy-b);
-  border-top-color: rgba(196,146,74,.25);
-  box-shadow: none;
-  border: 1px solid rgba(255,255,255,.07);
-  border-top: 3px solid rgba(196,146,74,.25);
-  min-height: 260px; justify-content: center; align-items: center;
-}
-.q-pending-inner { text-align: center; }
-.q-pending-icon {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 64px; color: rgba(196,146,74,.2);
-  display: block; margin-bottom: 16px; line-height: 1;
-}
-.q-pending-text {
-  font-size: 11px; font-weight: 400; letter-spacing: .12em;
-  text-transform: uppercase; color: rgba(140,155,175,.35);
+.tile-attr-text {
+  font-size: 10px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--mid); line-height: 1.5;
 }
 
-/* ── CTA ──────────────────────────────────────────────────── */
+/* CTA */
 .cta-strip {
-  padding: 80px 52px;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 28px;
+  padding: 60px 52px 72px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 24px;
 }
 .cta-text {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: clamp(24px, 3vw, 36px); font-weight: 400;
-  color: var(--cream); max-width: 520px; line-height: 1.25;
+  font-size: clamp(22px, 2.5vw, 32px); font-weight: 400;
+  color: var(--cream); max-width: 500px; line-height: 1.25;
 }
 .cta-link {
   font-size: 12px; font-weight: 500; letter-spacing: .12em;
@@ -210,10 +157,10 @@ nav {
 }
 .cta-link:hover { border-color: var(--amber); }
 
-/* ── FOOTER ──────────────────────────────────────────────── */
+/* FOOTER */
 footer {
   border-top: 1px solid rgba(255,255,255,.05);
-  padding: 32px 52px;
+  padding: 28px 52px;
   display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
 }
 .footer-brand { display: flex; align-items: center; gap: 10px; opacity: .55; }
@@ -222,19 +169,19 @@ footer {
 .footer-link { font-size: 11px; color: rgba(196,146,74,.5); text-decoration: none; transition: color .2s; }
 .footer-link:hover { color: var(--amber); }
 
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 900px) {
-  .q-grid { grid-template-columns: 1fr; }
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .tiles-grid { grid-template-columns: 1fr; gap: 20px; }
+  .t-header { flex-direction: column; align-items: flex-start; }
+  .t-header-tag { text-align: left; }
 }
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
   .nav-links, .nav-cta { display: none; }
   .nav-burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
   .nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--cream); }
-  .t-header, .q-featured, .q-grid-section, .cta-strip { padding-left: 24px; padding-right: 24px; }
+  .t-header, .tiles-section, .cta-strip { padding-left: 24px; padding-right: 24px; }
   footer { padding: 24px 20px; }
-  .q-featured-ghost { font-size: 200px; }
-  .q-card { padding: 32px 28px 28px; }
 }
 </style>
 </head>
@@ -252,7 +199,6 @@ footer {
         <path fill="#f5e9dc" d="M 404.31 294.59 Q 362.43 329.38 329.81 373.04 Q 292.12 423.49 270.58 483.05 Q 245.02 553.73 245.95 627.73 Q 246.39 662.71 254.18 704.35 A 0.65 0.64 -9.5 0 1 253.64 705.10 L 253.36 705.14 A 0.23 0.22 -13.9 0 1 253.11 705.00 Q 249.64 695.68 246.96 688.00 C 240.26 668.73 235.21 648.33 232.35 629.23 C 229.31 608.95 227.19 587.36 227.30 566.30 Q 229.61 560.82 229.92 553.33 Q 230.54 538.64 230.58 538.34 A 6.45 2.14 -80.5 0 1 230.76 537.45 Q 235.38 518.31 248.92 484.43 Q 254.87 469.54 259.57 461.79 C 265.31 452.31 273.75 442.30 279.36 434.20 Q 286.05 424.53 293.03 411.86 C 300.95 397.50 310.14 377.46 322.44 360.05 Q 336.90 339.61 353.83 321.53 Q 359.79 315.17 366.10 309.68 C 377.93 299.40 388.89 293.80 404.31 294.59 Z"/>
         <path fill="#eba148" d="M 1039.15 514.13 Q 1034.03 524.62 1034.75 536.06 C 1035.00 540.10 1035.45 544.29 1035.43 548.32 C 1035.38 560.19 1035.22 564.05 1035.82 572.79 C 1036.49 582.36 1035.31 589.35 1033.98 602.00 Q 1033.87 603.10 1033.47 613.52 Q 1033.28 618.50 1034.02 625.04 Q 1036.02 642.73 1033.87 665.23 C 1031.33 691.92 1025.75 717.45 1019.06 744.87 C 1013.31 768.44 1005.05 792.50 995.77 815.19 C 988.01 834.15 984.13 845.54 977.53 863.47 C 967.10 891.74 952.36 918.78 931.40 940.91 Q 916.51 956.64 908.12 965.45 Q 897.15 976.98 890.68 987.07 Q 803.97 1056.65 693.80 1074.64 Q 764.72 1012.04 835.08 994.13 Q 880.41 965.59 941.79 890.62 C 1003.77 750.35 1029.43 635.75 1033.03 590.83 Q 1033.39 582.37 1033.02 573.67 Q 1032.65 565.19 1032.29 556.50 Q 1031.87 546.25 1029.81 528.00 Q 1027.73 509.66 1020.74 472.56 C 1019.94 468.31 1018.44 463.88 1017.70 459.52 A 0.38 0.37 27.7 0 1 1018.41 459.30 Q 1026.57 476.61 1033.76 497.58 Q 1036.60 505.85 1039.15 514.13 Z"/>
         <path fill="#c38033" d="M 890.68 987.07 Q 897.15 976.98 908.12 965.45 Q 916.51 956.64 931.40 940.91 C 952.36 918.78 967.10 891.74 977.53 863.47 C 984.13 845.54 988.01 834.15 995.77 815.19 C 1005.05 792.50 1013.31 768.44 1019.06 744.87 C 1025.75 717.45 1031.33 691.92 1033.87 665.23 Q 1036.02 642.73 1034.02 625.04 Q 1033.47 613.52 1033.98 602.00 C 1035.31 589.35 1036.49 582.36 1035.82 572.79 C 1035.22 564.05 1035.38 560.19 1035.43 548.32 C 1035.45 544.29 1035.00 540.10 1034.75 536.06 Q 1034.03 524.62 1039.15 514.13 Q 1040.92 520.84 1042.76 527.48 Q 1044.76 534.71 1045.73 539.73 C 1047.57 549.22 1049.99 558.31 1051.08 566.75 C 1051.90 573.15 1053.43 579.81 1054.13 586.49 Q 1057.91 622.72 1056.84 652.98 Q 1056.08 674.24 1051.90 703.33 Q 1050.37 713.91 1048.22 723.09 C 1045.99 732.57 1044.77 740.08 1042.35 749.26 Q 1030.12 795.56 1010.77 835.31 Q 995.44 866.82 974.33 897.10 Q 938.91 947.93 890.68 987.07 Z"/>
-        <path fill="#f9d2a0" d="M 764.72 1012.04 Q 797.38 995.53 827.13 974.17 C 835.08 994.13 880.41 965.59 899.31 946.71 Q 941.79 890.62 955.15 867.19 Q 975.45 817.32 988.71 788.44 Q 1003.77 750.35 1018.40 708.11 Q 1029.43 635.75 1027.12 669.63 Q 1022.91 689.84 1022.37 689.28 Q 1018.40 708.11 1011.07 718.80 Q 990.36 775.79 973.60 806.45 Q 946.69 850.72 913.34 899.29 Q 870.15 939.17 867.93 941.16 Q 848.37 958.68 827.13 974.17 C 830.81 974.47 835.08 994.13 807.60 993.22 C 799.89 997.44 769.19 1012.08 764.72 1012.04 Z"/>
         <path fill="#eba148" d="M 550.71 1054.56 Q 539.99 1059.81 529.93 1066.36 C 499.60 1058.64 471.18 1046.65 443.80 1031.41 A 0.48 0.48 0.0 0 1 443.60 1030.79 L 443.60 1030.77 A 0.48 0.48 0.0 0 1 444.21 1030.52 Q 495.84 1049.53 550.71 1054.56 Z"/>
         <path fill="#c38033" d="M 693.80 1074.64 Q 610.87 1087.89 529.93 1066.36 Q 539.99 1059.81 550.71 1054.56 Q 562.21 1055.66 573.76 1055.77 C 582.26 1055.86 589.78 1056.55 596.75 1055.98 C 604.53 1055.35 612.52 1055.13 620.66 1054.36 Q 640.89 1052.46 663.79 1047.40 Q 672.15 1045.56 680.55 1043.71 Q 685.62 1043.41 693.29 1041.34 Q 700.55 1039.98 701.56 1040.02 C 709.65 1042.26 727.94 1048.27 717.21 1058.74 Q 709.02 1065.15 693.80 1074.64 Z"/>
       </g>
@@ -277,62 +223,59 @@ footer {
 
   <!-- HEADER -->
   <div class="t-header">
-    <div class="t-eyebrow">Perspectives</div>
-    <h1 class="t-headline">What people say<br>about working with us</h1>
-  </div>
-
-  <!-- FEATURED QUOTE — full width, dark -->
-  <div class="q-featured">
-    <div class="q-featured-arc"></div>
-    <div class="q-featured-inner">
-      <span class="q-featured-ghost">&ldquo;</span>
-      <span class="q-featured-open">&ldquo;</span>
-      <div class="q-featured-text">
-        <p>M&amp;A integration is one of those disciplines where experience shows. Jon has it. He understands the commercial reality of what you&#x2019;re trying to achieve, not just the process around it.</p>
-        <p>What I value is the combination of structured thinking and genuine judgment; knowing when to push and when to listen.</p>
-        <p>If you&#x2019;re heading into a deal and want someone who&#x2019;s actually done this at scale, Jon is someone I&#x2019;d recommend without hesitation.</p>
-      </div>
-      <div class="q-attr">
-        <span class="q-attr-line"></span>
-        <span class="q-attr-text">CEO &amp; Board Member &nbsp;&middot;&nbsp; Fintech</span>
-      </div>
+    <div class="t-header-left">
+      <div class="t-eyebrow">Perspectives</div>
+      <h1 class="t-headline">What people say about<br>working with us</h1>
+    </div>
+    <div class="t-header-tag">
+      From colleagues, CEOs<br>and integration practitioners
     </div>
   </div>
 
-  <!-- QUOTE CARD GRID -->
-  <div class="q-grid-section">
-    <div class="q-grid-label">More perspectives</div>
-    <div class="q-grid">
+  <!-- THREE TILES -->
+  <div class="tiles-section">
+    <div class="tiles-grid">
 
-      <!-- Card 2 — Brian -->
-      <div class="q-card">
-        <span class="q-card-ghost">&ldquo;</span>
-        <span class="q-card-open">&ldquo;</span>
-        <div class="q-card-text">
+      <!-- Tile 1 — Paul Stoddart -->
+      <div class="tile">
+        <span class="tile-q">&ldquo;</span>
+        <div class="tile-text">
+          <p>M&amp;A integration is one of those disciplines where experience shows. Jon has it. He understands the commercial reality of what you&#x2019;re trying to achieve, not just the process around it.</p>
+          <p>What I value is the combination of structured thinking and genuine judgment; knowing when to push and when to listen.</p>
+          <p>If you&#x2019;re heading into a deal and want someone who&#x2019;s actually done this at scale, Jon is someone I&#x2019;d recommend without hesitation.</p>
+        </div>
+        <div class="tile-attr">
+          <div class="tile-attr-bar"></div>
+          <div class="tile-attr-text">CEO &amp; Board Member &nbsp;&middot;&nbsp; Fintech</div>
+        </div>
+      </div>
+
+      <!-- Tile 2 — Brian Hanrahan -->
+      <div class="tile">
+        <span class="tile-q">&ldquo;</span>
+        <div class="tile-text">
           <p>Jon combines practical M&amp;A integration experience with the ability to bring structure and momentum to complex situations.</p>
           <p>What impressed me most was his ability to anticipate the issues that typically emerge during an integration and put the right framework in place before they became problems.</p>
           <p>Having been through multiple acquisitions myself, I know how quickly integrations can lose focus. Jon helped ensure ours didn&#x2019;t.</p>
           <p>I&#x2019;d happily work with him again and would recommend him to any leadership team preparing for an acquisition or post-deal integration.</p>
         </div>
-        <div class="q-card-attr">
-          <span class="q-card-attr-line"></span>
-          <span class="q-card-attr-text">CEO &nbsp;&middot;&nbsp; Fintech</span>
+        <div class="tile-attr">
+          <div class="tile-attr-bar"></div>
+          <div class="tile-attr-text">CEO &nbsp;&middot;&nbsp; Fintech</div>
         </div>
       </div>
 
-
-      <!-- Card 3 — Julian Davis -->
-      <div class="q-card">
-        <span class="q-card-ghost">&ldquo;</span>
-        <span class="q-card-open">&ldquo;</span>
-        <div class="q-card-text">
+      <!-- Tile 3 — Julian Davis -->
+      <div class="tile">
+        <span class="tile-q">&ldquo;</span>
+        <div class="tile-text">
           <p>I&#x2019;ve worked on integrations across consulting and industry, and the ones that go well have someone at the centre who can hold two things at once &#x2014; where the programme needs to go, and what&#x2019;s actually happening on the ground.</p>
           <p>He&#x2019;d walk into a workstream review and see in minutes what mattered and what didn&#x2019;t, no wasted motion getting there.</p>
           <p>Working with him made the rest of us better at the job. That&#x2019;s the best thing I can say about anyone.</p>
         </div>
-        <div class="q-card-attr">
-          <span class="q-card-attr-line"></span>
-          <span class="q-card-attr-text">Founder, M&amp;A Advisory &nbsp;&middot;&nbsp; ex-Mastercard</span>
+        <div class="tile-attr">
+          <div class="tile-attr-bar"></div>
+          <div class="tile-attr-text">Founder, M&amp;A Advisory &nbsp;&middot;&nbsp; ex-Mastercard</div>
         </div>
       </div>
 
@@ -341,7 +284,7 @@ footer {
 
   <!-- CTA -->
   <div class="cta-strip">
-    <p class="cta-text">Heading into a deal? Let's talk about what integration will actually take.</p>
+    <p class="cta-text">Heading into a deal? Let&#x2019;s talk about what integration will actually take.</p>
     <a class="cta-link" href="/#contact">Get in touch &rarr;</a>
   </div>
 
