@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perspectives · Integration Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:    #1C2331;
+  --navy-b:  #232E42;
+  --amber:   #C4924A;
+  --amber-l: #D4A96A;
+  --cream:   #F5F0E8;
+  --cream-d: #EDE7DB;
+  --slate:   #8C9BAF;
+  --mid:     #5A6A7E;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--cream); }
+
+/* ── NAV ─────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.05);
+  padding: 0 52px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+.nav-wm { display: flex; flex-direction: column; gap: 2px; }
+.nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 19px; line-height: 1; color: var(--cream); }
+.nav-wm-sub { font-size: 7px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-eng { font-size: 13px; font-weight: 400; letter-spacing: .06em; color: rgba(245,240,232,.6); text-decoration: none; transition: color .2s; }
+.nav-eng:hover, .nav-eng.active { color: var(--cream); }
+.nav-cta { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); text-decoration: none; border: 1px solid rgba(196,146,74,.4); padding: 8px 18px; transition: border-color .2s; }
+.nav-cta:hover { border-color: var(--amber); }
+.nav-burger { display: none; }
+
+/* ── PAGE ─────────────────────────────────────────────────── */
+.page { padding-top: 60px; }
+
+/* ── PAGE HEADER ──────────────────────────────────────────── */
+.t-header {
+  padding: 72px 52px 64px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.t-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 16px;
+}
+.t-headline {
+  font-family: 'EB Garamond', Georgia, serif; font-weight: 400;
+  font-size: clamp(36px, 5vw, 58px); line-height: 1.08; color: var(--cream);
+  max-width: 600px;
+}
+
+/* ── FEATURED QUOTE ───────────────────────────────────────── */
+.q-featured {
+  padding: 80px 52px 88px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  position: relative; overflow: hidden;
+}
+/* Amber arc accent — top right decorative */
+.q-featured-arc {
+  position: absolute; right: -40px; top: -40px;
+  width: 360px; height: 360px; opacity: .07;
+  border-radius: 50%;
+  border: 60px solid var(--amber);
+  pointer-events: none;
+}
+.q-featured-inner { max-width: 780px; position: relative; z-index: 1; }
+
+/* Ghost quote mark behind */
+.q-featured-ghost {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 320px; line-height: 0.72;
+  color: var(--amber); opacity: .07;
+  position: absolute; top: -32px; left: -12px;
+  pointer-events: none; user-select: none;
+  font-weight: 400; font-style: normal;
+}
+/* Visible leading quote mark */
+.q-featured-open {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 80px; line-height: 0.7;
+  color: var(--amber); display: block;
+  margin-bottom: 24px; font-style: normal; font-weight: 400;
+  position: relative; z-index: 1;
+}
+.q-featured-text {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(24px, 2.8vw, 34px);
+  line-height: 1.58; color: var(--cream);
+  margin-bottom: 44px;
+  position: relative; z-index: 1;
+}
+.q-featured-text p { margin-bottom: .85em; }
+.q-featured-text p:last-child { margin-bottom: 0; }
+.q-attr {
+  display: flex; align-items: center; gap: 14px;
+  position: relative; z-index: 1;
+}
+.q-attr-line { width: 28px; height: 1px; background: var(--amber); flex-shrink: 0; }
+.q-attr-text {
+  font-size: 11px; font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--slate);
+}
+
+/* ── CARD GRID ────────────────────────────────────────────── */
+.q-grid-section {
+  padding: 64px 52px 80px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.q-grid-label {
+  font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(140,155,175,.45); margin-bottom: 36px;
+}
+.q-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── INDIVIDUAL CARD ──────────────────────────────────────── */
+.q-card {
+  background: var(--cream);
+  border-top: 3px solid var(--amber);
+  padding: 44px 40px 38px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.28);
+  display: flex; flex-direction: column;
+  position: relative; overflow: hidden;
+}
+/* Faint ghost quote mark on card */
+.q-card-ghost {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 160px; line-height: 0.72;
+  color: var(--amber); opacity: .09;
+  position: absolute; top: 10px; left: 20px;
+  pointer-events: none; user-select: none;
+  font-weight: 400; font-style: normal;
+}
+.q-card-open {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 56px; line-height: 0.75;
+  color: var(--amber); display: block;
+  margin-bottom: 18px; font-style: normal; font-weight: 400;
+  position: relative; z-index: 1;
+}
+.q-card-text {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(18px, 1.7vw, 22px);
+  line-height: 1.65; color: var(--navy);
+  margin-bottom: 32px; flex: 1;
+  position: relative; z-index: 1;
+}
+.q-card-text p { margin-bottom: .8em; }
+.q-card-text p:last-child { margin-bottom: 0; }
+.q-card-attr {
+  display: flex; align-items: center; gap: 12px;
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(28,35,49,.1);
+  padding-top: 20px; margin-top: auto;
+}
+.q-card-attr-line { width: 20px; height: 1px; background: var(--amber); flex-shrink: 0; }
+.q-card-attr-text {
+  font-size: 10px; font-weight: 500; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--mid);
+}
+
+/* Placeholder / pending card */
+.q-card.pending {
+  background: var(--navy-b);
+  border-top-color: rgba(196,146,74,.25);
+  box-shadow: none;
+  border: 1px solid rgba(255,255,255,.07);
+  border-top: 3px solid rgba(196,146,74,.25);
+  min-height: 260px; justify-content: center; align-items: center;
+}
+.q-pending-inner { text-align: center; }
+.q-pending-icon {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 64px; color: rgba(196,146,74,.2);
+  display: block; margin-bottom: 16px; line-height: 1;
+}
+.q-pending-text {
+  font-size: 11px; font-weight: 400; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(140,155,175,.35);
+}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.cta-strip {
+  padding: 80px 52px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 28px;
+}
+.cta-text {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(24px, 3vw, 36px); font-weight: 400;
+  color: var(--cream); max-width: 520px; line-height: 1.25;
+}
+.cta-link {
+  font-size: 12px; font-weight: 500; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--amber);
+  text-decoration: none; border-bottom: 1px solid rgba(196,146,74,.35);
+  padding-bottom: 3px; transition: border-color .2s;
+}
+.cta-link:hover { border-color: var(--amber); }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 32px 52px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-brand { display: flex; align-items: center; gap: 10px; opacity: .55; }
+.footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 11px; color: rgba(196,146,74,.5); text-decoration: none; transition: color .2s; }
+.footer-link:hover { color: var(--amber); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .q-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-burger span { display: block; width: 22px; height: 1.5px; background: var(--cream); }
+  .t-header, .q-featured, .q-grid-section, .cta-strip { padding-left: 24px; padding-right: 24px; }
+  footer { padding: 24px 20px; }
+  .q-featured-ghost { font-size: 200px; }
+  .q-card { padding: 32px 28px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" width="36" height="36">
+      <defs><filter id="ba" x="-3%" y="-3%" width="106%" height="106%"><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="r"/><feComposite in="r" in2="SourceGraphic" operator="in"/></filter></defs>
+      <path fill="#1C2331" d="M 1254 0 L 1254 1254 L 0 1254 L 0 0 Z M 605.73 159.27 Q 561.28 162.24 516.64 175.13 Q 428.73 200.50 361.16 261.91 Q 338.06 282.91 321.56 303.81 Q 307.17 322.05 301.16 330.91 Q 250.18 406.15 233.77 495.73 Q 228.16 526.33 227.41 551.52 Q 227.29 555.31 227.30 566.30 C 227.19 587.36 229.31 608.95 232.35 629.23 C 235.21 648.33 240.26 668.73 246.96 688.00 Q 249.64 695.68 253.11 705.00 A 0.23 0.22 -13.9 0 0 253.36 705.14 L 253.64 705.10 A 0.65 0.64 -9.5 0 0 254.18 704.35 Q 246.39 662.71 245.95 627.73 Q 245.02 553.73 270.58 483.05 Q 292.12 423.49 329.81 373.04 Q 362.43 329.38 404.31 294.59 Q 420.06 281.48 435.12 270.87 Q 498.99 225.88 574.78 205.00 C 647.87 184.45 724.22 183.89 796.10 204.72 Q 807.73 208.09 813.34 209.81 Q 821.78 212.39 825.27 213.81 C 832.59 216.76 838.30 218.31 845.77 221.59 Q 849.09 223.05 854.46 225.18 A 0.45 0.44 -68.8 0 0 855.04 224.92 L 855.04 224.90 A 0.43 0.42 -64.5 0 0 854.86 224.38 Q 844.09 218.10 835.57 212.74 C 830.98 209.86 826.98 208.32 822.63 205.79 Q 819.19 203.78 812.67 200.71 Q 785.91 188.08 761.35 180.19 C 711.40 164.13 658.40 156.14 605.73 159.27 Z M 531.71 865.31 A 0.71 0.70 5.1 0 0 532.41 866.14 L 722.66 866.14 A 0.77 0.77 0.0 0 0 723.42 865.26 L 722.58 859.63 A 0.97 0.96 1.8 0 0 721.82 858.83 C 709.01 856.12 695.54 850.95 684.49 846.51 C 678.19 843.97 667.92 838.06 664.25 831.58 C 660.45 824.89 659.04 817.83 659.04 810.50 Q 659.00 616.10 659.03 466.00 Q 659.03 454.20 664.84 444.33 C 669.01 437.27 675.74 433.08 683.01 429.83 Q 701.69 421.47 721.45 417.46 A 1.22 1.21 89.3 0 0 722.41 416.47 L 723.45 410.69 A 1.26 1.25 5.0 0 0 722.21 409.22 L 532.67 409.22 A 0.85 0.85 0.0 0 0 531.83 410.19 L 532.79 416.56 A 1.09 1.07 -88.1 0 0 533.62 417.46 Q 552.13 421.55 570.56 429.50 C 582.10 434.47 591.30 442.68 594.46 454.91 Q 595.73 459.82 595.73 471.25 Q 595.71 727.84 595.68 811.48 Q 595.67 831.63 579.66 841.54 C 575.20 844.29 568.94 847.30 563.42 849.16 C 554.63 852.13 543.99 856.48 533.71 858.58 A 1.25 1.25 0.0 0 0 532.73 859.58 L 531.71 865.31 Z"/>
+      <g filter="url(#ba)">
+        <path fill="#f5e9dc" d="M 574.78 205.00 Q 570.84 204.12 566.15 205.59 Q 559.19 207.76 552.79 209.86 Q 546.61 211.90 540.60 212.73 C 524.76 214.91 509.02 215.92 494.73 219.90 Q 484.02 222.89 478.36 223.88 C 476.86 224.14 473.06 224.46 472.48 222.61 C 471.30 218.82 479.53 211.23 482.31 208.92 C 500.23 194.04 520.53 185.77 542.86 176.90 C 547.09 175.22 549.55 173.92 553.39 171.99 C 555.49 170.93 559.23 169.84 561.43 169.56 Q 574.22 167.97 585.39 164.68 C 590.37 163.21 595.55 162.84 600.80 161.95 Q 603.84 161.44 605.73 159.27 C 658.40 156.14 711.40 164.13 761.35 180.19 Q 785.91 188.08 812.67 200.71 Q 819.19 203.78 822.63 205.79 C 826.98 208.32 830.98 209.86 835.57 212.74 Q 844.09 218.10 854.86 224.38 A 0.43 0.42 -64.5 0 1 855.04 224.90 L 855.04 224.92 A 0.45 0.44 -68.8 0 1 854.46 225.18 Q 849.09 223.05 845.77 221.59 C 838.30 218.31 832.59 216.76 825.27 213.81 Q 821.78 212.39 813.34 209.81 Q 807.73 208.09 796.10 204.72 C 724.22 183.89 647.87 184.45 574.78 205.00 Z"/>
+        <path fill="#fdf9f7" d="M 605.73 159.27 Q 603.84 161.44 600.80 161.95 C 595.55 162.84 590.37 163.21 585.39 164.68 Q 574.22 167.97 561.43 169.56 C 559.23 169.84 555.49 170.93 553.39 171.99 C 549.55 173.92 547.09 175.22 542.86 176.90 C 520.53 185.77 500.23 194.04 482.31 208.92 C 479.53 211.23 471.30 218.82 472.48 222.61 C 473.06 224.46 476.86 224.14 478.36 223.88 Q 484.02 222.89 494.73 219.90 C 509.02 215.92 524.76 214.91 540.60 212.73 Q 546.61 211.90 552.79 209.86 Q 559.19 207.76 566.15 205.59 Q 570.84 204.12 574.78 205.00 Q 498.99 225.88 435.12 270.87 Q 420.06 281.48 404.31 294.59 C 388.89 293.80 377.93 299.40 366.10 309.68 Q 359.79 315.17 353.83 321.53 Q 336.90 339.61 322.44 360.05 C 310.14 377.46 300.95 397.50 293.03 411.86 Q 286.05 424.53 279.36 434.20 C 273.75 442.30 265.31 452.31 259.57 461.79 Q 254.87 469.54 248.92 484.43 Q 235.38 518.31 230.76 537.45 A 6.45 2.14 -80.5 0 0 230.58 538.34 Q 230.54 538.64 229.92 553.33 Q 229.61 560.82 227.30 566.30 Q 227.29 555.31 227.41 551.52 Q 228.16 526.33 233.77 495.73 Q 250.18 406.15 301.16 330.91 Q 307.17 322.05 321.56 303.81 Q 338.06 282.91 361.16 261.91 Q 428.73 200.50 516.64 175.13 Q 561.28 162.24 605.73 159.27 Z"/>
+        <path fill="#f5e9dc" d="M 404.31 294.59 Q 362.43 329.38 329.81 373.04 Q 292.12 423.49 270.58 483.05 Q 245.02 553.73 245.95 627.73 Q 246.39 662.71 254.18 704.35 A 0.65 0.64 -9.5 0 1 253.64 705.10 L 253.36 705.14 A 0.23 0.22 -13.9 0 1 253.11 705.00 Q 249.64 695.68 246.96 688.00 C 240.26 668.73 235.21 648.33 232.35 629.23 C 229.31 608.95 227.19 587.36 227.30 566.30 Q 229.61 560.82 229.92 553.33 Q 230.54 538.64 230.58 538.34 A 6.45 2.14 -80.5 0 1 230.76 537.45 Q 235.38 518.31 248.92 484.43 Q 254.87 469.54 259.57 461.79 C 265.31 452.31 273.75 442.30 279.36 434.20 Q 286.05 424.53 293.03 411.86 C 300.95 397.50 310.14 377.46 322.44 360.05 Q 336.90 339.61 353.83 321.53 Q 359.79 315.17 366.10 309.68 C 377.93 299.40 388.89 293.80 404.31 294.59 Z"/>
+        <path fill="#eba148" d="M 1039.15 514.13 Q 1034.03 524.62 1034.75 536.06 C 1035.00 540.10 1035.45 544.29 1035.43 548.32 C 1035.38 560.19 1035.22 564.05 1035.82 572.79 C 1036.49 582.36 1035.31 589.35 1033.98 602.00 Q 1033.87 603.10 1033.47 613.52 Q 1033.28 618.50 1034.02 625.04 Q 1036.02 642.73 1033.87 665.23 C 1031.33 691.92 1025.75 717.45 1019.06 744.87 C 1013.31 768.44 1005.05 792.50 995.77 815.19 C 988.01 834.15 984.13 845.54 977.53 863.47 C 967.10 891.74 952.36 918.78 931.40 940.91 Q 916.51 956.64 908.12 965.45 Q 897.15 976.98 890.68 987.07 Q 803.97 1056.65 693.80 1074.64 Q 764.72 1012.04 835.08 994.13 Q 880.41 965.59 941.79 890.62 C 1003.77 750.35 1029.43 635.75 1033.03 590.83 Q 1033.39 582.37 1033.02 573.67 Q 1032.65 565.19 1032.29 556.50 Q 1031.87 546.25 1029.81 528.00 Q 1027.73 509.66 1020.74 472.56 C 1019.94 468.31 1018.44 463.88 1017.70 459.52 A 0.38 0.37 27.7 0 1 1018.41 459.30 Q 1026.57 476.61 1033.76 497.58 Q 1036.60 505.85 1039.15 514.13 Z"/>
+        <path fill="#c38033" d="M 890.68 987.07 Q 897.15 976.98 908.12 965.45 Q 916.51 956.64 931.40 940.91 C 952.36 918.78 967.10 891.74 977.53 863.47 C 984.13 845.54 988.01 834.15 995.77 815.19 C 1005.05 792.50 1013.31 768.44 1019.06 744.87 C 1025.75 717.45 1031.33 691.92 1033.87 665.23 Q 1036.02 642.73 1034.02 625.04 Q 1033.47 613.52 1033.98 602.00 C 1035.31 589.35 1036.49 582.36 1035.82 572.79 C 1035.22 564.05 1035.38 560.19 1035.43 548.32 C 1035.45 544.29 1035.00 540.10 1034.75 536.06 Q 1034.03 524.62 1039.15 514.13 Q 1040.92 520.84 1042.76 527.48 Q 1044.76 534.71 1045.73 539.73 C 1047.57 549.22 1049.99 558.31 1051.08 566.75 C 1051.90 573.15 1053.43 579.81 1054.13 586.49 Q 1057.91 622.72 1056.84 652.98 Q 1056.08 674.24 1051.90 703.33 Q 1050.37 713.91 1048.22 723.09 C 1045.99 732.57 1044.77 740.08 1042.35 749.26 Q 1030.12 795.56 1010.77 835.31 Q 995.44 866.82 974.33 897.10 Q 938.91 947.93 890.68 987.07 Z"/>
+        <path fill="#f9d2a0" d="M 764.72 1012.04 Q 797.38 995.53 827.13 974.17 C 835.08 994.13 880.41 965.59 899.31 946.71 Q 941.79 890.62 955.15 867.19 Q 975.45 817.32 988.71 788.44 Q 1003.77 750.35 1018.40 708.11 Q 1029.43 635.75 1027.12 669.63 Q 1022.91 689.84 1022.37 689.28 Q 1018.40 708.11 1011.07 718.80 Q 990.36 775.79 973.60 806.45 Q 946.69 850.72 913.34 899.29 Q 870.15 939.17 867.93 941.16 Q 848.37 958.68 827.13 974.17 C 830.81 974.47 835.08 994.13 807.60 993.22 C 799.89 997.44 769.19 1012.08 764.72 1012.04 Z"/>
+        <path fill="#eba148" d="M 550.71 1054.56 Q 539.99 1059.81 529.93 1066.36 C 499.60 1058.64 471.18 1046.65 443.80 1031.41 A 0.48 0.48 0.0 0 1 443.60 1030.79 L 443.60 1030.77 A 0.48 0.48 0.0 0 1 444.21 1030.52 Q 495.84 1049.53 550.71 1054.56 Z"/>
+        <path fill="#c38033" d="M 693.80 1074.64 Q 610.87 1087.89 529.93 1066.36 Q 539.99 1059.81 550.71 1054.56 Q 562.21 1055.66 573.76 1055.77 C 582.26 1055.86 589.78 1056.55 596.75 1055.98 C 604.53 1055.35 612.52 1055.13 620.66 1054.36 Q 640.89 1052.46 663.79 1047.40 Q 672.15 1045.56 680.55 1043.71 Q 685.62 1043.41 693.29 1041.34 Q 700.55 1039.98 701.56 1040.02 C 709.65 1042.26 727.94 1048.27 717.21 1058.74 Q 709.02 1065.15 693.80 1074.64 Z"/>
+      </g>
+      <path fill="#fdf9f7" d="M 531.71 865.31 L 532.73 859.58 A 1.25 1.25 0.0 0 1 533.71 858.58 C 543.99 856.48 554.63 852.13 563.42 849.16 C 568.94 847.30 575.20 844.29 579.66 841.54 Q 595.67 831.63 595.68 811.48 Q 595.71 727.84 595.73 471.25 Q 595.73 459.82 594.46 454.91 C 591.30 442.68 582.10 434.47 570.56 429.50 Q 552.13 421.55 533.62 417.46 A 1.09 1.07 -88.1 0 1 532.79 416.56 L 531.83 410.19 A 0.85 0.85 0.0 0 0 532.67 409.22 L 722.21 409.22 A 1.26 1.25 5.0 0 1 723.45 410.69 L 722.41 416.47 A 1.22 1.21 89.3 0 1 721.45 417.46 Q 701.69 421.47 683.01 429.83 C 675.74 433.08 669.01 437.27 664.84 444.33 Q 659.03 454.20 659.03 466.00 Q 659.00 616.10 659.04 810.50 C 659.04 817.83 660.45 824.89 664.25 831.58 C 667.92 838.06 678.19 843.97 684.49 846.51 C 695.54 850.95 709.01 856.12 721.82 858.83 A 0.97 0.96 1.8 0 1 722.58 859.63 L 723.42 865.26 A 0.77 0.77 0.0 0 1 722.66 866.14 L 532.41 866.14 A 0.71 0.70 5.1 0 1 531.71 865.31 Z"/>
+    </svg>
+    <div class="nav-wm">
+      <span class="nav-wm-top">Integration</span>
+      <span class="nav-wm-sub">Intelligence</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-eng" href="/">Home</a>
+    <a class="nav-eng" href="/how-it-works.html">How it works</a>
+    <a class="nav-eng active" href="/testimonials.html">Perspectives</a>
+    <a class="nav-eng" href="/security.html">Security</a>
+  </div>
+  <a class="nav-cta" href="/#contact">Get in touch</a>
+  <button class="nav-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="t-header">
+    <div class="t-eyebrow">Perspectives</div>
+    <h1 class="t-headline">What people say<br>about working with us</h1>
+  </div>
+
+  <!-- FEATURED QUOTE — full width, dark -->
+  <div class="q-featured">
+    <div class="q-featured-arc"></div>
+    <div class="q-featured-inner">
+      <span class="q-featured-ghost">&ldquo;</span>
+      <span class="q-featured-open">&ldquo;</span>
+      <div class="q-featured-text">
+        <p>M&amp;A integration is one of those disciplines where experience shows. Jon has it. He understands the commercial reality of what you&#x2019;re trying to achieve, not just the process around it.</p>
+        <p>What I value is the combination of structured thinking and genuine judgment; knowing when to push and when to listen.</p>
+        <p>If you&#x2019;re heading into a deal and want someone who&#x2019;s actually done this at scale, Jon is someone I&#x2019;d recommend without hesitation.</p>
+      </div>
+      <div class="q-attr">
+        <span class="q-attr-line"></span>
+        <span class="q-attr-text">CEO &amp; Board Member &nbsp;&middot;&nbsp; Fintech</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE CARD GRID -->
+  <div class="q-grid-section">
+    <div class="q-grid-label">More perspectives</div>
+    <div class="q-grid">
+
+      <!-- Card 2 — Brian -->
+      <div class="q-card">
+        <span class="q-card-ghost">&ldquo;</span>
+        <span class="q-card-open">&ldquo;</span>
+        <div class="q-card-text">
+          <p>Jon combines practical M&amp;A integration experience with the ability to bring structure and momentum to complex situations.</p>
+          <p>What impressed me most was his ability to anticipate the issues that typically emerge during an integration and put the right framework in place before they became problems.</p>
+          <p>Having been through multiple acquisitions myself, I know how quickly integrations can lose focus. Jon helped ensure ours didn&#x2019;t.</p>
+          <p>I&#x2019;d happily work with him again and would recommend him to any leadership team preparing for an acquisition or post-deal integration.</p>
+        </div>
+        <div class="q-card-attr">
+          <span class="q-card-attr-line"></span>
+          <span class="q-card-attr-text">CEO &nbsp;&middot;&nbsp; Fintech</span>
+        </div>
+      </div>
+
+
+      <!-- Card 3 — Julian Davis -->
+      <div class="q-card">
+        <span class="q-card-ghost">&ldquo;</span>
+        <span class="q-card-open">&ldquo;</span>
+        <div class="q-card-text">
+          <p>I&#x2019;ve worked on integrations across consulting and industry, and the ones that go well have someone at the centre who can hold two things at once &#x2014; where the programme needs to go, and what&#x2019;s actually happening on the ground.</p>
+          <p>He&#x2019;d walk into a workstream review and see in minutes what mattered and what didn&#x2019;t, no wasted motion getting there.</p>
+          <p>Working with him made the rest of us better at the job. That&#x2019;s the best thing I can say about anyone.</p>
+        </div>
+        <div class="q-card-attr">
+          <span class="q-card-attr-line"></span>
+          <span class="q-card-attr-text">Founder, M&amp;A Advisory &nbsp;&middot;&nbsp; ex-Mastercard</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <p class="cta-text">Heading into a deal? Let's talk about what integration will actually take.</p>
+    <a class="cta-link" href="/#contact">Get in touch &rarr;</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <svg viewBox="0 0 1254 1254" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+        <defs><filter id="fb" x="-5%" y="-5%" width="110%" height="110%"><feGaussianBlur in="SourceGraphic" stdDeviation="14" result="b"/><feComposite in="b" in2="SourceGraphic" operator="in"/></filter></defs>
+        <rect width="1254" height="1254" fill="#1C2331"/>
+        <g filter="url(#fb)">
+          <path fill="#f5e9dc" d="M 574.78 205.00 C 647.87 184.45 724.22 183.89 796.10 204.72 Q 854.86 224.38 574.78 205.00 Z"/>
+          <path fill="#eba148" d="M 1039.15 514.13 Q 693.80 1074.64 835.08 994.13 Q 1029.43 635.75 1039.15 514.13 Z"/>
+          <path fill="#c38033" d="M 890.68 987.07 Q 1042.35 749.26 1039.15 514.13 Q 931.40 940.91 890.68 987.07 Z"/>
+        </g>
+        <path fill="#fdf9f7" d="M 531.71 865.31 L 532.73 859.58 C 563.42 849.16 595.68 811.48 595.73 471.25 C 591.30 442.68 533.62 417.46 532.67 409.22 L 722.21 409.22 L 723.45 410.69 Q 659.03 466.00 659.04 810.50 C 684.49 846.51 723.42 865.26 722.66 866.14 L 532.41 866.14 Z"/>
+      </svg>
+      <div class="nav-wm">
+        <span class="nav-wm-top" style="font-size:13px;">Integration</span>
+        <span class="nav-wm-sub">Intelligence</span>
+      </div>
+    </div>
+    <span class="footer-note">Integration Intelligence Ltd &middot; 2026</span>
+    <div class="footer-links">
+      <a class="footer-link" href="/security.html">Security</a>
+      <a class="footer-link" href="mailto:jon@integration-intelligence.com">Contact</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
