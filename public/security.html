@@ -219,8 +219,8 @@
     <p class="section-num">03</p>
     <h2 class="section-title">AI processing — Anthropic Claude API</h2>
     <div class="section-body">
-      <p>All AI processing uses the Anthropic Claude API — not the Claude.ai consumer interface. This distinction matters: API access is configured with zero data retention, meaning prompts and completions are not stored on Anthropic's infrastructure after each processing call completes.</p>
-      <p>Anthropic does not train on API inputs under zero-retention configuration. Your deal content is processed and then gone — it does not persist on Anthropic's servers.</p>
+      <p>All AI processing uses the Anthropic Claude API — not the Claude.ai consumer interface. This distinction matters for data handling: Anthropic does not use API inputs for model training. This is confirmed in Anthropic's Data Processing Addendum (DPA), which is incorporated into their Commercial Terms of Service on account creation.</p>
+      <p>The DPA confirms that data is used only to provide the service and is subject to deletion obligations on termination. A copy of the DPA is available at <a href="https://www.anthropic.com/legal/data-processing-addendum" style="color:var(--amber);">anthropic.com/legal/data-processing-addendum</a>.</p>
       <div class="callout">The Anthropic API is the only point at which document content leaves the engagement lead's direct control. It is the sole sub-processor involved in the service.</div>
     </div>
   </div>
@@ -246,9 +246,8 @@
     <p class="section-num">06</p>
     <h2 class="section-title">Data residency</h2>
     <div class="section-body">
-      <p>Engagement materials and outputs are held on UK-based infrastructure. We want to be clear about two points where data crosses borders.</p>
-      <p>AI processing is performed via the Anthropic Claude API, whose servers are based in the United States. Under zero-retention configuration, content is not stored after each call completes — but it does transit US infrastructure during processing.</p>
-      <p>Working documents may be held on devices that use Apple's iCloud backup service. Apple stores UK account data in Europe.</p>
+      <p>Engagement materials and outputs are held on EU-region infrastructure (AWS eu-west-1). We want to be clear about one point where data crosses borders.</p>
+      <p>AI processing is performed via the Anthropic Claude API, whose servers are based in the United States. Content does transit US infrastructure during each processing call. This cross-border transfer is covered by Standard Contractual Clauses in the Anthropic DPA.</p>
       <div class="callout">If your organisation has specific data residency requirements — including restrictions on US processing — please flag this before engagement begins. We would rather know early than discover a conflict later.</div>
     </div>
   </div>
