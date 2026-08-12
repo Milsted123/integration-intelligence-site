@@ -162,6 +162,58 @@ nav {
 }
 .cta-link:hover { border-color: var(--amber); }
 
+
+/* FROM THE FOUNDER SECTION */
+.founder-section {
+  padding: 64px 52px 72px;
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.founder-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 24px;
+}
+.founder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 0;
+}
+.article-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-left: 3px solid var(--amber);
+  padding: 32px 28px 28px;
+  display: flex; flex-direction: column;
+  transition: background .2s, border-color .2s;
+  text-decoration: none;
+}
+.article-card:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.14);
+  border-left-color: var(--amber-l);
+}
+.article-card-label {
+  font-size: 9px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 14px; opacity: .8;
+}
+.article-card-title {
+  font-family: 'EB Garamond', Georgia, serif; font-weight: 400;
+  font-size: 22px; line-height: 1.2; color: var(--cream);
+  margin-bottom: 12px;
+}
+.article-card-excerpt {
+  font-size: 13px; font-weight: 300; color: rgba(245,240,232,.55);
+  line-height: 1.7; flex: 1; margin-bottom: 24px;
+}
+.article-card-read {
+  font-size: 10px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--amber); opacity: .6; transition: opacity .2s;
+}
+.article-card:hover .article-card-read { opacity: 1; }
+@media (max-width: 768px) {
+  .founder-section { padding-left: 24px; padding-right: 24px; }
+  .founder-grid { grid-template-columns: 1fr; }
+}
 /* FOOTER */
 footer {
   border-top: 1px solid rgba(255,255,255,.05);
@@ -282,6 +334,29 @@ footer {
           <div class="tile-attr-bar"></div>
           <div class="tile-attr-text">Founder, M&amp;A Advisory &nbsp;&middot;&nbsp; ex-Mastercard</div>
         </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- FROM THE FOUNDER -->
+  <div class="founder-section">
+    <div class="founder-eyebrow">From the Founder</div>
+    <div class="founder-grid">
+
+      <a class="article-card" href="/perspectives/working-with-ai.html">
+        <div class="article-card-label">AI &amp; Building &nbsp;&middot;&nbsp; August 2026 &nbsp;&middot;&nbsp; 4 min</div>
+        <div class="article-card-title">Working with AI.<br>Some honest thoughts.</div>
+        <div class="article-card-excerpt">Six months ago I started building Integration Intelligence with no development team. Since then I&#x2019;ve coded a product, launched a website, and built a secure client portal. Here&#x2019;s what that actually looks like.</div>
+        <div class="article-card-read">Read article &rarr;</div>
+      </a>
+
+      <div class="article-card" style="opacity:.35; pointer-events:none; cursor:default;">
+        <div class="article-card-label">Perspectives &nbsp;&middot;&nbsp; Coming soon</div>
+        <div class="article-card-title">More perspectives<br>on their way.</div>
+        <div class="article-card-excerpt">More writing on integration, M&amp;A, and building in public coming soon.</div>
+        <div class="article-card-read">Coming soon</div>
       </div>
 
     </div>

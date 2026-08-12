@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Working with AI. Some honest thoughts. — Integration Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:  #1C2331;
+  --amber: #C4924A;
+  --cream: #F5F0E8;
+  --slate: #8C9BAF;
+  --mid:   #5A6A7E;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--navy); color: var(--cream); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.05);
+  padding: 0 52px; height: 60px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+.nav-wm { display: flex; flex-direction: column; gap: 2px; }
+.nav-wm-top { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 19px; line-height: 1; color: var(--cream); }
+.nav-wm-sub { font-size: 7px; font-weight: 500; letter-spacing: .26em; text-transform: uppercase; color: var(--amber); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-eng { font-size: 13px; font-weight: 400; letter-spacing: .06em; color: rgba(245,240,232,.6); text-decoration: none; transition: color .2s; }
+.nav-eng:hover, .nav-eng.active { color: var(--cream); }
+.nav-cta { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--amber); text-decoration: none; border: 1px solid rgba(196,146,74,.4); padding: 8px 18px; transition: border-color .2s; white-space: nowrap; }
+.nav-cta:hover { border-color: var(--amber); }
+.nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 36px; height: 36px; cursor: pointer; padding: 4px; background: none; border: none; }
+.nav-burger span { display: block; width: 22px; height: 2px; background: rgba(245,240,232,.7); transition: transform .25s, opacity .25s; }
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; z-index: 199; background: var(--navy); border-top: 1px solid rgba(255,255,255,.07); padding: 24px; flex-direction: column; }
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-link { font-size: 13px; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; color: rgba(245,240,232,.6); text-decoration: none; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
+.nav-mobile-cta { margin-top: 20px; display: block; text-align: center; font-size: 12px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); background: var(--amber); text-decoration: none; padding: 14px; }
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+}
+
+/* PAGE */
+.page { padding-top: 60px; }
+
+/* ARTICLE HERO */
+.article-hero {
+  background: var(--navy);
+  padding: 64px 52px 56px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  max-width: 780px;
+}
+.article-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--amber); text-decoration: none; margin-bottom: 32px;
+  opacity: .7; transition: opacity .2s;
+}
+.article-back:hover { opacity: 1; }
+.article-back::before { content: '←'; }
+.article-label { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin-bottom: 16px; }
+.article-title {
+  font-family: 'EB Garamond', Georgia, serif; font-weight: 400;
+  font-size: clamp(32px, 4vw, 52px); line-height: 1.1; color: var(--cream);
+  margin-bottom: 20px;
+}
+.article-meta { font-size: 12px; font-weight: 300; color: rgba(245,240,232,.4); letter-spacing: .04em; }
+
+/* ARTICLE BODY */
+.article-body {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 64px 52px 80px;
+}
+.article-body p {
+  font-size: 16px; font-weight: 300; color: rgba(245,240,232,.82);
+  line-height: 1.85; margin-bottom: 1.6em;
+}
+.article-body p:last-child { margin-bottom: 0; }
+
+/* Pull quote styling for standout lines */
+.article-body p.pull {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 24px; font-style: italic; font-weight: 400;
+  color: var(--amber); line-height: 1.5;
+  border-left: 2px solid var(--amber);
+  padding-left: 24px; margin: 2em 0;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid rgba(255,255,255,.05);
+  padding: 28px 52px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+}
+.footer-note { font-size: 11px; font-weight: 300; color: rgba(140,155,175,.4); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 11px; color: rgba(196,146,74,.5); text-decoration: none; transition: color .2s; }
+.footer-link:hover { color: var(--amber); }
+
+@media (max-width: 768px) {
+  .article-hero { padding: 48px 24px 40px; }
+  .article-body { padding: 48px 24px 64px; }
+  footer { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254" width="40" height="40">
+      <defs><filter id="blendArc" x="-3%" y="-3%" width="106%" height="106%"><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blurred"/><feComposite in="blurred" in2="SourceGraphic" operator="in"/></filter></defs>
+      <path fill="#1C2331" d="M 1254.00 0.00 L 1254.00 1254.00 L 0.00 1254.00 L 0.00 0.00 L 1254.00 0.00 Z M 531.71 865.31 A 0.71 0.70 5.1 0 0 532.41 866.14 L 722.66 866.14 A 0.77 0.77 0.0 0 0 723.42 865.26 L 722.58 859.63 A 0.97 0.96 1.8 0 0 721.82 858.83 C 709.01 856.12 695.54 850.95 684.49 846.51 C 678.19 843.97 667.92 838.06 664.25 831.58 C 660.45 824.89 659.04 817.83 659.04 810.50 Q 659.00 616.10 659.03 466.00 Q 659.03 454.20 664.84 444.33 C 669.01 437.27 675.74 433.08 683.01 429.83 Q 701.69 421.47 721.45 417.46 A 1.22 1.21 89.3 0 0 722.41 416.47 L 723.45 410.69 A 1.26 1.25 5.0 0 0 722.21 409.22 L 532.67 409.22 A 0.85 0.85 0.0 0 0 531.83 410.19 L 532.79 416.56 A 1.09 1.07 -88.1 0 0 533.62 417.46 Q 552.13 421.55 570.56 429.50 C 582.10 434.47 591.30 442.68 594.46 454.91 Q 595.73 459.82 595.73 471.25 Q 595.71 727.84 595.68 811.48 Q 595.67 831.63 579.66 841.54 C 575.20 844.29 568.94 847.30 563.42 849.16 C 554.63 852.13 543.99 856.48 533.71 858.58 A 1.25 1.25 0.0 0 0 532.73 859.58 L 531.71 865.31 Z"/>
+      <g filter="url(#blendArc)">
+        <path fill="#eba148" d="M 1039.15 514.13 Q 1026.57 476.61 1018.41 459.30 Q 1029.81 528.00 1033.02 573.67 Q 1029.43 635.75 1056.84 652.98 Q 1057.91 622.72 1039.15 514.13 Z"/>
+        <path fill="#c38033" d="M 890.68 987.07 Q 974.33 897.10 1042.35 749.26 Q 931.40 940.91 890.68 987.07 Z"/>
+        <path fill="#f5e9dc" d="M 574.78 205.00 C 647.87 184.45 724.22 183.89 796.10 204.72 Q 574.78 205.00 574.78 205.00 Z"/>
+      </g>
+      <path fill="#fdf9f7" d="M 531.71 865.31 L 532.73 859.58 C 554.63 852.13 595.68 811.48 595.73 471.25 C 591.30 442.68 533.62 417.46 531.83 410.19 L 722.21 409.22 L 723.45 410.69 Q 683.01 429.83 659.03 466.00 Q 659.04 810.50 684.49 846.51 C 723.42 865.26 722.66 866.14 722.66 866.14 L 532.41 866.14 Z"/>
+    </svg>
+    <div class="nav-wm">
+      <span class="nav-wm-top">Integration</span>
+      <span class="nav-wm-sub">Intelligence</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a class="nav-eng" href="/">Home</a>
+    <a class="nav-eng" href="/how-it-works.html">How it works</a>
+    <a class="nav-eng active" href="/testimonials.html">Perspectives</a>
+    <a class="nav-eng" href="/security.html">Security</a>
+  </div>
+  <a class="nav-cta" href="/#contact">Get in touch</a>
+  <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="nav-mobile-menu" id="navMobileMenu">
+  <a class="nav-mobile-link" href="/">Home</a>
+  <a class="nav-mobile-link" href="/how-it-works.html">How it works</a>
+  <a class="nav-mobile-link" href="/testimonials.html">Perspectives</a>
+  <a class="nav-mobile-link" href="/security.html">Security</a>
+  <a class="nav-mobile-cta" href="/#contact">Get in touch</a>
+</div>
+
+<div class="page">
+
+  <div class="article-hero">
+    <a class="article-back" href="/testimonials.html">Perspectives</a>
+    <div class="article-label">From the Founder &nbsp;&middot;&nbsp; AI &amp; Building</div>
+    <h1 class="article-title">Working with AI.<br>Some honest thoughts.</h1>
+    <div class="article-meta">Jon Milsted &nbsp;&middot;&nbsp; August 2026 &nbsp;&middot;&nbsp; 4 min read</div>
+  </div>
+
+  <div class="article-body">
+
+    <p>Six months ago I started building Integration Intelligence. I had an idea, a clear problem I wanted to solve, and no development team. What I had was access to AI. Gemini, Open AI and Anthropic have all been part of the build in various forms.</p>
+
+    <p>Since then I&#x2019;ve coded a product, launched a website, built a secure client portal, and iterated through more versions of each than I can count. If I&#x2019;d tried to do that from scratch; hiring resource, testing properly, building sequentially; I&#x2019;d still be at it. AI compressed what should have taken two or three years into months.</p>
+
+    <p>But I thought I would share what that actually looks like, because I think a lot of the conversation around AI sits at one of two extremes. Either it&#x2019;s going to replace everything, or it&#x2019;s overrated and you can&#x2019;t trust it. My experience is neither.</p>
+
+    <p class="pull">Judgement is the key and it&#x2019;s what we (the humans) bring.</p>
+
+    <p>You need to know where to let the AI run and where to check every line of its working. On creative tasks; drafting, research, ideation; I&#x2019;ll often take the first output and iterate from there. I spent quite a few evenings getting the agent to do a Q&amp;A exercise with me (think Mastermind; specialist subject: Integrations). This is how we iterated the first version. On anything that feeds into a client deliverable, or code that runs in production, I check it properly but I ask the agent to change code to natural language to allow me to do it. The AI is fast and often right. It&#x2019;s also occasionally (and confidently) wrong. Knowing which is which is not that straightforward.</p>
+
+    <p>Expect mistakes and learn to iterate. I&#x2019;d say this is the biggest shift in how I work. You ask, you get something back, you push it, you refine it. The first output is rarely the final one. That&#x2019;s not a flaw in the technology, it&#x2019;s how it works. How can we expect a system that is effectively built on millions of lines of human input to be 100% right? The people I&#x2019;ve seen get frustrated with AI are usually the ones expecting perfection on the first pass. It&#x2019;s not going to happen.</p>
+
+    <p>Something worth knowing: ask two agents the same question and you&#x2019;ll get two slightly different answers. I use this deliberately now; running the same problem through more than one model, or asking one agent to review what another produced and add feedback. I like the fact the agents don&#x2019;t take this personally and they don&#x2019;t always agree and before you ask I do still crave some human interaction. Anyway that disagreement is useful. It tells you where the uncertainty is, and it usually means the judgement call is yours to make.</p>
+
+    <p>Memory is the other thing that&#x2019;s bitten me a couple of times. An LLM can process an enormous amount of information at extraordinary speed. It can also forget something you established thirty minutes earlier in the same session. &#x201C;Sorry that piece is not in my memory&#x201D; can be a little frustrating. The fix is documentation; building up context files, prompts, reference materials that give the model what it needs rather than assuming it will remember. As you learn to prompt better, this improves but no doubt will get me again.</p>
+
+    <p>If you&#x2019;re building a product on top of AI; a pipeline, a process, an automated workflow. Test it more than you think you need to. Then test it again. I&#x2019;ll be honest my personality is not a great match with this part of the process; I like the building and iterating, the testing can be quite painful. But the truth is the failure modes are rarely obvious until you run real material through it a few times. I&#x2019;ve found that layering agents, using one to review or test what another has produced, catches things that a single pass review misses. Also the joy of AI is a whole new fabricated test case is only a few clicks away.</p>
+
+    <p>None of this is a criticism. I couldn&#x2019;t have built what I&#x2019;ve built without it. But I think the people who get the most out of AI are the ones who figure out what it is. A very capable tool that still needs a person working alongside it.</p>
+
+  </div>
+
+  <footer>
+    <span class="footer-note">Integration Intelligence Ltd &middot; Company no. 17289473 &middot; 2026</span>
+    <div class="footer-links">
+      <a class="footer-link" href="/security.html">Security</a>
+      <a class="footer-link" href="mailto:jon@integration-intelligence.com">Contact</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  var burger = document.getElementById('navBurger');
+  var menu = document.getElementById('navMobileMenu');
+  if (burger && menu) {
+    burger.addEventListener('click', function() {
+      burger.classList.toggle('open');
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        burger.classList.remove('open');
+        menu.classList.remove('open');
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
