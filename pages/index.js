@@ -310,6 +310,16 @@ export default function Home() {
             A structured analytical process, reviewed by a senior practitioner before delivery. Every output is traceable to a source document.
           </p>
 
+          {/* ── DEMO EMBED ── */}
+          <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "12px", marginBottom: "40px", background: "#1C2331" }}>
+            <iframe
+              src="/demo.html"
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none", borderRadius: "12px" }}
+              allow="autoplay"
+              allowFullScreen
+            />
+          </div>
+
           <div style={{ display: "grid", gridTemplateColumns: mobile ? "1fr" : "repeat(4, 1fr)", gap: "2px", marginBottom: "36px" }}>
             {[
               { n: "01", title: "Share your deal pack", desc: "IC paper, board pack, FDD, synergy model, management presentations. Secure, confidential, isolated per deal." },
