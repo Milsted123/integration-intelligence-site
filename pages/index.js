@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -83,7 +84,13 @@ export default function Home() {
       {/* ── NAV ── */}
       <nav style={{ background: DARK, padding: "0 24px", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", height: "56px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ color: "white", fontWeight: "600", fontSize: "17px", letterSpacing: "-0.01em" }}>Integration Intelligence</span>
+          <div style={{ display: "flex", alignItems: "center", gap: "28px" }}>
+            <span style={{ color: "white", fontWeight: "600", fontSize: "15px", letterSpacing: "-0.01em" }}>Integration Intelligence</span>
+            <span style={{ color: "rgba(255,255,255,0.15)", fontSize: "14px" }}>|</span>
+            <Link href="/carve-out-intelligence" style={{ color: "rgba(255,255,255,0.6)", fontWeight: "600", fontSize: "15px", letterSpacing: "-0.01em", textDecoration: "none" }}>
+              Carve-Out Intelligence
+            </Link>
+          </div>
           <a href="#pilot" style={{ background: PURPLE, color: "white", padding: "8px 18px", borderRadius: "10px", fontSize: "13px", fontWeight: "600", textDecoration: "none" }}>
             Register interest
           </a>
